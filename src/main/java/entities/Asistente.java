@@ -1,7 +1,7 @@
 package entities;
 
 import java.time.LocalDate;
-import java.util.Date;
+//import java.util.Date;
 
 
 public class Asistente {
@@ -15,10 +15,6 @@ public class Asistente {
 	private String celular;
 	private float saldo;
 	private String password;
-
-	
-	
-	private String dateFormat = "dd/MM/yyyy";
 	
 	
 	public String getTipo_doc() {
@@ -52,6 +48,7 @@ public class Asistente {
 		this.email = email;
 	}
 	
+
 	
 	public LocalDate getFecha_nacimiento() {
 		return fecha_nacimiento;

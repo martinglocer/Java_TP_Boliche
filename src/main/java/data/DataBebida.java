@@ -4,7 +4,7 @@ import entities.*;
 //import java.time.*;
 
 import java.sql.*;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.LinkedList;
 
 public class DataBebida {
@@ -24,7 +24,6 @@ public class DataBebida {
 					beb.setIdbebida(rs.getInt("idBebida"));
 					beb.setNombre_bebida(rs.getString("nombre_bebida"));
 					beb.setDescripcion(rs.getString("descripcion"));
-					
 					
 					bebs.add(beb);
 				}
