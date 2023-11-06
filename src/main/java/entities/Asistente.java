@@ -17,6 +17,22 @@ public class Asistente {
 	private String password;
 	
 	
+	public Asistente(String tipo_doc, int nro_doc, String nombre, String apellido, String email,
+			LocalDate fecha_nacimiento, String celular, String password) {
+		super();
+		this.tipo_doc = tipo_doc;
+		this.nro_doc = nro_doc;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.celular = celular;
+		this.saldo = 0;
+		this.password = password;
+	}
+	public Asistente() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getTipo_doc() {
 		return tipo_doc;
 	}
@@ -47,7 +63,6 @@ public class Asistente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 
 	
 	public LocalDate getFecha_nacimiento() {
