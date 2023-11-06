@@ -33,12 +33,7 @@ public class Lugar {
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
 	}
-	public Ciudad getCiudad() {
-		return ciudad;
-	}
-	public void setCiudad(Ciudad ciudad) {
-		this.ciudad = ciudad;
-	}
+	
 	@Override
 	public String toString() {
 		return "Lugar [idlugar=" + idlugar + ", nombre_lugar=" + nombre_lugar + ", direccion=" + direccion

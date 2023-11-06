@@ -29,4 +29,14 @@
     <servlet-name>Lugar</servlet-name>
     <url-pattern>/Lugar</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MostrarLugares</display-name>
+    <servlet-name>MostrarLugares</servlet-name>
+    <servlet-class>MostrarLugares</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MostrarLugares</servlet-name>
+    <url-pattern>/MostrarLugares</url-pattern>
+  </servlet-mapping>
 </web-app>
