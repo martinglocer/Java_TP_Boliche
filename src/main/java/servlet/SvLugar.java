@@ -7,16 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import entities.Lugar;
 
-public class Signin extends HttpServlet {
+public class SvLugar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-    public Signin() {
-        super();
-        
-    }
-
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -25,8 +21,15 @@ public class Signin extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		Lugar l = new Lugar();
+		
+		String nombre_lugar = request.getParameter("nombre");
+		String direccion = request.getParameter("direccion");
+		String capacidad = request.getParameter("capacidad");
+		
+		response.getWriter().append("Registrado: ").append(l.getNombre_lugar()).append(" ").append(l.getDireccion());
+		
 	}
 
 }
