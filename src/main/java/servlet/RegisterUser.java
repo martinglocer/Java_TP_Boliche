@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 
+
 import entities.Asistente;
 import logic.Login;
 
@@ -40,7 +41,7 @@ public class RegisterUser extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Login l = new Login();
+		Login log = new Login();
 		
 		String tipo_doc = request.getParameter("tipo_doc");
 		String nroDocStr = request.getParameter("nro_doc");
@@ -55,7 +56,7 @@ public class RegisterUser extends HttpServlet {
 		
 		
 		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, fecha_nacimiento, celular, password);
-		l.addAsistente(a);
+		log.addAsistente(a);
 		
 		System.out.println("Dni es: "+nro_doc);
 		System.out.println("nombre es: "+nombre);
