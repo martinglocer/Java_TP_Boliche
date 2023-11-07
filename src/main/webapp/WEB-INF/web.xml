@@ -29,4 +29,14 @@
     <servlet-name>RegisterUser</servlet-name>
     <url-pattern>/RegisterUser</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvUsuarios</display-name>
+    <servlet-name>SvUsuarios</servlet-name>
+    <servlet-class>servlet.SvUsuarios</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvUsuarios</servlet-name>
+    <url-pattern>/SvUsuarios</url-pattern>
+  </servlet-mapping>
 </web-app>
