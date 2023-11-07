@@ -70,7 +70,7 @@ public class MenuFiestas {
 		System.out.println();
 		System.out.println("Estos son las fiestas actuales: ");
 		this.list();
-		Fiesta f= new Fiesta();
+		Fiesta f= new Fiesta(null,null);
 		System.out.print(df.getAll());
 		
 		System.out.println("Ingrese id de la fiesta que desea encontrar: ");
@@ -86,7 +86,7 @@ public class MenuFiestas {
 	
 	private void add() {
 		System.out.println();
-		Fiesta f = new Fiesta();
+		Fiesta f = new Fiesta(null,null);
 		
 		System.out.println("Ingrese los datos de la nueva fiesta: ");
 		
@@ -96,7 +96,7 @@ public class MenuFiestas {
 	
 	private void edit() {
 		System.out.println();
-		Fiesta f = new Fiesta();
+		Fiesta f = new Fiesta(null,null);
 		
 		this.list();
 		System.out.print(df.getAll());
@@ -116,7 +116,7 @@ public class MenuFiestas {
 	}
 	
 	private void delete() {
-		Fiesta delfi = new Fiesta();
+		Fiesta delfi = new Fiesta(null,null);
 		
 		System.out.println("Fiestas actuales: ");
 		this.list();

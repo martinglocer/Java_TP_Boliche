@@ -8,7 +8,7 @@
 		<meta charset="UTF-8">
 		
 		<%
-			LinkedList<Lugar> ll = (LinkedList<Lugar>) request.getAttribute("istaLugares");
+			LinkedList<Lugar> ll = (LinkedList) request.getSession().getAttribute("istaLugares");
 		%>
 		
 		<title>Lugares</title>
@@ -23,6 +23,7 @@
 								<th>nombre</th>
 								<th>direccion</th>
 								<th>capacidad</th>
+								<th>ciudad</th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -33,6 +34,7 @@
 								<td><%=l.getNombre_lugar()%></td>
 								<td><%=l.getDireccion()%></td>
 								<td><%=l.getCapacidad()%></td>
+								<td><%=l.getCiudad()%></td>
 								<td></td><!-- editar -->
 								<td></td><!-- borrar -->
 							</tr>

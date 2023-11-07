@@ -5,6 +5,14 @@ public class Fiesta {
 	private int idfiesta;
 	private String nombre_fiesta;
 	private String descripcion;
+	
+
+	
+	public Fiesta(String nombre_f, String descripcion_f) {
+		this.nombre_fiesta = nombre_f;
+		this.descripcion = descripcion_f;
+	}
+	
 	public int getIdfiesta() {
 		return idfiesta;
 	}

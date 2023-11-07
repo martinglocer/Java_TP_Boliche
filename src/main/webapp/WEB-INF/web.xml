@@ -39,4 +39,24 @@
     <servlet-name>SvUsuarios</servlet-name>
     <url-pattern>/SvUsuarios</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvFiestas</display-name>
+    <servlet-name>SvFiestas</servlet-name>
+    <servlet-class>servlet.SvFiestas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvFiestas</servlet-name>
+    <url-pattern>/SvFiestas</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegistrarFiesta</display-name>
+    <servlet-name>RegistrarFiesta</servlet-name>
+    <servlet-class>servlet.RegistrarFiesta</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrarFiesta</servlet-name>
+    <url-pattern>/RegistrarFiesta</url-pattern>
+  </servlet-mapping>
 </web-app>

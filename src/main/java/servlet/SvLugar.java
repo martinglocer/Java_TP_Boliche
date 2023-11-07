@@ -41,14 +41,9 @@ public class SvLugar extends HttpServlet {
 		String nombre_lugar = request.getParameter("nombre");
 		String direccion = request.getParameter("direccion");
 		String capacidad = request.getParameter("capacidad");
+		String ciudad = request.getParameter("ciudad");
 		
 		dl.add(l);
-		
-		
-		
-		
-		
-		
 		
 		//response.getWriter().append("Registrado: ").append(l.getNombre_lugar()).append(" ").append(l.getDireccion());
 		

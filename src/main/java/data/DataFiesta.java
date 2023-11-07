@@ -19,7 +19,7 @@ public class DataFiesta {
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
-					Fiesta f=new Fiesta();
+					Fiesta f=new Fiesta(null, null);
 					f.setIdfiesta(rs.getInt("idfiesta"));
 					f.setNombre_fiesta(rs.getString("nombre_fiesta"));
 					f.setDescripcion(rs.getString("descripcion"));					
@@ -56,7 +56,7 @@ public class DataFiesta {
 			stmt.setInt(1, fie.getIdfiesta());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				f=new Fiesta();
+				f=new Fiesta(null, null);
 				f.setIdfiesta(rs.getInt("idfiesta"));
 				f.setNombre_fiesta(rs.getString("nombre_fiesta"));
 				f.setDescripcion(rs.getString("descripcion"));

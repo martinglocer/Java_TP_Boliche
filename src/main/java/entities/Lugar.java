@@ -1,6 +1,5 @@
 package entities;
 
-import entities.Ciudad;
 
 public class Lugar {
 	
@@ -8,7 +7,8 @@ public class Lugar {
 	private String nombre_lugar;
 	private String direccion;
 	private int capacidad;
-	private Ciudad ciudad;
+	private String ciudad;
+	
 	public int getIdlugar() {
 		return idlugar;
 	}
@@ -32,6 +32,12 @@ public class Lugar {
 	}
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
+	}
+	public String getCiudad() {
+		return ciudad;
+	}
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 	
 	@Override

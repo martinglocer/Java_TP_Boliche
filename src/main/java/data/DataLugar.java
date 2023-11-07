@@ -15,16 +15,16 @@ public class DataLugar {
 			
 			try {
 				stmt= DbConnector.getInstancia().getConn().createStatement();
-				rs= stmt.executeQuery("select idlugar, nombre_lugar, direccion, capacidad from lugar");
+				rs= stmt.executeQuery("select idlugar, nombre_lugar, direccion, capacidad, ciudad from lugar");
 				//intencionalmente no se recupera la password
 				if(rs!=null) {
 					while(rs.next()) {
 						Lugar l =new Lugar();
-						Ciudad c = new Ciudad();
 						l.setIdlugar(rs.getInt("idlugar"));
 						l.setNombre_lugar(rs.getString("nombre_lugar"));
 						l.setDireccion(rs.getString("direccion"));	
 						l.setCapacidad(rs.getInt("capacidad"));
+						l.setCiudad(rs.getString("ciudad"));
 						
 						lug.add(l);
 					}
@@ -53,18 +53,17 @@ public class DataLugar {
 			ResultSet rs=null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().prepareStatement(
-						"select idlugar, nombre_lugar, direccion, capacidad from lugar where idlugar = ? "
+						"select idlugar, nombre_lugar, direccion, capacidad, ciudad from lugar where idlugar = ? "
 						);
 				stmt.setInt(1, lug.getIdlugar());
 				rs=stmt.executeQuery();
 				if(rs!=null && rs.next()) {
 					l=new Lugar();
-					Ciudad c = new Ciudad();
 					l.setIdlugar(rs.getInt("idlugar"));
 					l.setNombre_lugar(rs.getString("nombre_lugar"));
 					l.setDireccion(rs.getString("direccion"));
 					l.setCapacidad(rs.getInt("capacidad"));
-					
+					l.setCiudad(rs.getString("ciudad"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -86,11 +85,12 @@ public class DataLugar {
 			ResultSet keyResultSet=null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().prepareStatement(
-								"insert into lugar(nombre_lugar, direccion, capacidad) values(?,?,?)"
+								"insert into lugar(nombre_lugar, direccion, capacidad, ciudad) values(?,?,?,?)"
 								,PreparedStatement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, l.getNombre_lugar());
 				stmt.setString(2, l.getDireccion());
 				stmt.setInt(3, l.getCapacidad());
+				stmt.setString(4, l.getCiudad());
 				stmt.executeUpdate();
 				keyResultSet=stmt.getGeneratedKeys();
 				
@@ -117,12 +117,13 @@ public class DataLugar {
 	        try {
 	            stmt=DbConnector.getInstancia().getConn().
 	                    prepareStatement("update lugar set idlugar = ?, nombre_lugar=?, direccion= ?, "
-	                    		+ "capacidad = ? where idlugar = ?");
+	                    		+ "capacidad = ?, ciudad = ? where idlugar = ?");
 				stmt.setInt(1, lug.getIdlugar());
 				stmt.setString(2, lug.getNombre_lugar());
 				stmt.setString(3, lug.getDireccion());
 				stmt.setInt(4, lug.getCapacidad());
-				stmt.setInt(5, lug.getIdlugar());
+				stmt.setString(5, lug.getCiudad());
+				stmt.setInt(6, lug.getIdlugar());
 
 	            stmt.executeUpdate();
 
