@@ -15,7 +15,7 @@ import logic.Login;
 import java.util.LinkedList;
 import java.util.Collections;
 
-@WebServlet(name = "SvUsuarios", urlPatterns = {"/SvUsuarios"})
+@WebServlet(name = "indexUsuarios", urlPatterns = {"/indexUsuarios"})
 
 /**
  * Servlet implementation class SvUsuarios
