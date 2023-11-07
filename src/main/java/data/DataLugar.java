@@ -15,7 +15,7 @@ public class DataLugar {
 			
 			try {
 				stmt= DbConnector.getInstancia().getConn().createStatement();
-				rs= stmt.executeQuery("select idlugar, nombre_lugar, direccion, capacidad, cod_postal from lugar");
+				rs= stmt.executeQuery("select idlugar, nombre_lugar, direccion, capacidad from lugar");
 				//intencionalmente no se recupera la password
 				if(rs!=null) {
 					while(rs.next()) {
@@ -25,8 +25,6 @@ public class DataLugar {
 						l.setNombre_lugar(rs.getString("nombre_lugar"));
 						l.setDireccion(rs.getString("direccion"));	
 						l.setCapacidad(rs.getInt("capacidad"));
-						c.setCod_postal(rs.getInt("cod_postal"));
-						l.setCiudad(c);
 						
 						lug.add(l);
 					}
@@ -55,7 +53,7 @@ public class DataLugar {
 			ResultSet rs=null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().prepareStatement(
-						"select idlugar, nombre_lugar, direccion, capacidad, cod_postal from lugar where idlugar = ? "
+						"select idlugar, nombre_lugar, direccion, capacidad from lugar where idlugar = ? "
 						);
 				stmt.setInt(1, lug.getIdlugar());
 				rs=stmt.executeQuery();
@@ -66,8 +64,6 @@ public class DataLugar {
 					l.setNombre_lugar(rs.getString("nombre_lugar"));
 					l.setDireccion(rs.getString("direccion"));
 					l.setCapacidad(rs.getInt("capacidad"));
-					c.setCod_postal(rs.getInt("cod_postal"));
-					l.setCiudad(c);
 					
 				}
 			} catch (SQLException e) {
@@ -90,12 +86,11 @@ public class DataLugar {
 			ResultSet keyResultSet=null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().prepareStatement(
-								"insert into lugar(nombre_lugar, direccion, capacidad, cod_postal) values(?,?,?,?)"
+								"insert into lugar(nombre_lugar, direccion, capacidad) values(?,?,?)"
 								,PreparedStatement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, l.getNombre_lugar());
 				stmt.setString(2, l.getDireccion());
 				stmt.setInt(3, l.getCapacidad());
-				stmt.setInt(4, l.getCiudad().getCod_postal());
 				stmt.executeUpdate();
 				keyResultSet=stmt.getGeneratedKeys();
 				
@@ -122,13 +117,12 @@ public class DataLugar {
 	        try {
 	            stmt=DbConnector.getInstancia().getConn().
 	                    prepareStatement("update lugar set idlugar = ?, nombre_lugar=?, direccion= ?, "
-	                    		+ "capacidad = ?, cod_postal = ? where idlugar = ?");
+	                    		+ "capacidad = ? where idlugar = ?");
 				stmt.setInt(1, lug.getIdlugar());
 				stmt.setString(2, lug.getNombre_lugar());
 				stmt.setString(3, lug.getDireccion());
 				stmt.setInt(4, lug.getCapacidad());
-				stmt.setInt(5, lug.getCiudad().getCod_postal());
-				stmt.setInt(6, lug.getIdlugar());
+				stmt.setInt(5, lug.getIdlugar());
 
 	            stmt.executeUpdate();
 
@@ -158,7 +152,7 @@ public class DataLugar {
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	            System.out.println("Documento inexistente");
+	            System.out.println("Lugar inexistente");
 
 	        } finally {
 	            try {
