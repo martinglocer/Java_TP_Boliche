@@ -8,7 +8,7 @@
 		<meta charset="UTF-8">
 		
 		<%
-			LinkedList<Lugar> ll = (LinkedList) request.getSession().getAttribute("istaLugares");
+			LinkedList<Lugar> ll = (LinkedList) request.getSession().getAttribute("listaLugares");
 		%>
 		
 		<title>Lugares</title>
