@@ -30,7 +30,9 @@ public class SvUsuarios extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		Login log = new Login();
+		
 		LinkedList <Asistente> listaUsuarios = log.getAll();
+		
 		
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("listaUsuarios", listaUsuarios);

@@ -15,7 +15,7 @@ public class DbConnector {
 	private String password="himitsu";
 	private String db="boliche_java";
 	private int conectados=0;
-	private Connection conn=null;
+	private Connection conn;
 	
 	private DbConnector() {
 		try {

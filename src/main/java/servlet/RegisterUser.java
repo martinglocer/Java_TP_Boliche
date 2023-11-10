@@ -62,6 +62,7 @@ public class RegisterUser extends HttpServlet {
 		System.out.println("nombre es: "+nombre);
 		System.out.println("apellido es: "+apellido);
 		System.out.println("telefono es: "+celular);
+		System.out.println("password es: "+password);
 
 	}
 

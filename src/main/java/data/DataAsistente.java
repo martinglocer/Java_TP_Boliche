@@ -34,6 +34,7 @@ public class DataAsistente {
 					
 					asis.add(a);
 				}
+				System.out.println(asis.size());
 			}
 			
 		} catch (SQLException e) {
@@ -149,6 +150,7 @@ public class DataAsistente {
 			stmt.setObject(6, a.getFecha_nacimiento());
 			stmt.setString(7, a.getCelular());
 			stmt.setString(8, a.getPassword());
+			System.out.println("password es: "+a.getPassword());
 			stmt.executeUpdate();
 
 			

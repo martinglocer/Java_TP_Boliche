@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h1>Lista de usuarios registrados</h1>
-    <% if (listaUsuarios != null && !listaUsuarios.isEmpty()) { %>
+   
         <div>
             <table>
                 <thead>
@@ -46,10 +46,6 @@
                 </tbody>
             </table>
         </div>
-    <% } else { %>
-        <div>
-            <h4>No hay usuarios registrados hasta el momento</h4>
-        </div>
-    <% } %>
+
 </body>
 </html>

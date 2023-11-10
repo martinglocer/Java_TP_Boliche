@@ -15,6 +15,7 @@
                 	<li><a href="RegisterUser.jsp">Registrar un usuario</a></li>
                 	<!-- <li><a href="SvUsuarios">Listar usuarios</a></li> -->
                 	<li><a href="updateUser.jsp">Modificar un usuario</a></li>
+                	<li><a href="indexUsuarios">Lista usuario</a></li>
                 	<!-- <li><a href="indexUsuarios.html">Eliminar un usuario</a></li> -->
             	</ul>
         	</nav>

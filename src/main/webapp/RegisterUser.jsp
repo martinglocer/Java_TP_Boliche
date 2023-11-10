@@ -17,7 +17,7 @@
 			<p><input type="email" name="email" placeholder="Email"></p>
 			<p><input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento"></p>
 			<p><input type="number" name="celular" placeholder="Celular"></p>
-			<p><input type="password" name="celular" placeholder="Contraseña"></p>
+			<p><input type="password" name="password" placeholder="Contraseña"></p>
 			<button type="submit"> Registrar Usuario </button>
 		</form>
 	</div>
