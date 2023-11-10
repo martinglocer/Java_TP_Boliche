@@ -59,4 +59,15 @@
     <servlet-name>RegistrarFiesta</servlet-name>
     <url-pattern>/RegistrarFiesta</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateUser</display-name>
+    <servlet-name>UpdateUser</servlet-name>
+    <servlet-class>servlet.UpdateUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateUser</servlet-name>
+    <url-pattern>/UpdateUser</url-pattern>
+    <url-pattern>/updateUser</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -14,14 +14,14 @@
             	<ul>
                 	<li><a href="RegisterUser.jsp">Registrar un usuario</a></li>
                 	<!-- <li><a href="SvUsuarios">Listar usuarios</a></li> -->
-                	<!-- <li><a href="nosotros.html">Modificar un usuario</a></li> -->
+                	<li><a href="updateUser.jsp">Modificar un usuario</a></li>
                 	<!-- <li><a href="indexUsuarios.html">Eliminar un usuario</a></li> -->
             	</ul>
         	</nav>
         </div>
         
         <div>
-        	<form action="mostrarUsuarios" method="get">
+        	<form action="mostrarUsuarios.jsp" method="get">
         		<button type="submit"> Mostrar usuarios </button>
         	</form>
         </div>
