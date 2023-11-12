@@ -18,34 +18,21 @@ import logic.Login;
 public class UpdateUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public UpdateUser() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Login log = new Login();
 		
 		String tipo_doc = request.getParameter("tipo_doc");
@@ -57,16 +44,17 @@ public class UpdateUser extends HttpServlet {
 		String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
 		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
 		String celular = request.getParameter("celular");
-		String password = request.getParameter("password");
+		String password = request.getParameter("contraseña");
 		
 		
-		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, fecha_nacimiento, celular, password);
+		Asistente a = new Asistente(nombre, apellido, email, password, celular, fecha_nacimiento, tipo_doc, nro_doc);
 		log.actualizarDatos(a);
 		
 		System.out.println("Dni es: "+nro_doc);
 		System.out.println("nombre es: "+nombre);
 		System.out.println("apellido es: "+apellido);
 		System.out.println("telefono es: "+celular);
+		System.out.println("contraseña es: "+password); /* HAY QUE REVISAR ESTO PORQUE LA CONTRASEÑA LA ASIGNA SIEMPRE COMO NULL */
 	}
 
 }

@@ -21,7 +21,7 @@ public class DataAsistente {
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
-					Asistente a=new Asistente();
+					Asistente a=new Asistente(null,null,null,null,null,null,null,0);
 					a.setTipo_doc(rs.getString("tipo_doc"));
 					a.setNro_doc(rs.getInt("nro_doc"));
 					a.setNombre(rs.getString("nombre"));
@@ -67,7 +67,7 @@ public class DataAsistente {
 			stmt.setString(2, asi.getPassword());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				a=new Asistente();
+				a=new Asistente(null,null,null,null,null,null,null,0);
 				a.setTipo_doc(rs.getString("tipo_doc"));
 				a.setNro_doc(rs.getInt("nro_doc"));
 				a.setNombre(rs.getString("nombre"));
@@ -107,7 +107,7 @@ public class DataAsistente {
 			stmt.setInt(2, asi.getNro_doc());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				a=new Asistente();
+				a=new Asistente(null,null,null,null,null,null,null,0);
 				a.setTipo_doc(rs.getString("tipo_doc"));
 				a.setNro_doc(rs.getInt("nro_doc"));
 				a.setNombre(rs.getString("nombre"));
@@ -171,7 +171,7 @@ public class DataAsistente {
         PreparedStatement stmt= null;
         try {
             stmt=DbConnector.getInstancia().getConn().
-                    prepareStatement("update persona set nombre = ?, apellido = ?, email = ?, password = ?, celular = ?, " 
+                    prepareStatement("update asistente set nombre = ?, apellido = ?, email = ?, password = ?, celular = ?, " 
                     				 +"fecha_nacimiento= ?, tipo_doc = ?, nro_doc = ? where tipo_doc = ? and nro_doc = ?");
 			stmt.setString(1, asi.getNombre());
 			stmt.setString(2, asi.getApellido());
@@ -204,7 +204,7 @@ public class DataAsistente {
 		PreparedStatement stmt = null;
 
         try {
-        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from persona where tipo_doc=? and nro_doc=?");
+        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from asistente where tipo_doc=? and nro_doc=?");
 
         stmt.setString(1, delAsi.getTipo_doc());
         stmt.setInt(2, delAsi.getNro_doc());

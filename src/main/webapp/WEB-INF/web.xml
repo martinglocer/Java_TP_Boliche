@@ -70,4 +70,24 @@
     <url-pattern>/UpdateUser</url-pattern>
     <url-pattern>/updateUser</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegistrarLugar</display-name>
+    <servlet-name>RegistrarLugar</servlet-name>
+    <servlet-class>servlet.RegistrarLugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrarLugar</servlet-name>
+    <url-pattern>/RegistrarLugar</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ActualizarLugar</display-name>
+    <servlet-name>ActualizarLugar</servlet-name>
+    <servlet-class>servlet.ActualizarLugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActualizarLugar</servlet-name>
+    <url-pattern>/ActualizarLugar</url-pattern>
+  </servlet-mapping>
 </web-app>

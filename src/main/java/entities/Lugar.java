@@ -9,6 +9,16 @@ public class Lugar {
 	private int capacidad;
 	private String ciudad;
 	
+	
+	
+	public Lugar(int idlugar, String nombre_lugar, String direccion, int capacidad, String ciudad) {
+		super();
+		this.idlugar = idlugar;
+		this.nombre_lugar = nombre_lugar;
+		this.direccion = direccion;
+		this.capacidad = capacidad;
+		this.ciudad = ciudad;
+	}
 	public int getIdlugar() {
 		return idlugar;
 	}

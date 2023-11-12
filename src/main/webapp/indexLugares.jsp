@@ -7,9 +7,19 @@
 		<title>Lugares</title>
 	</head>
 <body>
-	<h1>Lugares</h1>
-			<form action="SvLugar" method="get">
-				<button type="submit">Mostrar todos</button>
-			</form>
+	<h1>Menu lugares</h1>
+		
+		<div>	
+			<nav>
+            	<ul>
+                	<li><a href="indexLugares">Listar lugares</a></li>
+                	<li><a href="buscarLugarPorId.jsp">Buscar lugar por id</a></li>    <!-- sin hacer -->           
+                	<li><a href="registrarLugar.jsp">Registrar un lugar</a></li>                
+                	<li><a href="actualizarLugar.jsp">Modificar un lugar</a></li>
+                	<li><a href="eliminarLugar.jsp">Eliminar un lugar</a></li>
+            	</ul>
+        	</nav>
+        </div>
+        
 </body>
 </html>

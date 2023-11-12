@@ -15,9 +15,8 @@ import entities.Fiesta;
 import data.DataFiesta;
 
 @WebServlet(name = "RegistrarFiesta", urlPatterns = {"/RegistrarFiesta"})
-/**
- * Servlet implementation class RegisterUser
- */
+
+
 public class RegistrarFiesta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -19,7 +19,7 @@ public class DataLugar {
 				//intencionalmente no se recupera la password
 				if(rs!=null) {
 					while(rs.next()) {
-						Lugar l =new Lugar();
+						Lugar l =new Lugar(0,null,null,0,null);
 						l.setIdlugar(rs.getInt("idlugar"));
 						l.setNombre_lugar(rs.getString("nombre_lugar"));
 						l.setDireccion(rs.getString("direccion"));	
@@ -58,7 +58,7 @@ public class DataLugar {
 				stmt.setInt(1, lug.getIdlugar());
 				rs=stmt.executeQuery();
 				if(rs!=null && rs.next()) {
-					l=new Lugar();
+					l=new Lugar(0,null,null,0,null);
 					l.setIdlugar(rs.getInt("idlugar"));
 					l.setNombre_lugar(rs.getString("nombre_lugar"));
 					l.setDireccion(rs.getString("direccion"));
