@@ -80,6 +80,41 @@ public class DataLugar {
 			return l;
 		}
 		
+		
+		public Lugar getById(int idlugar) {
+			Lugar l=null;
+			PreparedStatement stmt=null;
+			ResultSet rs=null;
+			try {
+				stmt=DbConnector.getInstancia().getConn().prepareStatement(
+						"select idlugar, nombre_lugar, direccion, capacidad, ciudad from lugar where idlugar = ? "
+						);
+				stmt.setInt(1, idlugar);
+				rs=stmt.executeQuery();
+				if(rs!=null && rs.next()) {
+					l=new Lugar(0,null,null,0,null);
+					l.setIdlugar(rs.getInt("idlugar"));
+					l.setNombre_lugar(rs.getString("nombre_lugar"));
+					l.setDireccion(rs.getString("direccion"));
+					l.setCapacidad(rs.getInt("capacidad"));
+					l.setCiudad(rs.getString("ciudad"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rs!=null) {rs.close();}
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return l;
+		}
+		
+		
 		public void add(Lugar l) {
 			PreparedStatement stmt= null;
 			ResultSet keyResultSet=null;
@@ -116,14 +151,14 @@ public class DataLugar {
 	        PreparedStatement stmt= null;
 	        try {
 	            stmt=DbConnector.getInstancia().getConn().
-	                    prepareStatement("update lugar set idlugar = ?, nombre_lugar=?, direccion= ?, "
+	                    prepareStatement("update lugar set nombre_lugar=?, direccion= ?, "
 	                    		+ "capacidad = ?, ciudad = ? where idlugar = ?");
-				stmt.setInt(1, lug.getIdlugar());
-				stmt.setString(2, lug.getNombre_lugar());
-				stmt.setString(3, lug.getDireccion());
-				stmt.setInt(4, lug.getCapacidad());
-				stmt.setString(5, lug.getCiudad());
-				stmt.setInt(6, lug.getIdlugar());
+				
+				stmt.setString(1, lug.getNombre_lugar());
+				stmt.setString(2, lug.getDireccion());
+				stmt.setInt(3, lug.getCapacidad());
+				stmt.setString(4, lug.getCiudad());
+				stmt.setInt(5, lug.getIdlugar());
 
 	            stmt.executeUpdate();
 
@@ -148,6 +183,30 @@ public class DataLugar {
 	        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from lugar where idlugar=?");
 
 	        stmt.setInt(1, delug.getIdlugar());
+	        
+	        stmt.executeUpdate();
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            System.out.println("Lugar inexistente");
+
+	        } finally {
+	            try {
+	                if(stmt!=null) {stmt.close();}
+	                DbConnector.getInstancia().releaseConn();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+		
+		public void deleteByID(int idlugar) {
+	        PreparedStatement stmt = null;
+
+	        try {
+	        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from lugar where idlugar=?");
+	        
+	        stmt.setInt(1, idlugar);
 	        
 	        stmt.executeUpdate();
 

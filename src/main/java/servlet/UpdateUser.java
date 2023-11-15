@@ -47,7 +47,7 @@ public class UpdateUser extends HttpServlet {
 		String password = request.getParameter("contraseña");
 		
 		
-		Asistente a = new Asistente(nombre, apellido, email, password, celular, fecha_nacimiento, tipo_doc, nro_doc);
+		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento);
 		log.actualizarDatos(a);
 		
 		System.out.println("Dni es: "+nro_doc);

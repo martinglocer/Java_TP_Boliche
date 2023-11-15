@@ -7,9 +7,18 @@
 		<title>Fiestas</title>
 	</head>
 <body>
-	<h1>Fiestas</h1>
-			<form action="mostrarFiestas" method="get">
-				<button type="submit">Mostrar todas las fiestas registradas</button>
-			</form>
+	<h1>Menu fiestas</h1>
+		
+		<div>	
+			<nav>
+            	<ul>
+                	<li><a href="indexFiestas">Listar fiestas</a></li>
+                	<li><a href="registrarFiesta.jsp">Registrar una fiesta</a></li>                
+                	<li><a href="actualizarFiesta.jsp">Modificar una fiesta</a></li>
+                	<li><a href="eliminarFiesta.jsp">Eliminar una fiesta</a></li>
+            	</ul>
+        	</nav>
+        </div>
+        
 </body>
 </html>

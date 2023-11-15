@@ -46,7 +46,7 @@ public class RegisterUser extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		
-		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, fecha_nacimiento, celular, password);
+		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento);
 		log.addAsistente(a);
 		
 		System.out.println("Dni es: "+nro_doc);

@@ -13,7 +13,7 @@
 			<nav>
             	<ul>
                 	<li><a href="indexLugares">Listar lugares</a></li>
-                	<li><a href="buscarLugarPorId.jsp">Buscar lugar por id</a></li>    <!-- sin hacer -->           
+                	<li><a href="buscarLugarPorId.jsp">Buscar lugar por id</a></li>    <!-- consultar si es necesario -->           
                 	<li><a href="registrarLugar.jsp">Registrar un lugar</a></li>                
                 	<li><a href="actualizarLugar.jsp">Modificar un lugar</a></li>
                 	<li><a href="eliminarLugar.jsp">Eliminar un lugar</a></li>

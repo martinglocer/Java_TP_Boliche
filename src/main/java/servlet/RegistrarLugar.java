@@ -14,12 +14,6 @@ import entities.Lugar;
 
 public class RegistrarLugar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
-    public RegistrarLugar() {
-        super();
-        
-    }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,13 +26,14 @@ public class RegistrarLugar extends HttpServlet {
 		
 		DataLugar dl = new DataLugar();
 		
+		int idLugar = 0;
 		String nombre_lugar = request.getParameter("nombre_lugar");
 		String direccion = request.getParameter("direccion");
 		String capacidadStr = request.getParameter("capacidad"); 
 		int capacidad = Integer.parseInt(capacidadStr);
 		String ciudad = request.getParameter("ciudad");
 		
-		Lugar l = new Lugar(nombre_lugar, direccion, capacidad, ciudad);
+		Lugar l = new Lugar(idLugar, nombre_lugar, direccion, capacidad, ciudad);
 		dl.add(l);
 		
 		response.getWriter().append("Registrado: ").append(l.getNombre_lugar()).append(" ").append(l.getDireccion());

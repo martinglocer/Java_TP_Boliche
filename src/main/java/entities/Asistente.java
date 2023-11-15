@@ -19,9 +19,11 @@ public class Asistente {
 	
 
 
-	public Asistente(String nombre, String apellido, String email, String password, String celular,
-			LocalDate fecha_nacimiento, String tipo_doc, int nro_doc) {
+	public Asistente(String tipo_doc, int nro_doc, String nombre, String apellido, String email, String password, String celular,
+			LocalDate fecha_nacimiento) {
 		super();
+		this.tipo_doc = tipo_doc;
+		this.nro_doc = nro_doc;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;

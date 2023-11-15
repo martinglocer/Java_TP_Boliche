@@ -20,6 +20,7 @@
 					<table>
 						<thead>
 							<tr>
+								<th>id</th>
 								<th>nombre</th>
 								<th>direccion</th>
 								<th>capacidad</th>
@@ -31,6 +32,7 @@
 						<tbody>
 						<% for (Lugar l : ll) {%>
 							<tr>
+								<td><%=l.getIdlugar()%></td>
 								<td><%=l.getNombre_lugar()%></td>
 								<td><%=l.getDireccion()%></td>
 								<td><%=l.getCapacidad()%></td>

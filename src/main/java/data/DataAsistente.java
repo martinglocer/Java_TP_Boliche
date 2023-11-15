@@ -21,7 +21,7 @@ public class DataAsistente {
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
-					Asistente a=new Asistente(null,null,null,null,null,null,null,0);
+					Asistente a=new Asistente(null,0,null,null,null,null,null,null);
 					a.setTipo_doc(rs.getString("tipo_doc"));
 					a.setNro_doc(rs.getInt("nro_doc"));
 					a.setNombre(rs.getString("nombre"));
@@ -67,7 +67,7 @@ public class DataAsistente {
 			stmt.setString(2, asi.getPassword());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				a=new Asistente(null,null,null,null,null,null,null,0);
+				a=new Asistente(null,0,null,null,null,null,null,null);
 				a.setTipo_doc(rs.getString("tipo_doc"));
 				a.setNro_doc(rs.getInt("nro_doc"));
 				a.setNombre(rs.getString("nombre"));
@@ -107,7 +107,7 @@ public class DataAsistente {
 			stmt.setInt(2, asi.getNro_doc());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				a=new Asistente(null,null,null,null,null,null,null,0);
+				a=new Asistente(null,0,null,null,null,null,null,null);
 				a.setTipo_doc(rs.getString("tipo_doc"));
 				a.setNro_doc(rs.getInt("nro_doc"));
 				a.setNombre(rs.getString("nombre"));

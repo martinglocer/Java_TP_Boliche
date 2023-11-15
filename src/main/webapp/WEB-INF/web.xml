@@ -90,4 +90,24 @@
     <servlet-name>ActualizarLugar</servlet-name>
     <url-pattern>/ActualizarLugar</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditarLugar</display-name>
+    <servlet-name>EditarLugar</servlet-name>
+    <servlet-class>servlet.EditarLugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditarLugar</servlet-name>
+    <url-pattern>/EditarLugar</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEliminarLugar</display-name>
+    <servlet-name>SvEliminarLugar</servlet-name>
+    <servlet-class>servlet.SvEliminarLugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEliminarLugar</servlet-name>
+    <url-pattern>/SvEliminarLugar</url-pattern>
+  </servlet-mapping>
 </web-app>
