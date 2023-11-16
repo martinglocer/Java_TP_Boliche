@@ -14,7 +14,7 @@
 			<p><input type=text name="direccion" placeholder="Dirección"></p>
 			<p><input type="number" name="capacidad" placeholder="Capacidad"></p>
 			<p><input type="text" name="ciudad" placeholder="Ciudad"></p>
-			<button type="submit"> Registrar Lugar </button>
+			<button type="submit"> Registrar </button>
 		</form>
 	</div>
 </body>

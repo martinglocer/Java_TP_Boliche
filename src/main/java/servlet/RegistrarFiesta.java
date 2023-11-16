@@ -34,6 +34,7 @@ public class RegistrarFiesta extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		DataFiesta df = new DataFiesta();
 		
 		String nombre_fiesta = request.getParameter("nombre_fiesta");
