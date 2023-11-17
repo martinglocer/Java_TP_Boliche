@@ -14,26 +14,27 @@ import java.time.LocalDate;
 import entities.Asistente;
 import logic.Login;
 
-@WebServlet(name = "UpdateUser", urlPatterns = {"/updateUser"})
-public class UpdateUser extends HttpServlet {
+
+@WebServlet(name = "ActualizarUsuario", urlPatterns = {"/actualizarUsuario"})
+
+public class ActualizarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
    
-    public UpdateUser() {
+	
+    public ActualizarUsuario() {
         super();
         
     }
 
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Login log = new Login();
+		
+		Login l = new Login();
 		
 		String tipo_doc = request.getParameter("tipo_doc");
 		String nroDocStr = request.getParameter("nro_doc");
@@ -44,17 +45,18 @@ public class UpdateUser extends HttpServlet {
 		String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
 		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
 		String celular = request.getParameter("celular");
-		String password = request.getParameter("contraseña");
+		String password = request.getParameter("password");
 		
 		
 		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento);
-		log.actualizarDatos(a);
+		l.actualizarDatos(a);
 		
-		System.out.println("Dni es: "+nro_doc);
-		System.out.println("nombre es: "+nombre);
+		System.out.println("Nombre del usuario es: "+nombre);
 		System.out.println("apellido es: "+apellido);
-		System.out.println("telefono es: "+celular);
-		System.out.println("contraseña es: "+password); /* HAY QUE REVISAR ESTO PORQUE LA CONTRASEÑA LA ASIGNA SIEMPRE COMO NULL */
+		System.out.println("celular es: "+celular);
+		System.out.println("email es: "+email);
+		
+		
 	}
 
 }

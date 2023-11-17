@@ -110,4 +110,34 @@
     <servlet-name>SvEliminarLugar</servlet-name>
     <url-pattern>/SvEliminarLugar</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>mostrarUsuarios</display-name>
+    <servlet-name>mostrarUsuarios</servlet-name>
+    <servlet-class>servlet.mostrarUsuarios</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mostrarUsuarios</servlet-name>
+    <url-pattern>/mostrarUsuarios</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ActualizarUsuario</display-name>
+    <servlet-name>ActualizarUsuario</servlet-name>
+    <servlet-class>servlet.ActualizarUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActualizarUsuario</servlet-name>
+    <url-pattern>/ActualizarUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEditarUsuario</display-name>
+    <servlet-name>SvEditarUsuario</servlet-name>
+    <servlet-class>servlet.SvEditarUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEditarUsuario</servlet-name>
+    <url-pattern>/SvEditarUsuario</url-pattern>
+  </servlet-mapping>
 </web-app>

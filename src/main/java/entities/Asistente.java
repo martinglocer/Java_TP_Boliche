@@ -34,6 +34,10 @@ public class Asistente {
 		this.nro_doc = nro_doc;
 	}
 	
+	public Asistente() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getTipo_doc() {
 		return tipo_doc;
 	}

@@ -12,19 +12,13 @@
 		<div>	
 			<nav>
             	<ul>
+            		<li><a href="indexUsuarios">Listar usuarios</a></li>
+            		<li><a href="buscarUsuario.jsp">Buscar usuarios por tipo y numero de doc</a></li>
                 	<li><a href="RegisterUser.jsp">Registrar un usuario</a></li>
-                	<!-- <li><a href="SvUsuarios">Listar usuarios</a></li> -->
-                	<li><a href="updateUser.jsp">Modificar un usuario</a></li>
-                	<li><a href="indexUsuarios">Lista usuario</a></li>
-                	<!-- <li><a href="indexUsuarios.html">Eliminar un usuario</a></li> -->
+                	<li><a href="actualizarUsuario.jsp">Modificar un usuario</a></li>
+                	<li><a href="indexUsuarios.html">Eliminar un usuario</a></li>
             	</ul>
         	</nav>
-        </div>
-        
-        <div>
-        	<form action="mostrarUsuarios.jsp" method="get">
-        		<button type="submit"> Mostrar usuarios </button>
-        	</form>
         </div>
 </body>
 </html>
