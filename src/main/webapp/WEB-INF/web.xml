@@ -140,4 +140,14 @@
     <servlet-name>SvEditarUsuario</servlet-name>
     <url-pattern>/SvEditarUsuario</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvBuscarUsuario</display-name>
+    <servlet-name>SvBuscarUsuario</servlet-name>
+    <servlet-class>servlet.SvBuscarUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvBuscarUsuario</servlet-name>
+    <url-pattern>/SvBuscarUsuario</url-pattern>
+  </servlet-mapping>
 </web-app>

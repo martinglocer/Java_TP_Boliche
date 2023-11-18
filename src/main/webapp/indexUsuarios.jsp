@@ -13,7 +13,7 @@
 			<nav>
             	<ul>
             		<li><a href="indexUsuarios">Listar usuarios</a></li>
-            		<li><a href="buscarUsuario.jsp">Buscar usuarios por tipo y numero de doc</a></li>
+            		<li><a href="buscarUsuario.jsp">Buscar usuarios por tipo y numero de documento</a></li>
                 	<li><a href="RegisterUser.jsp">Registrar un usuario</a></li>
                 	<li><a href="actualizarUsuario.jsp">Modificar un usuario</a></li>
                 	<li><a href="indexUsuarios.html">Eliminar un usuario</a></li>
