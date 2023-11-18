@@ -48,6 +48,7 @@ public class SvEliminarUsuario extends HttpServlet {
 		Login l = new Login();
 		Asistente a = l.getByDocumento(asi);
 		l.deleteByDoc(a);
+		response.sendRedirect("indexUsuarios");
 		
 	}
 

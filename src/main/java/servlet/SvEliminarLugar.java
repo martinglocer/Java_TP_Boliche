@@ -30,6 +30,7 @@ public class SvEliminarLugar extends HttpServlet {
 		l = dl.getById(l);
 		System.out.println(" id:" + l.getIdlugar() + " nombre: " + l.getNombre_lugar() );
 		dl.deleteByID(l);
+		response.sendRedirect("indexLugares");
 		
 	}
 
