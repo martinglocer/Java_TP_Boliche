@@ -101,6 +101,8 @@ public class DataLugar {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+				System.out.println("No se encontro el lugar");
+				
 			}finally {
 				try {
 					if(rs!=null) {rs.close();}
@@ -178,17 +180,17 @@ public class DataLugar {
 
 		public void deleteByID(Lugar delug) {
 	        PreparedStatement stmt = null;
-
+			
 	        try {
-	        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from lugar where idlugar=?");
-
-	        stmt.setInt(1, delug.getIdlugar());
+				stmt=DbConnector.getInstancia().getConn().prepareStatement(
+						"delete from lugar where idlugar = ? ");
+				stmt.setInt(1, delug.getIdlugar());
 	        
-	        stmt.executeUpdate();
+				stmt.executeUpdate();
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	            System.out.println("Lugar inexistente");
+	            System.out.println("Lugar inexistente por lo tanto no existe");
 
 	        } finally {
 	            try {

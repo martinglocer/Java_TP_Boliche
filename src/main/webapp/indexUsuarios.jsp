@@ -16,7 +16,7 @@
             		<li><a href="buscarUsuario.jsp">Buscar usuarios por tipo y numero de documento</a></li>
                 	<li><a href="RegisterUser.jsp">Registrar un usuario</a></li>
                 	<li><a href="actualizarUsuario.jsp">Modificar un usuario</a></li>
-                	<li><a href="indexUsuarios.html">Eliminar un usuario</a></li>
+                	<li><a href="buscarUsuario.jsp">Eliminar un usuario</a></li>
             	</ul>
         	</nav>
         </div>

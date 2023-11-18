@@ -150,4 +150,14 @@
     <servlet-name>SvBuscarUsuario</servlet-name>
     <url-pattern>/SvBuscarUsuario</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEliminarUsuario</display-name>
+    <servlet-name>SvEliminarUsuario</servlet-name>
+    <servlet-class>servlet.SvEliminarUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEliminarUsuario</servlet-name>
+    <url-pattern>/SvEliminarUsuario</url-pattern>
+  </servlet-mapping>
 </web-app>

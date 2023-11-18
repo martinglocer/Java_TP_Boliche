@@ -81,6 +81,8 @@ public class DataAsistente {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("No funciona el Asistente getByUser(Asistente asi)");
+			
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
@@ -213,7 +215,7 @@ public class DataAsistente {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Documento inexistente");
+            System.out.println("Documento inexistente " + "no funciona el deleteByDoc(Asistente delAsi)  ");
 
         } finally {
             try {

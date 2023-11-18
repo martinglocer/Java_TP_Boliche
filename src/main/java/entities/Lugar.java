@@ -19,6 +19,9 @@ public class Lugar {
 		this.capacidad = capacidad;
 		this.ciudad = ciudad;
 	}
+	public Lugar() {
+	}
+	
 	public int getIdlugar() {
 		return idlugar;
 	}

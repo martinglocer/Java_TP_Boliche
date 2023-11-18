@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import data.DataLugar;
+import entities.Lugar;
 
 
 @WebServlet(name = "SvEliminarLugar", urlPatterns = {"/SvEliminarLugar"})
@@ -24,7 +25,11 @@ public class SvEliminarLugar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id_lugar = Integer.parseInt(request.getParameter("idlugar"));
-		dl.deleteByID(id_lugar);
+		Lugar l = new Lugar();
+		l.setIdlugar(id_lugar);
+		l = dl.getById(l);
+		System.out.println(" id:" + l.getIdlugar() + " nombre: " + l.getNombre_lugar() );
+		dl.deleteByID(l);
 		
 	}
 
