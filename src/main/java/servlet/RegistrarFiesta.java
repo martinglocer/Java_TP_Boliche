@@ -20,12 +20,6 @@ import data.DataFiesta;
 public class RegistrarFiesta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public RegistrarFiesta() {
-        super();
-       
-    }
-
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -37,15 +31,18 @@ public class RegistrarFiesta extends HttpServlet {
 		
 		DataFiesta df = new DataFiesta();
 		
+		int idFiesta = 0;
 		String nombre_fiesta = request.getParameter("nombre_fiesta");
 		String descripcion = request.getParameter("descripcion");
 		
-		Fiesta f = new Fiesta(nombre_fiesta, descripcion);
+		Fiesta f = new Fiesta(idFiesta, nombre_fiesta, descripcion);
 		df.add(f);
 		
-		//System.out.println("Id es: "+ idLugar);
+		System.out.println("Id es: "+ idFiesta);
 		System.out.println("Nombre es: "+ nombre_fiesta);
 		System.out.println("Descripcion es: "+ descripcion);
+		
+		response.sendRedirect("indexFiestas.jsp");
 
 	}
 

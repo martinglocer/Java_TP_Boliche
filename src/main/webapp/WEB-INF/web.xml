@@ -160,4 +160,24 @@
     <servlet-name>SvEliminarUsuario</servlet-name>
     <url-pattern>/SvEliminarUsuario</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEditarFiesta</display-name>
+    <servlet-name>SvEditarFiesta</servlet-name>
+    <servlet-class>servlet.SvEditarFiesta</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEditarFiesta</servlet-name>
+    <url-pattern>/SvEditarFiesta</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEliminarFiesta</display-name>
+    <servlet-name>SvEliminarFiesta</servlet-name>
+    <servlet-class>servlet.SvEliminarFiesta</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEliminarFiesta</servlet-name>
+    <url-pattern>/SvEliminarFiesta</url-pattern>
+  </servlet-mapping>
 </web-app>

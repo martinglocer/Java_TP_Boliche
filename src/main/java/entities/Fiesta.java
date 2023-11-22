@@ -8,7 +8,9 @@ public class Fiesta {
 	
 
 	
-	public Fiesta(String nombre_f, String descripcion_f) {
+	public Fiesta(int idfiesta, String nombre_f, String descripcion_f) {
+		super();
+		this.idfiesta = idfiesta;
 		this.nombre_fiesta = nombre_f;
 		this.descripcion = descripcion_f;
 	}

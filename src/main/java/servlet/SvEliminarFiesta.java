@@ -6,37 +6,31 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import jakarta.servlet.http.HttpSession;
-
-import entities.Fiesta;
 import data.DataFiesta;
-
-import java.util.LinkedList;
-import java.util.Collections;
-
-@WebServlet(name = "indexFiestas", urlPatterns = {"/indexFiestas"})
+import entities.Fiesta;
 
 
-public class SvFiestas extends HttpServlet {
+@WebServlet(name = "SvEliminarFiesta", urlPatterns = {"/SvEliminarFiesta"})
+public class SvEliminarFiesta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SvFiestas() {
-        super();       
-    }
+	DataFiesta df = new DataFiesta();
 	
+    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		DataFiesta df = new DataFiesta();
-		LinkedList<Fiesta> listaFiestas = df.getAll();
 		
-		HttpSession misesion = request.getSession();
-		misesion.setAttribute("listaFiestas", listaFiestas);
-		
-		response.sendRedirect("mostrarFiestas.jsp");
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int id_fiesta = Integer.parseInt(request.getParameter("idfiesta"));
+		System.out.println(id_fiesta);
+		Fiesta f = new Fiesta(0,null,null);
+		f = df.getById(id_fiesta);
+		System.out.println(" id:" + f.getIdfiesta() + " nombre: " + f.getNombre_fiesta() );
+		df.deleteByID(f);
+		response.sendRedirect("indexFiestas");
 		
 	}
 

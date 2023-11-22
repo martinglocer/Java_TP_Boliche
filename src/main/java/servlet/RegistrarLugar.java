@@ -42,7 +42,8 @@ public class RegistrarLugar extends HttpServlet {
 		System.out.println("Direccion es: "+direccion);
 		System.out.println("Capacidad es: "+capacidad);
 		System.out.println("Ciudad es: "+ciudad);
-	
+		
+		response.sendRedirect("indexLugares.jsp");
 		
 	}
 

@@ -19,7 +19,7 @@ public class DataFiesta {
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
-					Fiesta f=new Fiesta(null, null);
+					Fiesta f=new Fiesta(0, null, null);
 					f.setIdfiesta(rs.getInt("idfiesta"));
 					f.setNombre_fiesta(rs.getString("nombre_fiesta"));
 					f.setDescripcion(rs.getString("descripcion"));					
@@ -56,7 +56,7 @@ public class DataFiesta {
 			stmt.setInt(1, fie.getIdfiesta());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				f=new Fiesta(null, null);
+				f=new Fiesta(0, null, null);
 				f.setIdfiesta(rs.getInt("idfiesta"));
 				f.setNombre_fiesta(rs.getString("nombre_fiesta"));
 				f.setDescripcion(rs.getString("descripcion"));
@@ -76,6 +76,42 @@ public class DataFiesta {
 		
 		return f;
 	}
+	
+	
+	public Fiesta getById(int idfiesta) {
+		Fiesta f=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select idfiesta, nombre_fiesta, descripcion from fiesta where idfiesta = ? "
+					);
+			stmt.setInt(1, idfiesta);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				f=new Fiesta(0,null,null);
+				f.setIdfiesta(rs.getInt("idfiesta"));
+				f.setNombre_fiesta(rs.getString("nombre_fiesta"));
+				f.setDescripcion(rs.getString("descripcion"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("No se encontro la fiesta");
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return f;
+	}
+	
+	
 	
 	public void add(Fiesta f) {
 		PreparedStatement stmt= null;
