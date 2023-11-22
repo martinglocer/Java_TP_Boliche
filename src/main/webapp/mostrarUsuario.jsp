@@ -12,7 +12,7 @@
 		<% Asistente a = (Asistente) request.getSession().getAttribute("usuMostrar"); %>
 		<h1>Datos del usuario</h1>
 		<div>
-			<p>Tipo de documente: <%=a.getTipo_doc()%></p>
+			<p>Tipo de documento: <%=a.getTipo_doc()%></p>
 			<p>Numero de documento: <%=a.getNro_doc()%></p>
 			<p>Nombre: <%=a.getNombre()%></p>
 			<p>Apellido: <%=a.getApellido()%></p>
