@@ -8,15 +8,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mostrar fiestas</title>
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
+	<title>Mostrar fiestas</title>
 </head>
 <body>
 	<h1>Lista de fiestas registradas</h1>
 	<%
 		LinkedList<Fiesta> listaFiestas = (LinkedList) request.getSession().getAttribute("listaFiestas");
 	%>
-	
-	<h1>Fiestas</h1>
 				<div>
 					<table>
 						<thead>

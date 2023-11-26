@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
 		<meta charset="UTF-8">
 		<title>Mostrar Usuario</title>
 	</head>

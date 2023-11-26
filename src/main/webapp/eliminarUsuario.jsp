@@ -27,7 +27,7 @@
             	<input type="hidden" name="nro_doc" value="<%=a.getNro_doc()%>">
 				<button>Si, quiero eliminarlo</button>
 			</form>
-			<form action="indexUsuario">
+			<form action="indexUsuarios">
 				<button>No quiero eliminarlo</button>
 			</form>
 		</div>
