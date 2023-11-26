@@ -7,22 +7,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Mostrar fiestas</title>
 </head>
 <body>
 	<h1>Lista de fiestas registradas</h1>
 	<%
 		LinkedList<Fiesta> listaFiestas = (LinkedList) request.getSession().getAttribute("listaFiestas");
-		int cont = 1;
-		for(Fiesta f : listaFiestas){
 	%>
-			<p> <b>Fiesta N° <%=cont %> </b> </p>
-			<p> Id Fiesta: <%=f.getIdfiesta() %></p>
-			<p> Numero de documento: <%=f.getNombre_fiesta() %></p>
-			<p> Nombre: <%= f.getDescripcion() %> </p>
-			<p>----------------------------------</p>
-			<%cont = cont + 1; %>
-	<% } %>
+	
+	<h1>Fiestas</h1>
+				<div>
+					<table>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Nombre</th>
+								<th>Descripcion</th>
+								<th>modificar</th>
+								<th>eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+						<% for (Fiesta f : listaFiestas) {%>
+							<tr>
+								<td><%=f.getIdfiesta() %></td>
+								<td><%=f.getNombre_fiesta()%></td>
+								<td><%=f.getDescripcion()%></td>
+								<td></td><!-- editar -->
+								<td></td><!-- borrar -->
+							</tr>
+						<% } %>	
+						</tbody>
+					</table>
+				</div>
+	
 </body>
 </html>
