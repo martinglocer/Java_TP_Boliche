@@ -1,4 +1,5 @@
-/servlet/
 /data/
 /entities/
+/logic/
+/servlet/
 /ui/

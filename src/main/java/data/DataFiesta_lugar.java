@@ -4,9 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import entities.Fiesta_lugar;
+
 
 public class DataFiesta_lugar {
 
@@ -24,7 +27,7 @@ public class DataFiesta_lugar {
 					Fiesta_lugar fl=new Fiesta_lugar(0, 0, null);
 					fl.setIdfiesta(rs.getInt("idfiesta"));
 					fl.setIdlugar(rs.getInt("idlugar"));
-					fl.setFecha_hora_fiesta(rs.getObject("fecha_hora_fiesta", LocalDate.class));	
+					fl.setFecha_hora_fiesta(rs.getTimestamp("fecha_hora_fiesta").toLocalDateTime());
 					
 					fie_lug.add(fl);
 				}
@@ -47,7 +50,7 @@ public class DataFiesta_lugar {
 		return fie_lug;
 	}
 	
-	public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDate fecha_hora) {
+	public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDateTime fecha_hora) {
 		Fiesta_lugar fl=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -63,7 +66,7 @@ public class DataFiesta_lugar {
 				fl=new Fiesta_lugar(0, 0, null);
 				fl.setIdfiesta(rs.getInt("idfiesta"));
 				fl.setIdlugar(rs.getInt("idlugar"));
-				fl.setFecha_hora_fiesta(rs.getObject("fecha_hora_fiesta", LocalDate.class));	
+				fl.setFecha_hora_fiesta(rs.getTimestamp("fecha_hora_fiesta").toLocalDateTime());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,7 +100,7 @@ public class DataFiesta_lugar {
 				fl=new Fiesta_lugar(0, 0, null);
 				fl.setIdfiesta(rs.getInt("idfiesta"));
 				fl.setIdlugar(rs.getInt("idlugar"));
-				fl.setFecha_hora_fiesta(rs.getObject("fecha_hora_fiesta", LocalDate.class));	
+				fl.setFecha_hora_fiesta(rs.getTimestamp("fecha_hora_fiesta").toLocalDateTime());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,39 +145,65 @@ public class DataFiesta_lugar {
     }
 	
 	public void actualizarFiesta_lugar(Fiesta_lugar fl) {
-        PreparedStatement stmt= null;
-        try {
-            stmt=DbConnector.getInstancia().getConn().
-                    prepareStatement("update fiesta set idfiesta = ?, idlugar=?, fecha_hora_fiesta= ? where idfiesta = ? and idlugar = ? and fecha_hora_fiesta = ?");
-            stmt.setInt(1, fl.getIdfiesta());
-			stmt.setInt(2, fl.getIdlugar());
-			stmt.setObject(3, fl.getFecha_hora_fiesta());	
+	    PreparedStatement stmt = null;
+	    try {
+	        stmt = DbConnector.getInstancia().getConn().
+	                prepareStatement("update fiesta_lugar set idfiesta = ?, idlugar = ?, fecha_hora_fiesta = ? where (idfiesta = ? and idlugar = ? and fecha_hora_fiesta = ?)");
+	        
+	        stmt.setInt(1, fl.getIdfiesta());
+	        stmt.setInt(2, fl.getIdlugar());
 
-            stmt.executeUpdate();
+	        LocalDateTime fecha_hora_fiesta = fl.getFecha_hora_fiesta();
+	        Timestamp timestamp = Timestamp.valueOf(fecha_hora_fiesta);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Se produjo un error, revise los datos ingresados.(DataFiesta_lugar - actualizarFiesta_lugar");
+	        stmt.setTimestamp(3, timestamp);
 
-        } finally {
-            try {
-                if(stmt!=null) {stmt.close();}
-                DbConnector.getInstancia().releaseConn();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	        //Establecer los valores para la cláusula WHERE (idfiesta = ?, idlugar = ?, fecha_hora_fiesta = ?)
+	        
+	        stmt.setInt(4, fl.getIdfiesta());
+	        stmt.setInt(5, fl.getIdlugar());
+	        
+	        LocalDateTime fecha_hora = fl.getFecha_hora_fiesta();
+	        Timestamp timestamp1 = Timestamp.valueOf(fecha_hora);
+
+	        stmt.setTimestamp(6, timestamp1);
+	        
+	        System.out.println(fl.getIdfiesta());
+	        System.out.println(fl.getIdlugar());
+	        System.out.println(fl.getFecha_hora_fiesta());
+
+	        stmt.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.out.println("Se produjo un error, revise los datos ingresados");
+
+	    } finally {
+	        try {
+	            if (stmt != null) {
+	                stmt.close();
+	            }
+	            DbConnector.getInstancia().releaseConn();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
 
 	public void deleteByIDs(Fiesta_lugar delfl) {
         PreparedStatement stmt = null;
 
         try {
-        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from fiesta where idfiesta=? and idlugar=? and fecha_hora_fiesta=?");
+        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from fiesta_lugar where idfiesta=? and idlugar=? and fecha_hora_fiesta=?");
 
         stmt.setInt(1, delfl.getIdfiesta());
 		stmt.setInt(2, delfl.getIdlugar());
-		stmt.setObject(3, delfl.getFecha_hora_fiesta());	
+		
+		LocalDateTime fecha_hora_fiesta = delfl.getFecha_hora_fiesta();
+        Timestamp timestamp = Timestamp.valueOf(fecha_hora_fiesta);
+
+        stmt.setTimestamp(3, timestamp);
         
         stmt.executeUpdate();
 

@@ -1,15 +1,16 @@
 package entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Fiesta_lugar {
 
 	private int idfiesta;
 	private int idlugar;
-	private LocalDate fecha_hora_fiesta;
+	private LocalDateTime fecha_hora_fiesta;
 	
 	
-	public Fiesta_lugar(int idfiesta, int idlugar, LocalDate fecha_hora_fiesta) {
+	public Fiesta_lugar(int idfiesta, int idlugar, LocalDateTime fecha_hora_fiesta) {
 		super();
 		this.idfiesta = idfiesta;
 		this.idlugar = idlugar;
@@ -37,12 +38,12 @@ public class Fiesta_lugar {
 	}
 
 
-	public LocalDate getFecha_hora_fiesta() {
+	public LocalDateTime getFecha_hora_fiesta() {
 		return fecha_hora_fiesta;
 	}
 
 
-	public void setFecha_hora_fiesta(LocalDate fecha_hora_fiesta) {
+	public void setFecha_hora_fiesta(LocalDateTime fecha_hora_fiesta) {
 		this.fecha_hora_fiesta = fecha_hora_fiesta;
 	}
 	

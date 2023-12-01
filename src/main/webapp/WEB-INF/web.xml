@@ -180,4 +180,44 @@
     <servlet-name>SvEliminarFiesta</servlet-name>
     <url-pattern>/SvEliminarFiesta</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvFiesta_lugar</display-name>
+    <servlet-name>SvFiesta_lugar</servlet-name>
+    <servlet-class>servlet.SvFiesta_lugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvFiesta_lugar</servlet-name>
+    <url-pattern>/SvFiesta_lugar</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvRegistrarFiesta_lugar</display-name>
+    <servlet-name>SvRegistrarFiesta_lugar</servlet-name>
+    <servlet-class>servlet.SvRegistrarFiesta_lugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvRegistrarFiesta_lugar</servlet-name>
+    <url-pattern>/SvRegistrarFiesta_lugar</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEditarFiesta_lugar</display-name>
+    <servlet-name>SvEditarFiesta_lugar</servlet-name>
+    <servlet-class>servlet.SvEditarFiesta_lugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEditarFiesta_lugar</servlet-name>
+    <url-pattern>/SvEditarFiesta_lugar</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEliminarFiesta_lugar</display-name>
+    <servlet-name>SvEliminarFiesta_lugar</servlet-name>
+    <servlet-class>servlet.SvEliminarFiesta_lugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEliminarFiesta_lugar</servlet-name>
+    <url-pattern>/SvEliminarFiesta_lugar</url-pattern>
+  </servlet-mapping>
 </web-app>
