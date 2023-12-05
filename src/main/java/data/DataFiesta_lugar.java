@@ -138,7 +138,7 @@ public class DataFiesta_lugar {
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-							"insert into fiesta_lugar(idfiesta, idlugar, fecha_evento, hora_evento) values(?,?,?)"
+							"insert into fiesta_lugar(idfiesta, idlugar, fecha_evento, hora_evento) values(?,?,?,?)"
 							,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			Fiesta f = fl.getFiesta();
