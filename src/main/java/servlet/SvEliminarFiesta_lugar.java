@@ -24,7 +24,7 @@ public class SvEliminarFiesta_lugar extends HttpServlet {
 		
 	}
 
-	@Override
+	/*@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id_fiesta = Integer.parseInt(request.getParameter("idfiesta_elim"));
@@ -43,6 +43,6 @@ public class SvEliminarFiesta_lugar extends HttpServlet {
 		dfl.deleteByIDs(fl);
 		response.sendRedirect("indexFiesta_lugar");
 		
-	}
+	}*/
 
 }

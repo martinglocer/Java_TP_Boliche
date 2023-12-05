@@ -6,7 +6,7 @@ public class Fiesta {
 	private String nombre_fiesta;
 	private String descripcion;
 	
-
+	public Fiesta() {}
 	
 	public Fiesta(int idfiesta, String nombre_f, String descripcion_f) {
 		super();

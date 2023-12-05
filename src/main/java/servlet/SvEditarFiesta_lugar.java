@@ -21,7 +21,7 @@ public class SvEditarFiesta_lugar extends HttpServlet {
        
 	DataFiesta_lugar dfl = new DataFiesta_lugar();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id_editar1 = Integer.parseInt(request.getParameter("idfiesta_edit"));
 		int id_editar2 = Integer.parseInt(request.getParameter("idlugar_edit"));
@@ -37,10 +37,10 @@ public class SvEditarFiesta_lugar extends HttpServlet {
 		misesion.setAttribute("fiesta_lugarEditar", fiesta_lugar);
 		
 		response.sendRedirect("editarFiesta_lugar.jsp");
-	}
+	}*/
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		DataFiesta_lugar dfl = new DataFiesta_lugar();
 		
@@ -69,6 +69,6 @@ public class SvEditarFiesta_lugar extends HttpServlet {
 		System.out.println("Id del lugar es: "+idlugar);
 		System.out.println("Fecha es: "+fecha_hora_fiesta);
 	
-	}
+	}*/
 
 }

@@ -12,7 +12,8 @@
 		<form action="RegistrarFiesta_lugar" method="post">
 			<p><input type="number" name="idfiesta" placeholder="Id de la fiesta (ya existente)"></p>
 			<p><input type="number" name="idlugar" placeholder="Id del lugar (ya existente)"></p>
-			<p><input type="datetime" name="fecha_hora_fiesta" placeholder="Fecha y hora a realizar la fiesta"></p>
+			<p><input type="date" name="fecha_fiesta" placeholder="Fecha realizarse la fiesta"></p>
+			<p><input type="time" name="hora_fiesta" placeholder="Hora a realizar la fiesta"></p>
 			<button type="submit"> Registrar </button>
 		</form>
 	</div>

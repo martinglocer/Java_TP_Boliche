@@ -7,9 +7,11 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import entities.Fiesta_lugar;
-
+import entities.Lugar;
+import entities.Fiesta;
 
 public class DataFiesta_lugar {
 
@@ -20,14 +22,27 @@ public class DataFiesta_lugar {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select idfiesta, idlugar, fecha_hora_fiesta from fiesta_lugar");
-			//intencionalmente no se recupera la password
+			rs= stmt.executeQuery("select fl.fecha_evento, fl.hora_evento, f.nombre_fiesta, l.nombre_lugar, l.direccion, l.ciudad \r\n"
+					+ "from fiesta_lugar fl \r\n"
+					+ "inner join fiesta f \r\n"
+					+ "on f.idfiesta = fl.idfiesta \r\n"
+					+ "inner join lugar l \r\n"
+					+ "on l.idlugar = fl.idlugar  \r\n"
+					+ "order by fl.fecha_evento asc, fl.hora_evento asc;");
+					
 			if(rs!=null) {
 				while(rs.next()) {
-					Fiesta_lugar fl=new Fiesta_lugar(0, 0, null);
-					fl.setIdfiesta(rs.getInt("idfiesta"));
-					fl.setIdlugar(rs.getInt("idlugar"));
-					fl.setFecha_hora_fiesta(rs.getTimestamp("fecha_hora_fiesta").toLocalDateTime());
+					Lugar l = new Lugar();
+					l.setNombre_lugar(rs.getString("l.nombre_lugar"));
+					l.setDireccion(rs.getString("l.direccion"));
+					l.setCiudad(rs.getString("l.ciudad"));
+					Fiesta f = new Fiesta();
+					f.setNombre_fiesta(rs.getString("f.nombre_fiesta"));
+					Fiesta_lugar fl=new Fiesta_lugar();
+					fl.setFecha_fiesta(rs.getObject("fl.fecha_evento", LocalDate.class));
+					fl.setHora_fiesta(rs.getObject("fl.hora_evento", LocalTime.class));
+					fl.setFiesta(f);
+					fl.setLugar(l);
 					
 					fie_lug.add(fl);
 				}
@@ -50,7 +65,7 @@ public class DataFiesta_lugar {
 		return fie_lug;
 	}
 	
-	public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDateTime fecha_hora) {
+	/*public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDateTime fecha_hora) {
 		Fiesta_lugar fl=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -81,10 +96,10 @@ public class DataFiesta_lugar {
 		}
 		
 		return fl;
-	}
+	}*/
 	
 	
-	public Fiesta_lugar getByFiesta_lugar(Fiesta_lugar f_lug) {
+	/*public Fiesta_lugar getByFiesta_lugar(Fiesta_lugar f_lug) {
 		Fiesta_lugar fl=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -115,7 +130,7 @@ public class DataFiesta_lugar {
 		}
 		
 		return fl;
-	}
+	}*/
 	
 	
 	public void add(Fiesta_lugar fl) {
@@ -123,11 +138,16 @@ public class DataFiesta_lugar {
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-							"insert into fiesta_lugar(idfiesta, idlugar, fecha_hora_fiesta) values(?,?,?)"
+							"insert into fiesta_lugar(idfiesta, idlugar, fecha_evento, hora_evento) values(?,?,?)"
 							,PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, fl.getIdfiesta());
-			stmt.setInt(2, fl.getIdlugar());
-			stmt.setObject(3, fl.getFecha_hora_fiesta());	
+			
+			Fiesta f = fl.getFiesta();
+			Lugar l = fl.getLugar();
+			
+			stmt.setInt(1, f.getIdfiesta());
+			stmt.setInt(2, l.getIdlugar());
+			stmt.setObject(3, fl.getFecha_fiesta());
+			stmt.setObject(4, fl.getHora_fiesta());
 			stmt.executeUpdate();
 		
 			
@@ -144,7 +164,7 @@ public class DataFiesta_lugar {
 		}
     }
 	
-	public void actualizarFiesta_lugar(Fiesta_lugar fl) {
+	/*public void actualizarFiesta_lugar(Fiesta_lugar fl) {
 	    PreparedStatement stmt = null;
 	    try {
 	        stmt = DbConnector.getInstancia().getConn().
@@ -188,10 +208,10 @@ public class DataFiesta_lugar {
 	            e.printStackTrace();
 	        }
 	    }
-	}
+	}*/
 
 
-	public void deleteByIDs(Fiesta_lugar delfl) {
+	/*public void deleteByIDs(Fiesta_lugar delfl) {
         PreparedStatement stmt = null;
 
         try {
@@ -219,6 +239,6 @@ public class DataFiesta_lugar {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
 	
 }

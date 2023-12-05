@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import = "java.util.LinkedList"%>
 <%@page import = "entities.Fiesta_lugar"%>
+<%@page import = "entities.Lugar"%>
+<%@page import = "entities.Fiesta"%>
 <%@page import = "jakarta.servlet.http.HttpSession" %>
 <%@page import = "java.time.LocalDateTime" %>
 <% %>
@@ -21,19 +23,27 @@
 					<table>
 						<thead>
 							<tr>
-								<th>Id fiesta</th>
-								<th>Id lugar</th>
-								<th>Fecha y hora de realización</th>
+								<th>Fecha</th>
+								<th>Hora</th>
+								<th>Fiesta</th>
+								<th>Lugar</th>
+								<th>Direccion</th>
+								<th>Ciudad</th>
 								<th>modificar</th>
 								<th>eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
-						<% for (Fiesta_lugar fl : listaFiestas_lugares) {%>
+						<% for (Fiesta_lugar fl : listaFiestas_lugares) {
+								Lugar l = fl.getLugar();
+								Fiesta f = fl.getFiesta();%>
 							<tr>
-								<td><%=fl.getIdfiesta() %></td>
-								<td><%=fl.getIdlugar()%></td>
-								<td><%=fl.getFecha_hora_fiesta()%></td>
+								<td><%=fl.getFecha_fiesta()%></td>
+								<td><%=fl.getHora_fiesta()%></td>
+								<td><%=f.getNombre_fiesta()%></td>
+								<td><%=l.getNombre_lugar()%></td>
+								<td><%=l.getDireccion()%></td>
+								<td><%=l.getCiudad()%></td>
 								<td></td><!-- editar -->
 								<td></td><!-- borrar -->
 							</tr>

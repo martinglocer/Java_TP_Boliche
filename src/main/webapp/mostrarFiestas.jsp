@@ -28,7 +28,8 @@
 							</tr>
 						</thead>
 						<tbody>
-						<% for (Fiesta f : listaFiestas) {%>
+						<% for (Fiesta f : listaFiestas) {
+								%>
 							<tr>
 								<td><%=f.getIdfiesta() %></td>
 								<td><%=f.getNombre_fiesta()%></td>
