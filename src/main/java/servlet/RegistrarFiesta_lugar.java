@@ -56,7 +56,7 @@ public class RegistrarFiesta_lugar extends HttpServlet {
 		System.out.println("Fecha y hora es: "+ fecha_fiesta);
 		System.out.println("Fecha y hora es: "+ hora_fiesta);
 		
-		response.sendRedirect("indexFiesta_lugar.jsp");
+		response.sendRedirect("indexFiesta_lugar");
 
 	}
 

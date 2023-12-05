@@ -99,23 +99,34 @@ public class DataFiesta_lugar {
 	}*/
 	
 	
-	/*public Fiesta_lugar getByFiesta_lugar(Fiesta_lugar f_lug) {
+	public Fiesta_lugar getOne(Fiesta_lugar f_lug) {
 		Fiesta_lugar fl=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select idfiesta, idlugar, fecha_hora_fiesta from fiesta_lugar where idfiesta = ? and idlugar = ? and fecha_hora_fiesta = ?"
+					"select idfiesta, idlugar, fecha_evento, hora_evento from fiesta_lugar where idfiesta = ? and idlugar = ? and fecha_evento = ? and hora_evento = ?"
 					);
-			stmt.setInt(1, f_lug.getIdfiesta());
-			stmt.setInt(2,  f_lug.getIdlugar());
-			stmt.setObject(3, f_lug.getFecha_hora_fiesta());	
+			
+			Fiesta f = f_lug.getFiesta();
+			Lugar l = f_lug.getLugar();
+			
+			stmt.setInt(1, f.getIdfiesta());
+			stmt.setInt(2,  l.getIdlugar());
+			stmt.setObject(3, f_lug.getFecha_fiesta());	
+			stmt.setObject(4, f_lug.getHora_fiesta());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				fl=new Fiesta_lugar(0, 0, null);
-				fl.setIdfiesta(rs.getInt("idfiesta"));
-				fl.setIdlugar(rs.getInt("idlugar"));
-				fl.setFecha_hora_fiesta(rs.getTimestamp("fecha_hora_fiesta").toLocalDateTime());
+				fl= new Fiesta_lugar();
+				Fiesta f2 = new Fiesta();
+				Lugar l2 = new Lugar(); 
+				
+				f2.setIdfiesta(rs.getInt("idfiesta"));
+				fl.setFiesta(f2);
+				l2.setIdlugar(rs.getInt("idlugar"));
+				fl.setLugar(l2);
+				fl.setFecha_fiesta(rs.getObject("fecha_evento", LocalDate.class));
+				fl.setHora_fiesta(rs.getObject("hora_evento", LocalTime.class));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -130,7 +141,7 @@ public class DataFiesta_lugar {
 		}
 		
 		return fl;
-	}*/
+	}
 	
 	
 	public void add(Fiesta_lugar fl) {
@@ -164,33 +175,28 @@ public class DataFiesta_lugar {
 		}
     }
 	
-	/*public void actualizarFiesta_lugar(Fiesta_lugar fl) {
+	public void actualizarFiesta_lugar(Fiesta_lugar fl, LocalDate fe_nueva, LocalTime ho_nueva) {
 	    PreparedStatement stmt = null;
 	    try {
 	        stmt = DbConnector.getInstancia().getConn().
-	                prepareStatement("update fiesta_lugar set idfiesta = ?, idlugar = ?, fecha_hora_fiesta = ? where (idfiesta = ? and idlugar = ? and fecha_hora_fiesta = ?)");
+	                prepareStatement("update fiesta_lugar set fecha_evento = ?, hora_evento = ? where idfiesta = ? and idlugar = ? and fecha_evento = ? and hora_evento = ?");
 	        
-	        stmt.setInt(1, fl.getIdfiesta());
-	        stmt.setInt(2, fl.getIdlugar());
-
-	        LocalDateTime fecha_hora_fiesta = fl.getFecha_hora_fiesta();
-	        Timestamp timestamp = Timestamp.valueOf(fecha_hora_fiesta);
-
-	        stmt.setTimestamp(3, timestamp);
-
-	        //Establecer los valores para la cláusula WHERE (idfiesta = ?, idlugar = ?, fecha_hora_fiesta = ?)
+	        Fiesta f = fl.getFiesta();
+			Lugar l = fl.getLugar(); 
 	        
-	        stmt.setInt(4, fl.getIdfiesta());
-	        stmt.setInt(5, fl.getIdlugar());
-	        
-	        LocalDateTime fecha_hora = fl.getFecha_hora_fiesta();
-	        Timestamp timestamp1 = Timestamp.valueOf(fecha_hora);
-
-	        stmt.setTimestamp(6, timestamp1);
-	        
-	        System.out.println(fl.getIdfiesta());
-	        System.out.println(fl.getIdlugar());
-	        System.out.println(fl.getFecha_hora_fiesta());
+			stmt.setObject(1, fe_nueva);
+			stmt.setObject(2, ho_nueva);
+	        stmt.setInt(3, f.getIdfiesta());
+	        stmt.setInt(4, l.getIdlugar());
+	        stmt.setObject(5, fl.getFecha_fiesta());
+			stmt.setObject(6, fl.getHora_fiesta());
+			
+	        System.out.println(f.getIdfiesta());
+	        System.out.println(l.getIdlugar());
+	        System.out.println(fl.getFecha_fiesta());
+	        System.out.println(fl.getHora_fiesta());
+	        System.out.println(fe_nueva);
+	        System.out.println(ho_nueva);
 
 	        stmt.executeUpdate();
 
@@ -208,7 +214,7 @@ public class DataFiesta_lugar {
 	            e.printStackTrace();
 	        }
 	    }
-	}*/
+	}
 
 
 	/*public void deleteByIDs(Fiesta_lugar delfl) {
