@@ -100,7 +100,7 @@ public class DataFiesta_lugar {
 	
 	
 	public Fiesta_lugar getOne(Fiesta_lugar f_lug) {
-		Fiesta_lugar fl=null;
+		Fiesta_lugar fl = new Fiesta_lugar();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
@@ -111,13 +111,16 @@ public class DataFiesta_lugar {
 			Fiesta f = f_lug.getFiesta();
 			Lugar l = f_lug.getLugar();
 			
+			System.out.println(f);
+			System.out.println(l);
+			
 			stmt.setInt(1, f.getIdfiesta());
 			stmt.setInt(2,  l.getIdlugar());
 			stmt.setObject(3, f_lug.getFecha_fiesta());	
 			stmt.setObject(4, f_lug.getHora_fiesta());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				fl= new Fiesta_lugar();
+				/*fl= new Fiesta_lugar();*/
 				Fiesta f2 = new Fiesta();
 				Lugar l2 = new Lugar(); 
 				
@@ -127,6 +130,7 @@ public class DataFiesta_lugar {
 				fl.setLugar(l2);
 				fl.setFecha_fiesta(rs.getObject("fecha_evento", LocalDate.class));
 				fl.setHora_fiesta(rs.getObject("hora_evento", LocalTime.class));
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

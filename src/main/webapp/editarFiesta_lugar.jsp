@@ -11,7 +11,7 @@
 	</head>
 	<body>
 	
-		<% 
+		<%  
 			Fiesta_lugar fl = (Fiesta_lugar) request.getSession().getAttribute("fiesta_lugarEditar"); 
 			Fiesta f = fl.getFiesta();
 			Lugar l = fl.getLugar();
