@@ -220,4 +220,24 @@
     <servlet-name>SvEliminarFiesta_lugar</servlet-name>
     <url-pattern>/SvEliminarFiesta_lugar</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEntrada</display-name>
+    <servlet-name>SvEntrada</servlet-name>
+    <servlet-class>SvEntrada</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEntrada</servlet-name>
+    <url-pattern>/SvEntrada</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEntradaa</display-name>
+    <servlet-name>SvEntradaa</servlet-name>
+    <servlet-class>servlet.SvEntrada</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEntradaa</servlet-name>
+    <url-pattern>/SvEntradaa</url-pattern>
+  </servlet-mapping>
 </web-app>

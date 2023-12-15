@@ -23,8 +23,8 @@ public class SvEliminarFiesta_lugar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
-
-	/*@Override
+    
+    /*@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id_fiesta = Integer.parseInt(request.getParameter("idfiesta_elim"));
