@@ -240,4 +240,14 @@
     <servlet-name>SvEntradaa</servlet-name>
     <url-pattern>/SvEntradaa</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegistrarEntrada</display-name>
+    <servlet-name>RegistrarEntrada</servlet-name>
+    <servlet-class>servlet.RegistrarEntrada</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrarEntrada</servlet-name>
+    <url-pattern>/RegistrarEntrada</url-pattern>
+  </servlet-mapping>
 </web-app>
