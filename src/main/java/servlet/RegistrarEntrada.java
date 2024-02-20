@@ -79,7 +79,7 @@ public class RegistrarEntrada extends HttpServlet {
 		System.out.println("Fecha de la fiesta es: "+ fecha_fiesta);
 		System.out.println("Hora de la fiesta es: "+ hora_fiesta);
 		System.out.println("Fecha de la compra es: "+ fecha_actual);
-		System.out.println("Hora de la fiesta es: "+ horaActual);
+		System.out.println("Hora de la compra es: "+ horaActual);
 		
 		
 		response.sendRedirect("indexEntrada");

@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
-	<title>Mostrar fiestas_lugares</title>
+	<title>Mostrar entradas</title>
 </head>
 <body>
 	<h1>Lista de todas las entradas</h1>
