@@ -8,7 +8,7 @@ Aqui desarrollaremos el trabajo practico integrador de la materia electiva Lengu
  Integrantes:
  
 
- - GLOCER MARTÍN (legajo)
+ - GLOCER MARTÍN 48165
    
   *  SPINI SANTIAGO 49799
 
