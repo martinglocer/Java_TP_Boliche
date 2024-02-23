@@ -7,8 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
 	<title>Mostrar fiestas</title>
 </head>
 <body>
@@ -34,8 +35,13 @@
 								<td><%=f.getIdfiesta() %></td>
 								<td><%=f.getNombre_fiesta()%></td>
 								<td><%=f.getDescripcion()%></td>
-								<td></td><!-- editar -->
-								<td></td><!-- borrar -->
+								<td><a href="SvEditarFiesta?idfiesta_edit=<%= f.getIdfiesta() %>">Editar</a></td>
+                                <td>
+                            <form action="SvEliminarFiesta" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta fiesta?');">
+                                <input type="hidden" name="idfiesta" value="<%=f.getIdfiesta()%>">
+                                <button type="submit"> Borrar </button>
+                            </form>
+                        </td>
 							</tr>
 						<% } %>	
 						</tbody>

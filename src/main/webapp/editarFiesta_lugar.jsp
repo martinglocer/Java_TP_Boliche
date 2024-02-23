@@ -18,12 +18,12 @@
 		%>
 		<h1>Datos de fiesta_lugar</h1>
 		<form action="SvEditarFiesta_lugar" method="post">
-			<p><input type="number"  name="idfiesta" readonly placeholder="Id fiesta" value="<%=f.getIdfiesta()%>"></p>
-			<p><input type="number" name="idlugar" readonly placeholder="Id lugar" value="<%=l.getIdlugar()%>"></p>
-			<p><input type="date" name="fecha_fiesta_vieja" readonly placeholder="Fecha realización" value="<%=fl.getFecha_fiesta()%>"></p>
-			<p><input type="date" name="fecha_fiesta_nueva" placeholder="Fecha nueva de realización" ></p>
-			<p><input type="time" name="hora_fiesta_vieja" readonly placeholder="Hora realización" value="<%=fl.getHora_fiesta()%>"></p>
-			<p><input type="time" name="hora_fiesta_nueva" placeholder="Hora realización" ></p>
+			<p>Id Fiesta<input type="number"  name="idfiesta" readonly placeholder="Id fiesta" value="<%=f.getIdfiesta()%>"></p>
+			<p>Id Lugar<input type="number" name="idlugar" readonly placeholder="Id lugar" value="<%=l.getIdlugar()%>"></p>
+			<p>Fecha actual del evento<input type="date" name="fecha_fiesta_vieja" readonly placeholder="Fecha realización" value="<%=fl.getFecha_fiesta()%>"></p>
+			<p>Elegir fecha nueva del evento<input type="date" name="fecha_fiesta_nueva" placeholder="Fecha nueva de realización" ></p>
+			<p>Hora actual del evento<input type="time" name="hora_fiesta_vieja" readonly placeholder="Hora realización" value="<%=fl.getHora_fiesta()%>"></p>
+			<p>Elegir hora nueva del evento<input type="time" name="hora_fiesta_nueva" placeholder="Hora realización" ></p>
 			<button type="submit"> Guardar cambios </button>
 		</form>
 		
