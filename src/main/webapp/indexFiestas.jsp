@@ -14,8 +14,6 @@
             	<ul>
                 	<li><a href="indexFiestas">Listar fiestas</a></li>
                 	<li><a href="registrarFiesta.jsp">Registrar una nueva fiesta</a></li>                
-                	<li><a href="actualizarFiesta.jsp">Modificar una fiesta</a></li>
-                	<li><a href="eliminarFiesta.jsp">Eliminar una fiesta</a></li>
             	</ul>
         	</nav>
         </div>
