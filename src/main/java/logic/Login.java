@@ -4,9 +4,21 @@ import java.util.LinkedList;
 
 import data.*;
 import entities.*;
+import ui.Login1;
 
 public class Login {
 	private DataAsistente da;
+	
+	
+	public static void main(String[] args) {
+		
+		Login1 log = new Login1();
+		log.setVisible(true);
+		log.setLocationRelativeTo(null);
+		
+	}
+	
+	
 	
 	public Login() {
 		da=new DataAsistente();
