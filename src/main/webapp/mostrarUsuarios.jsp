@@ -40,8 +40,15 @@
                             <td><%=a.getEmail()%></td>
                             <td><%=a.getCelular()%></td>
                             <td><%=a.getFecha_nacimiento()%></td>
-                            <td></td><!-- editar -->
-                            <td></td><!-- borrar -->
+                            <td><a href="SvEditarUsuario?tipo_doc_editar=<%= a.getTipo_doc() %>
+                            		&nro_doc_editar=<%= a.getNro_doc() %>">Editar</a></td>
+                                <td>
+                            <form action="SvEliminarUsuario" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta fiesta?');">
+                                <input type="hidden" name="tipo_doc" value="<%=a.getTipo_doc()%> ">
+                                <input type="hidden" name="nro_doc" value="<%= a.getNro_doc() %>">
+                                <button type="submit"> Borrar </button>
+                            </form>
+                        </td>
                         </tr>
                     <% } %>
                 </tbody>
