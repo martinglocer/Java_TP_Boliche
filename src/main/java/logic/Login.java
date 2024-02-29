@@ -1,5 +1,6 @@
 package logic;
 
+import java.awt.EventQueue;
 import java.util.LinkedList;
 
 import data.*;
@@ -11,13 +12,17 @@ public class Login {
 	
 	
 	public static void main(String[] args) {
-		
-		Login1 log = new Login1();
-		log.setVisible(true);
-		log.setLocationRelativeTo(null);
-		
-	}
-	
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Login1 window = new Login1();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 	
 	
 	public Login() {
@@ -55,4 +60,27 @@ public class Login {
 	public void deleteByDoc(Asistente a) {
 		da.deleteByDoc(a);
 	}
+	
+	public String validateUser(int dni, String password) {
+		
+		String message="Dni no encontrado";
+		LinkedList<Asistente> listaAsistentes = da.getAll();
+		
+		for (Asistente asi : listaAsistentes) {
+			if ((asi.getNro_doc()) == dni) {
+				if (asi.getPassword().equals(password)) {
+					message = " Dni y contraseña correctos. Bienvenido/a!";
+				}
+				else {
+					message = "Contraseña incorrecta";
+				}
+				
+				break;
+			} 
+		}
+		
+		return message;
+		
+	}
+	
 }

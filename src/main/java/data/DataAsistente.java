@@ -50,6 +50,9 @@ public class DataAsistente {
 			}
 		}
 		
+		if (asis.isEmpty() == true) {
+			System.out.println("Vacío");
+		}
 		
 		return asis;
 	}
@@ -64,6 +67,48 @@ public class DataAsistente {
 					+ "password  from asistente where email=? and password=?"
 					);
 			stmt.setString(1, asi.getEmail());
+			stmt.setString(2, asi.getPassword());
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				a=new Asistente(null,0,null,null,null,null,null,null);
+				a.setTipo_doc(rs.getString("tipo_doc"));
+				a.setNro_doc(rs.getInt("nro_doc"));
+				a.setNombre(rs.getString("nombre"));
+				a.setApellido(rs.getString("apellido"));
+				a.setEmail(rs.getString("email"));
+				a.setFecha_nacimiento(rs.getObject("fecha_nacimiento", LocalDate.class));
+				a.setCelular(rs.getString("celular"));
+				a.setSaldo(rs.getFloat("saldo"));
+				a.setPassword(rs.getString("password"));
+				//
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("No funciona el Asistente getByUser(Asistente asi)");
+			
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return a;
+	}
+	
+	public Asistente validateUser(Asistente asi) {
+		Asistente a=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select nro_doc, email, apellido, email, fecha_nacimiento, celular, saldo, "
+					+ "password  from asistente where nro_doc=? and password=?"
+					);
+			stmt.setInt(1, asi.getNro_doc());
 			stmt.setString(2, asi.getPassword());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {

@@ -21,19 +21,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
+import data.DataAsistente;
+import entities.Asistente;
+import logic.Login;
+
 public class Login1 extends JFrame {
 
-	private JFrame frame;
-	private JTextField txtUser;
+	public JFrame frame;
+	private JTextField txtDNI;
 	private JTextArea txtMessage;
 	private JPasswordField txtPassword;
-
+	
+	DataAsistente da;
+	
+	Login log;
 
 	/**
 	 * Create the application.
 	 */
 	public Login1() {
 		initialize();
+		da = new DataAsistente();
+		log = new Login();
 	}
 
 	/**
@@ -53,9 +62,9 @@ public class Login1 extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 36));
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Usuario:");
+		JLabel lblNewLabel_1 = new JLabel("DNI:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(85, 123, 66, 22);
+		lblNewLabel_1.setBounds(113, 123, 38, 22);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Contraseña:");
@@ -63,11 +72,11 @@ public class Login1 extends JFrame {
 		lblNewLabel_1_1.setBounds(55, 180, 98, 22);
 		panel.add(lblNewLabel_1_1);
 		
-		txtUser = new JTextField();
-		txtUser.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtUser.setBounds(161, 119, 213, 31);
-		panel.add(txtUser);
-		txtUser.setColumns(10);
+		txtDNI = new JTextField();
+		txtDNI.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtDNI.setBounds(161, 119, 213, 31);
+		panel.add(txtDNI);
+		txtDNI.setColumns(10);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(55, 252, 372, 2);
@@ -78,6 +87,19 @@ public class Login1 extends JFrame {
 		panel.add(separator_1);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String dniStr = txtDNI.getText();
+				int dni = Integer.parseInt(dniStr);
+				String password = txtPassword.getText();
+				
+				String message = log.validateUser(dni, password);
+				
+				txtMessage.setText(message);
+				
+			}
+		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnLogin.setBounds(85, 264, 126, 51);
 		panel.add(btnLogin);
@@ -87,7 +109,7 @@ public class Login1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				System.out.println("Botón Limpiar clickeado");
-				txtUser.setText("");
+				txtDNI.setText("");
 				txtPassword.setText("");
 				txtMessage.setText("");
 				
@@ -97,10 +119,10 @@ public class Login1 extends JFrame {
 		btnLimpiar.setBounds(269, 264, 126, 51);
 		panel.add(btnLimpiar);
 		
-		JTextArea txtMessage = new JTextArea();
-		txtMessage.setEditable(false);
-		txtMessage.setBounds(55, 344, 372, 167);
-		panel.add(txtMessage);
+		txtMessage = new JTextArea();
+        txtMessage.setEditable(false);
+        txtMessage.setBounds(55, 344, 372, 167);
+        panel.add(txtMessage);
 		
 		txtPassword = new JPasswordField();
 		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -108,12 +130,30 @@ public class Login1 extends JFrame {
 		panel.add(txtPassword);
 	}
 	
+	/*
 	public void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {
+	 
 		
 		txtUser.setText("");
 		txtPassword.setText("");
 		txtMessage.setText("");
 		
 	}
+	*/
+	
+	/*
+	public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Login1 window = new Login1();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    */
 	
 }
