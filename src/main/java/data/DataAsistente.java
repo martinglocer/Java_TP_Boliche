@@ -164,9 +164,11 @@ public class DataAsistente {
 				a.setCelular(rs.getString("celular"));
 				a.setSaldo(rs.getFloat("saldo"));
 				a.setPassword(rs.getString("password"));
+				System.out.println("Usuario encontrado");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("Usuario no encontrado");
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
@@ -174,6 +176,7 @@ public class DataAsistente {
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				System.out.println("Usuario no encontrado");
 			}
 		}
 		

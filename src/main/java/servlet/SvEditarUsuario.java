@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import entities.Asistente;
+import data.DataAsistente; 
 import logic.Login;
 
 @WebServlet(name = "SvEditarUsuario", urlPatterns = "/SvEditarUsuario")
@@ -32,8 +33,9 @@ public class SvEditarUsuario extends HttpServlet {
 		Asistente asi = new Asistente();
 		asi.setTipo_doc(tipo_doc_editar);
 		asi.setNro_doc(nro_doc_editar);
-		Login l = new Login();
-		Asistente a = l.getByDocumento(asi);
+		DataAsistente da = new DataAsistente();
+		//Login l = new Login();
+		Asistente a = da.getByDocumento(asi);
 		
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("usuEditar", a);
