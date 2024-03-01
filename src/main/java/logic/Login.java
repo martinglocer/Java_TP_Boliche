@@ -61,6 +61,7 @@ public class Login {
 		da.deleteByDoc(a);
 	}
 	
+	/*
 	public String validateUser(int dni, String password) {
 		
 		String message="Dni no encontrado";
@@ -80,6 +81,29 @@ public class Login {
 		}
 		
 		return message;
+		*/
+	
+	public boolean validateUser(int dni, String password) {
+		
+		LinkedList<Asistente> listaAsistentes = da.getAll();
+		
+		if (listaAsistentes == null) {
+	        return false;
+	    }
+
+	    for (Asistente asi : listaAsistentes) {
+	        if (asi.getNro_doc() == dni) {
+	            if (asi.getPassword().equals(password)) {
+	                return true;
+	            } else {
+	                return false;
+	            }
+	        }
+	    }
+	    
+	    return false;
+		
+		
 		
 	}
 	
