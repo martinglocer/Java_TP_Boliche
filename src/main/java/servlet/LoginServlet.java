@@ -39,7 +39,18 @@ public class LoginServlet extends HttpServlet {
         if (validateUser(dni, password)) {
             response.sendRedirect("index.jsp");
         } else {
-            response.sendRedirect("login.jsp?error=1");
+        	boolean incorrectPassword = isIncorrectPassword(dni, password);
+        	boolean dniNotFound = isDniNotFound(dni);
+        	
+        	String redirectURL = "login.jsp?error=true&dni=" + dni;
+        	
+        	if (incorrectPassword) {
+                redirectURL += "&incorrectPassword=true";
+            } else if (dniNotFound) {
+                redirectURL += "&dniNotFound=true";
+            }
+            
+            response.sendRedirect(redirectURL);
         }
     }
 
@@ -63,6 +74,35 @@ public class LoginServlet extends HttpServlet {
 	    
 	    return false;
     	
+    }
+    
+    private boolean isIncorrectPassword(int dni, String password) {
+    	
+    	LinkedList<Asistente> listaAsistentes = da.getAll();
+    	
+    	for (Asistente asi : listaAsistentes) {
+    		if (asi.getNro_doc() == dni) {
+    			if (asi.getPassword().equals(password)) {
+	                return false;
+	            } else {
+	            	return true;
+	            }
+    		}
+    	}
+		return false;
+    }
+
+    private boolean isDniNotFound(int dni) {
+    	
+    	
+    	LinkedList<Asistente> listaAsistentes = da.getAll();
+    	
+    	for (Asistente asi : listaAsistentes) {
+    		if (asi.getNro_doc() == dni) {
+    			return false;
+    		}
+    	}
+		return true;
     }
 		
 	}
