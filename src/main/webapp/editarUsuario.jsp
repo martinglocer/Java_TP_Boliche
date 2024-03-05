@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Editar Lugar</title>
+		<title>Editar Usuario</title>
 	</head>
 	<body>
 	

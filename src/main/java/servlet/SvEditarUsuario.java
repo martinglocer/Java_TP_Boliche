@@ -37,8 +37,8 @@ public class SvEditarUsuario extends HttpServlet {
 		System.out.println(asi);
 		
 		DataAsistente da = new DataAsistente();
-		//Login l = new Login();
 		Asistente a = da.getByDocumento(asi);
+		System.out.println(a);
 		
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("usuEditar", a);
@@ -53,8 +53,6 @@ public class SvEditarUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Login l = new Login();
-		
 		String tipo_doc = request.getParameter("tipo_doc");
 		String nroDocStr = request.getParameter("nro_doc");
 		int nro_doc = Integer.parseInt(nroDocStr);
@@ -68,7 +66,8 @@ public class SvEditarUsuario extends HttpServlet {
 		
 		
 		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento);
-		l.actualizarDatos(a);
+		DataAsistente da = new DataAsistente();
+		da.actualizarAsist(a);
 		
 		response.sendRedirect("indexUsuarios");
 		

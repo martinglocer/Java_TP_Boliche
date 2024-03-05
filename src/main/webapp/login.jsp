@@ -4,6 +4,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
 		<title>Login</title>
 	</head>
 	<body>
@@ -21,7 +23,7 @@
     	<% } %>
 		<form action="LoginServlet" method="post">
 			<p><label>DNI</label><p>
-			<p><input type="number" name="dni" value="<%= request.getParameter("dni") != null ? request.getParameter("dni") : "" %>"></p>
+			<p><input type="text" name="dni" value="<%= request.getParameter("dni") != null ? request.getParameter("dni") : "" %>"></p>
 			<p><label>Contraseña</label><p>
 			<p><input type="password" name="password" value=""></p>
 			<button type="submit"> Enviar </button>
