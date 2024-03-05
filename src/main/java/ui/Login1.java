@@ -94,9 +94,9 @@ public class Login1 extends JFrame {
 				int dni = Integer.parseInt(dniStr);
 				String password = txtPassword.getText();
 				
-				String message = log.validateUser(dni, password);
+				// String message = log.validateUser(dni, password);
 				
-				txtMessage.setText(message);
+				// txtMessage.setText(message);
 				
 			}
 		});

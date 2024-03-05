@@ -33,6 +33,9 @@ public class SvEditarUsuario extends HttpServlet {
 		Asistente asi = new Asistente();
 		asi.setTipo_doc(tipo_doc_editar);
 		asi.setNro_doc(nro_doc_editar);
+		
+		System.out.println(asi);
+		
 		DataAsistente da = new DataAsistente();
 		//Login l = new Login();
 		Asistente a = da.getByDocumento(asi);
