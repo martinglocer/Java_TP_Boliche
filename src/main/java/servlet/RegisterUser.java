@@ -48,6 +48,7 @@ public class RegisterUser extends HttpServlet {
 		
 		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento);
 		log.addAsistente(a);
+		response.sendRedirect("indexUsuarios");
 		
 		System.out.println("Dni es: "+nro_doc);
 		System.out.println("nombre es: "+nombre);

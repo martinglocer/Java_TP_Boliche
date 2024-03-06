@@ -71,6 +71,7 @@ public class RegistrarEntrada extends HttpServlet {
         
 		Entrada ent = new Entrada(identrada, asis, fl, fecha_actual, horaActual);
 		
+		
 		System.out.println("Id de la entrada es: "+ identrada);
 		System.out.println("Tipo de documento es: "+ tipo_doc);
 		System.out.println("Número de documento es: "+ nro_doc);

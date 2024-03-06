@@ -38,8 +38,13 @@
 								<td><%=l.getDireccion()%></td>
 								<td><%=l.getCapacidad()%></td>
 								<td><%=l.getCiudad()%></td>
-								<td></td><!-- editar -->
-								<td></td><!-- borrar -->
+								<td><a href="SvEditarLugar?idlugar_edit=<%= l.getIdlugar() %>">Editar</a></td>
+                                <td>
+		                            <form action="SvEliminarLugar" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta fiesta?');">
+		                                <input type="hidden" name="idlugar" value="<%=l.getIdlugar()%>">
+		                                <button type="submit"> Borrar </button>
+		                            </form>
+                        		</td>
 							</tr>
 						<% } %>	
 						</tbody>

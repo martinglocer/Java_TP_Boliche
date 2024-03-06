@@ -17,7 +17,7 @@ public class DataAsistente {
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
 			rs= stmt.executeQuery("select tipo_doc, nro_doc, nombre, apellido, email, fecha_nacimiento, celular, saldo, "
-					+ "password  from asistente");
+					+ "password  from asistente order by apellido");
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {

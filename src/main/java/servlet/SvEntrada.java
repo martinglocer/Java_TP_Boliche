@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import jakarta.servlet.http.HttpSession;
-
+import entities.Asistente;
 import entities.Entrada;
+import entities.Fiesta;
+import entities.Fiesta_lugar;
+import entities.Lugar;
 import data.DataEntrada;
 
 import java.util.LinkedList;
@@ -29,6 +32,7 @@ public class SvEntrada extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		DataEntrada de = new DataEntrada();
 		LinkedList<Entrada> listaEntradas = de.getAll();
+		System.out.println(listaEntradas.size());
 		
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("listaEntradas", listaEntradas);

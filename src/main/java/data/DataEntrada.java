@@ -41,19 +41,22 @@ public class DataEntrada {
 					+ "left join lugar l\r\n"
 					+ "  on fl.idlugar=l.idlugar\r\n"
 					+ "left join asistente asis \r\n"
-					+ "  on ent.tipo_doc = asis.tipo_doc \r\n"
-					+ "  and ent.nro_doc = asis.nro_doc \r\n"
+					//+ "  #on ent.tipo_doc = asis.tipo_doc \r\n"
+					+ "  on ent.nro_doc = asis.nro_doc \r\n"
 					+ "order by ent.identrada, fl.fecha_evento asc, fl.hora_evento asc;");
 					
 			if(rs!=null) {
 				while(rs.next()) {
 					Entrada ent = new Entrada();
 					ent.setIdentrada(rs.getInt("ent.identrada"));
+					ent.setFecha_compra(rs.getObject("ent.fecha_compra", LocalDate.class));
+					ent.setHora_compra(rs.getObject("ent.hora_compra", LocalTime.class));
 					Asistente asis = new Asistente();
 					asis.setTipo_doc(rs.getString("asis.tipo_doc"));
 					asis.setNro_doc(rs.getInt("asis.nro_doc"));
 					asis.setNombre(rs.getString("asis.nombre"));
 					asis.setApellido(rs.getString("asis.apellido"));
+					ent.setAsistente(asis);
 					Fiesta f = new Fiesta();
 					f.setNombre_fiesta(rs.getString("f.nombre_fiesta"));
 					Lugar l = new Lugar();
@@ -66,7 +69,8 @@ public class DataEntrada {
 					fl.setFiesta(f);
 					fl.setLugar(l);
 					ent.setFiesta_lugar(fl);
-					
+		
+					System.out.println("IdEntrada: " + ent.getIdentrada() + ", Tipo_doc: " + asis.getTipo_doc() + ", Nro_doc: " + asis.getNro_doc());
 					ents.add(ent);
 				}
 			}
