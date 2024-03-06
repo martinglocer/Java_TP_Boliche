@@ -264,7 +264,7 @@ public class DataAsistente {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error SQL: " + e.getMessage());
-            System.out.println("Documento inexistente " + "no funciona el deleteByDoc(Asistente delAsi)  ");
+            //System.out.println("Documento inexistente " + "no funciona el deleteByDoc(Asistente delAsi)  ");
 
         } finally {
             try {

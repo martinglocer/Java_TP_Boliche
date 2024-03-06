@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import entities.Asistente;
-import logic.Login;
+import data.DataAsistente;
 
 
 public class SvEliminarUsuario extends HttpServlet {
@@ -20,6 +20,7 @@ public class SvEliminarUsuario extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DataAsistente da = new DataAsistente();
 		
 		String tipo_doc_editar = request.getParameter("tipo_doc_editar");
 		String nro_doc_editarStr = request.getParameter("nro_doc_editar");
@@ -27,8 +28,7 @@ public class SvEliminarUsuario extends HttpServlet {
 		Asistente asi = new Asistente();
 		asi.setTipo_doc(tipo_doc_editar);
 		asi.setNro_doc(nro_doc_editar);
-		Login l = new Login();
-		Asistente a = l.getByDocumento(asi);
+		Asistente a = da.getByDocumento(asi);
 		
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("usuMostrar", a);
@@ -45,9 +45,11 @@ public class SvEliminarUsuario extends HttpServlet {
 		Asistente asi = new Asistente();
 		asi.setTipo_doc(tipo_doc_eliminar);
 		asi.setNro_doc(nro_doc_eliminar);
-		Login l = new Login();
-		Asistente a = l.getByDocumento(asi);
-		l.deleteByDoc(a);
+		System.out.println(asi);
+		DataAsistente da = new DataAsistente();
+		Asistente a = da.getByDocumento(asi);
+		System.out.println(a);
+		da.deleteByDoc(a);
 		response.sendRedirect("indexUsuarios");
 		
 	}
