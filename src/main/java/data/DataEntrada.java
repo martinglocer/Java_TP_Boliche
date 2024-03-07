@@ -92,6 +92,50 @@ public class DataEntrada {
 		return ents;
 	}
 	
+	public void add(Entrada en) {
+		
+		
+		Fiesta_lugar fl = en.getFiesta_lugar();
+		Fiesta f = fl.getFiesta();
+		Lugar l = fl.getLugar();
+		Asistente a = en.getAsistente();
+		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+							"insert into Entrada(tipo_doc, nro_doc, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra)\r\n" 
+						+ "values(?,?,?,?,?,?,?,?)"
+						,PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			stmt.setString(1, a.getTipo_doc());
+			stmt.setInt(2, a.getNro_doc());
+			stmt.setInt(3, f.getIdfiesta());
+			stmt.setInt(4, l.getIdlugar());
+			stmt.setObject(5, fl.getFecha_fiesta());
+			stmt.setObject(6, fl.getHora_fiesta());
+			stmt.setObject(7, en.getFecha_compra());
+			stmt.setObject(8, en.getHora_compra());
+			stmt.executeUpdate();
+			keyResultSet=stmt.getGeneratedKeys();
+			
+			if (keyResultSet!= null && keyResultSet.next()) {
+				l.setIdlugar(keyResultSet.getInt(1));
+			} 
+
+			
+		}  catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+    }
+	
 	/*public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDateTime fecha_hora) {
 		Fiesta_lugar fl=null;
 		PreparedStatement stmt=null;

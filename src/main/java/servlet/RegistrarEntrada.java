@@ -82,6 +82,7 @@ public class RegistrarEntrada extends HttpServlet {
 		System.out.println("Fecha de la compra es: "+ fecha_actual);
 		System.out.println("Hora de la compra es: "+ horaActual);
 		
+		dent.add(ent);
 		
 		response.sendRedirect("indexEntrada");
 
