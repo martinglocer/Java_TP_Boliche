@@ -260,4 +260,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEliminarEntrada</display-name>
+    <servlet-name>SvEliminarEntrada</servlet-name>
+    <servlet-class>servlet.SvEliminarEntrada</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEliminarEntrada</servlet-name>
+    <url-pattern>/SvEliminarEntrada</url-pattern>
+  </servlet-mapping>
 </web-app>
