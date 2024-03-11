@@ -70,6 +70,7 @@ public class SvEditarEntrada extends HttpServlet {
 		String hora_fiesta_nStr = request.getParameter("hora_fiesta_nueva");
 		LocalTime hora_fiesta_nueva = LocalTime.parse(hora_fiesta_nStr);
 		
+		/*
 		
 		Fiesta_lugar fiesta_lugar = new Fiesta_lugar(f, l, fecha_fiesta_vieja, hora_fiesta_vieja);
 		
@@ -81,6 +82,8 @@ public class SvEditarEntrada extends HttpServlet {
 		System.out.println("Id del lugar es: "+idlugar);
 		System.out.println("Fecha nueva es: "+fecha_fiesta_nueva);
 		System.out.println("Hora nueva es: "+hora_fiesta_nueva);
+		
+		*/
 	
 	}
 
