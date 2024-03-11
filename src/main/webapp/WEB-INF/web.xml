@@ -262,6 +262,7 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+<<<<<<< HEAD
     <display-name>SvEditarEntrada</display-name>
     <servlet-name>SvEditarEntrada</servlet-name>
     <servlet-class>servlet.SvEditarEntrada</servlet-class>
@@ -269,5 +270,14 @@
   <servlet-mapping>
     <servlet-name>SvEditarEntrada</servlet-name>
     <url-pattern>/SvEditarEntrada</url-pattern>
+=======
+    <display-name>SvEliminarEntrada</display-name>
+    <servlet-name>SvEliminarEntrada</servlet-name>
+    <servlet-class>servlet.SvEliminarEntrada</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEliminarEntrada</servlet-name>
+    <url-pattern>/SvEliminarEntrada</url-pattern>
+>>>>>>> c6c6bb473c20e56413c7b2658320f55911e2752a
   </servlet-mapping>
 </web-app>

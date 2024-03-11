@@ -63,7 +63,12 @@
 								<td><%=ent.getFecha_compra()%></td>
 								<td><%=ent.getHora_compra()%></td>
 								<td></td><!-- editar -->
-								<td></td><!-- borrar -->
+								<td>
+		                            <form action="SvEliminarEntrada" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta entrada?');">
+		                                <input type="hidden" name="identrada" value="<%=ent.getIdentrada()%>">
+		                                <button type="submit"> Borrar </button>
+		                            </form>
+                        		</td>
 							</tr>
 						<% } %>	
 						</tbody>

@@ -284,25 +284,19 @@ public class DataEntrada {
 	}
 
 
-	/*public void deleteByIDs(Fiesta_lugar delfl) {
+	public void deleteByID(Entrada en) {
         PreparedStatement stmt = null;
 
         try {
-        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from fiesta_lugar where idfiesta=? and idlugar=? and fecha_hora_fiesta=?");
+        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from entrada where identrada=? ");
 
-        stmt.setInt(1, delfl.getIdfiesta());
-		stmt.setInt(2, delfl.getIdlugar());
-		
-		LocalDateTime fecha_hora_fiesta = delfl.getFecha_hora_fiesta();
-        Timestamp timestamp = Timestamp.valueOf(fecha_hora_fiesta);
-
-        stmt.setTimestamp(3, timestamp);
         
+		stmt.setInt(1, en.getIdentrada());      
         stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Fiesta_lugar inexistente");
+            System.out.println("Entrada inexistente");
 
         } finally {
             try {
@@ -312,7 +306,7 @@ public class DataEntrada {
                     e.printStackTrace();
                 }
             }
-        }*/
+        }
 	
 }
 
