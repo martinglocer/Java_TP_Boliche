@@ -136,23 +136,40 @@ public class DataEntrada {
 		}
     }
 	
-	/*public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDateTime fecha_hora) {
-		Fiesta_lugar fl=null;
+	
+	public Entrada getById(int identrada) {
+		Entrada ent=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select idfiesta, idlugar, fecha_hora_fiesta from fiesta_lugar where idfiesta = ? and idlugar = ? and fecha_hora_fiesta = ?"
+					"select identrada, tipo_doc, nro_doc, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra\r\n"
+					+ "from entrada where identrada = ?"
 					);
-			stmt.setInt(1, idfiesta);
-			stmt.setInt(2,  idlugar);
-			stmt.setObject(3, fecha_hora);	
+			stmt.setInt(1, identrada);
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				fl=new Fiesta_lugar(0, 0, null);
-				fl.setIdfiesta(rs.getInt("idfiesta"));
-				fl.setIdlugar(rs.getInt("idlugar"));
-				fl.setFecha_hora_fiesta(rs.getTimestamp("fecha_hora_fiesta").toLocalDateTime());
+				ent=new Entrada();
+				ent.setIdentrada(rs.getInt("identrada"));
+				
+				Asistente asis = new Asistente();
+				asis.setTipo_doc(rs.getString("tipo_doc"));
+				asis.setNro_doc(rs.getInt("nro_doc"));
+				
+				Fiesta f = new Fiesta();
+				f.setIdfiesta(rs.getInt("idfiesta"));
+				
+				Lugar l = new Lugar();
+				l.setIdlugar(rs.getInt("idlugar"));
+				
+				Fiesta_lugar fiesta_lug = new Fiesta_lugar();
+				fiesta_lug.setFiesta(f);
+				fiesta_lug.setLugar(l);
+				fiesta_lug.setFecha_fiesta(rs.getObject("fecha_evento", LocalDate.class));
+				fiesta_lug.setHora_fiesta(rs.getObject("hora_evento", LocalTime.class));
+				
+				ent.setFecha_compra(rs.getObject("fecha_compra", LocalDate.class));
+				ent.setHora_compra(rs.getObject("hora_compra", LocalTime.class));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -166,8 +183,11 @@ public class DataEntrada {
 			}
 		}
 		
-		return fl;
-	}*/
+		System.out.println(ent);
+		
+		return ent;
+	}
+	
 	
 	
 	public Entrada getOne(Entrada ent) {
@@ -176,20 +196,35 @@ public class DataEntrada {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select identrada from entrada where identrada = ?"
+					"select identrada, tipo_doc, nro_doc, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra \r\n "
+					+ "from entrada where identrada = ?"
 					);
-			
-			Fiesta_lugar fl = ent.getFiesta_lugar();
-			
-			System.out.println(fl);
-			
+					
 			stmt.setInt(1, ent.getIdentrada());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				/*e= new Entrada();*/
+				Asistente asis = new Asistente();
+				asis.setTipo_doc(rs.getString("tipo_doc"));
+				asis.setNro_doc(rs.getInt("nro_doc"));
 				
+				Fiesta f = new Fiesta();
+				f.setIdfiesta(rs.getInt("idfiesta"));
+				
+				Lugar l = new Lugar();
+				l.setIdlugar(rs.getInt("idlugar"));
+				
+				Fiesta_lugar fiesta_lug = new Fiesta_lugar();
+				fiesta_lug.setFiesta(f);
+				fiesta_lug.setLugar(l);
+				fiesta_lug.setFecha_fiesta(rs.getObject("fecha_evento", LocalDate.class));
+				fiesta_lug.setHora_fiesta(rs.getObject("hora_evento", LocalTime.class));
+				
+				System.out.println(fiesta_lug);
 				
 				en.setIdentrada(rs.getInt("identrada"));
+				en.setFecha_compra(rs.getObject("fecha_compra", LocalDate.class));
+				en.setHora_compra(rs.getObject("hora_compra", LocalTime.class));
+				
 				
 			}
 		} catch (SQLException e) {
@@ -207,39 +242,7 @@ public class DataEntrada {
 		return en;
 	}
 	
-	
-	public void add(Fiesta_lugar fl) {
-		PreparedStatement stmt= null;
-		ResultSet keyResultSet=null;
-		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-							"insert into fiesta_lugar(idfiesta, idlugar, fecha_evento, hora_evento) values(?,?,?,?)"
-							,PreparedStatement.RETURN_GENERATED_KEYS);
-			
-			Fiesta f = fl.getFiesta();
-			Lugar l = fl.getLugar();
-			
-			stmt.setInt(1, f.getIdfiesta());
-			stmt.setInt(2, l.getIdlugar());
-			stmt.setObject(3, fl.getFecha_fiesta());
-			stmt.setObject(4, fl.getHora_fiesta());
-			stmt.executeUpdate();
-		
-			
-		}  catch (SQLException e) {
-            e.printStackTrace();
-		} finally {
-            try {
-                if(keyResultSet!=null)keyResultSet.close();
-                if(stmt!=null)stmt.close();
-                DbConnector.getInstancia().releaseConn();
-            } catch (SQLException e) {
-            	e.printStackTrace();
-            }
-		}
-    }
-	
-	public void actualizarFiesta_lugar(Fiesta_lugar fl, LocalDate fe_nueva, LocalTime ho_nueva) {
+	public void actualizarEntrada(Fiesta_lugar fl, LocalDate fe_nueva, LocalTime ho_nueva) {
 	    PreparedStatement stmt = null;
 	    try {
 	        stmt = DbConnector.getInstancia().getConn().

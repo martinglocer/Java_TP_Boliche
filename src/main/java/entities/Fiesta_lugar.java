@@ -59,6 +59,10 @@ public class Fiesta_lugar {
 		this.hora_fiesta = hora_fiesta;
 	}
 	
+	@Override
+    public String toString() {
+        return "Fiesta_lugar [fiesta=" + fiesta + ", lugar=" + lugar + ", fecha_fiesta=" + fecha_fiesta + ", hora_fiesta=" + hora_fiesta + "]";
+    }
 	
 	
 }

@@ -260,4 +260,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEditarEntrada</display-name>
+    <servlet-name>SvEditarEntrada</servlet-name>
+    <servlet-class>servlet.SvEditarEntrada</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEditarEntrada</servlet-name>
+    <url-pattern>/SvEditarEntrada</url-pattern>
+  </servlet-mapping>
 </web-app>

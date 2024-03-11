@@ -65,6 +65,10 @@ public class Entrada {
 		this.hora_compra = hora_compra;
 	}
 	
+	@Override
+    public String toString() {
+        return "Entrada [identrada=" + identrada + ", asistente=" + asistente + ", fiesta_lugar=" + fiesta_lugar + ", fecha_compra=" + fecha_compra + ", hora_compra=" + hora_compra + "]";
+    }
 	
 
 }
