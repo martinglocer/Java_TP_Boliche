@@ -12,7 +12,8 @@
 		<div>	
 			<nav>
             	<ul>
-                	<li><a href="indexFiesta_lugar">Listar las fiestas organizadas</a></li>
+                	<li><a href="indexFiesta_lugar">Listar todas las fiestas organizadas</a></li>
+                	<li><a href="fiesta_lugar_disponibles">Listar las futuras fiestas disponibles</a></li>
                 	<li><a href="registrarFiesta_lugar.jsp">Registrar una nueva fiesta con su lugar y fecha de realización</a></li>                
                 	<li><a href="actualizarFiesta_lugar.jsp">Modificar una fiesta_lugar</a></li>
                 	<li><a href="eliminarFiesta_lugar.jsp">Eliminar una fiesta_lugar</a></li>

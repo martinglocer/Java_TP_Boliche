@@ -65,6 +65,65 @@ public class DataFiesta_lugar {
 		return fie_lug;
 	}
 	
+	public LinkedList<Fiesta_lugar> getDisponibles(){
+		Statement stmt=null;
+		ResultSet rs=null;
+		LinkedList<Fiesta_lugar> fie_lug= new LinkedList<>();
+		
+		try {
+			stmt= DbConnector.getInstancia().getConn().createStatement(); 
+			rs= stmt.executeQuery("select f.idfiesta, l.idlugar, fl.fecha_evento, fl.hora_evento, f.nombre_fiesta, \r\n"
+								+ "l.nombre_lugar, l.direccion, l.ciudad, l.capacidad, count(e.identrada) entradas_vendidas \r\n"
+								+ "from fiesta_lugar fl \r\n"
+								+ "inner join fiesta f \r\n"
+								+ "		on f.idfiesta = fl.idfiesta \r\n"
+								+ "inner join lugar l \r\n"
+								+ "		on l.idlugar = fl.idlugar \r\n"
+								+ "left join entrada e \r\n"
+								+ "		on e.fecha_evento = fl.fecha_evento \r\n"
+								+ "	    and e.hora_evento = fl.hora_evento \r\n"
+								+ "	    and e.idlugar = fl.idlugar \r\n"
+								+ "     and e.idfiesta = fl.idfiesta \r\n"
+								+ "where fl.fecha_evento >= current_timestamp() \r\n"
+								+ "group by fl.fecha_evento, fl.hora_evento, f.nombre_fiesta, l.nombre_lugar, l.direccion, l.ciudad \r\n"
+								+ "having l.capacidad > entradas_vendidas \r\n"
+								+ "order by fl.fecha_evento asc, fl.hora_evento asc;");
+					
+			if(rs!=null) {
+				while(rs.next()) {
+					Lugar l = new Lugar();
+					l.setNombre_lugar(rs.getString("l.nombre_lugar"));
+					l.setDireccion(rs.getString("l.direccion"));
+					l.setCiudad(rs.getString("l.ciudad"));
+					Fiesta f = new Fiesta();
+					f.setNombre_fiesta(rs.getString("f.nombre_fiesta"));
+					Fiesta_lugar fl=new Fiesta_lugar();
+					fl.setFecha_fiesta(rs.getObject("fl.fecha_evento", LocalDate.class));
+					fl.setHora_fiesta(rs.getObject("fl.hora_evento", LocalTime.class));
+					fl.setFiesta(f);
+					fl.setLugar(l);
+					
+					fie_lug.add(fl);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return fie_lug;
+	}
+	
 	/*public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDateTime fecha_hora) {
 		Fiesta_lugar fl=null;
 		PreparedStatement stmt=null;

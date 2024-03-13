@@ -262,7 +262,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-
     <display-name>SvEditarEntrada</display-name>
     <servlet-name>SvEditarEntrada</servlet-name>
     <servlet-class>servlet.SvEditarEntrada</servlet-class>
@@ -270,6 +269,15 @@
   <servlet-mapping>
     <servlet-name>SvEditarEntrada</servlet-name>
     <url-pattern>/SvEditarEntrada</url-pattern>
-
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvFiesta_lugar_disponibles</display-name>
+    <servlet-name>SvFiesta_lugar_disponibles</servlet-name>
+    <servlet-class>servlet.SvFiesta_lugar_disponibles</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvFiesta_lugar_disponibles</servlet-name>
+    <url-pattern>/SvFiesta_lugar_disponibles</url-pattern>
   </servlet-mapping>
 </web-app>
