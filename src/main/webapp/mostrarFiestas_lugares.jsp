@@ -45,7 +45,15 @@
 								<td><%=l.getDireccion()%></td>
 								<td><%=l.getCiudad()%></td>
 								<td></td><!-- editar -->
-								<td></td><!-- borrar -->
+                                <td>
+		                            <form action="SvEliminarFiesta_lugar" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta fiesta con su lugar de realización?');">
+		                                <input type="hidden" name="idfiesta_elim" value="<%=f.getIdfiesta()%>">
+		                                <input type="hidden" name="idlugar_elim" value="<%=l.getIdlugar()%>">
+		                                <input type="hidden" name="fecha_fiesta_elim" value="<%=fl.getFecha_fiesta()%>">
+		                                <input type="hidden" name="hora_fiesta_elim" value="<%=fl.getHora_fiesta()%>">
+		                                <button type="submit"> Borrar </button>
+		                            </form>
+                        		</td>
 							</tr>
 						<% } %>	
 						</tbody>

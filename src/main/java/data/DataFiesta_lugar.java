@@ -124,23 +124,29 @@ public class DataFiesta_lugar {
 		return fie_lug;
 	}
 	
-	/*public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDateTime fecha_hora) {
+	public Fiesta_lugar getByData(int idfiesta, int idlugar, LocalDate fecha_fiesta, LocalTime hora_fiesta) {
 		Fiesta_lugar fl=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select idfiesta, idlugar, fecha_hora_fiesta from fiesta_lugar where idfiesta = ? and idlugar = ? and fecha_hora_fiesta = ?"
+					"select idfiesta, idlugar, fecha_evento, hora_evento from fiesta_lugar where idfiesta = ? and idlugar = ? and fecha_evento = ? and hora_evento = ?"
 					);
 			stmt.setInt(1, idfiesta);
 			stmt.setInt(2,  idlugar);
-			stmt.setObject(3, fecha_hora);	
+			stmt.setObject(3, fecha_fiesta);
+			stmt.setObject(4, hora_fiesta);
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				fl=new Fiesta_lugar(0, 0, null);
-				fl.setIdfiesta(rs.getInt("idfiesta"));
-				fl.setIdlugar(rs.getInt("idlugar"));
-				fl.setFecha_hora_fiesta(rs.getTimestamp("fecha_hora_fiesta").toLocalDateTime());
+				fl=new Fiesta_lugar();
+				Lugar l=new Lugar();
+				l.setIdlugar(idlugar);
+				Fiesta f = new Fiesta();
+				f.setIdfiesta(idfiesta);
+				fl.setLugar(l);
+				fl.setFiesta(f);
+				fl.setFecha_fiesta(rs.getTimestamp("fecha_fiesta").toLocalDateTime().toLocalDate());
+				fl.setHora_fiesta(rs.getTimestamp("hora_fiesta").toLocalDateTime().toLocalTime());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -154,8 +160,9 @@ public class DataFiesta_lugar {
 			}
 		}
 		
-		return fl;
-	}*/
+	return fl;
+	
+	}
 	
 	
 	public Fiesta_lugar getOne(Fiesta_lugar f_lug) {
@@ -280,19 +287,26 @@ public class DataFiesta_lugar {
 	}
 
 
-	/*public void deleteByIDs(Fiesta_lugar delfl) {
+	public void deleteByIDs(Fiesta_lugar delfl) {
         PreparedStatement stmt = null;
 
         try {
-        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from fiesta_lugar where idfiesta=? and idlugar=? and fecha_hora_fiesta=?");
-
-        stmt.setInt(1, delfl.getIdfiesta());
-		stmt.setInt(2, delfl.getIdlugar());
+        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from fiesta_lugar where idfiesta=? and idlugar=? and fecha_fiesta=? and hora_fiesta = ?");
+        
+        Lugar dell = delfl.getLugar();
+        Fiesta delf = delfl.getFiesta();
+        
+        stmt.setInt(1, dell.getIdlugar());
+		stmt.setInt(2, delf.getIdfiesta());
 		
-		LocalDateTime fecha_hora_fiesta = delfl.getFecha_hora_fiesta();
-        Timestamp timestamp = Timestamp.valueOf(fecha_hora_fiesta);
-
-        stmt.setTimestamp(3, timestamp);
+		LocalDate fecha_fiesta = delfl.getFecha_fiesta();
+		LocalTime hora_fiesta = delfl.getHora_fiesta();
+		
+		Timestamp fechaTimestamp = Timestamp.valueOf(fecha_fiesta.atStartOfDay()); // Cambiado para obtener la marca de tiempo de la fecha y la hora juntas
+        Timestamp horaTimestamp = Timestamp.valueOf(hora_fiesta.atDate(LocalDate.now())); // Cambiado para obtener la marca de tiempo de la fecha y la hora juntas
+        
+        stmt.setTimestamp(3, fechaTimestamp);
+        stmt.setTimestamp(4, horaTimestamp);
         
         stmt.executeUpdate();
 
@@ -308,6 +322,6 @@ public class DataFiesta_lugar {
                     e.printStackTrace();
                 }
             }
-        }*/
+        }
 	
 }
