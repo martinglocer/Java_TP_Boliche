@@ -1,5 +1,5 @@
 # Java_TP_Boliche
-Aqui desarrollaremos el trabajo practico integrador de la materia electiva Lenguaje JAVA
+Aqui desarrollaremos el trabajo practico integrador de la materia electiva Lenguaje de programación Java.
 
 **![](https://lh4.googleusercontent.com/ptjW-3iL9bTm5-C0QnpPKPrbyWRCVwPkUOvZBuJr4xk9ARJoB-mCguPI2OWRdajDE_Clo8_EcuzgCgXgnpppYL8HTSKqTSLk_Xk02xyIznusYUBmW0DocNbAnecqq-M3hW8DsDbdrfFq3C99JKxl_Qs)**
 
