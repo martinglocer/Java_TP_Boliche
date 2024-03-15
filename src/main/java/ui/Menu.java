@@ -70,7 +70,7 @@ public class Menu {
 	}
 	
 	public Asistente login() {
-		Asistente p=new Asistente(null, 0, null, null, null, null, null, null);
+		Asistente p=new Asistente(null, 0, null, null, null, null, null, null, 0);
 		
 		System.out.print("Email: ");
 		p.setEmail(s.nextLine());
@@ -88,7 +88,7 @@ public class Menu {
 	
 	private Asistente getByUser() {
 		System.out.println();
-		Asistente a = new Asistente(null, 0, null, null, null, null, null, null);
+		Asistente a = new Asistente(null, 0, null, null, null, null, null, null, 0);
 		
 		System.out.print("Apellido: ");
 		a.setApellido(s.nextLine());
@@ -98,7 +98,7 @@ public class Menu {
 	
 	private void add() {
 		System.out.println();
-		Asistente a=new Asistente(null, 0, null, null, null, null, null, null);
+		Asistente a=new Asistente(null, 0, null, null, null, null, null, null, 0);
 		
 		System.out.println("Ingrese los datos del nuevo asistente: ");
 		
@@ -109,7 +109,7 @@ public class Menu {
 	
 	private void edit() {
 		System.out.println();
-		Asistente a=new Asistente(null, 0, null, null, null, null, null, null);
+		Asistente a=new Asistente(null, 0, null, null, null, null, null, null, 0);
 
 		System.out.print("Tipo doc: ");
 		a.setTipo_doc(s.nextLine());
@@ -127,7 +127,7 @@ public class Menu {
 	}
 	
 	private void delete() {
-		Asistente delAsist = new Asistente(null, 0, null, null, null, null, null, null);
+		Asistente delAsist = new Asistente(null, 0, null, null, null, null, null, null, 0);
 		
 		System.out.println("Personas actuales: ");
 		System.out.println(ctrlLogin.getAll());

@@ -15,12 +15,12 @@ public class Asistente {
 	private String celular;
 	private float saldo;
 	private String password;
-	
+	private int idrol;
 	
 
 
 	public Asistente(String tipo_doc, int nro_doc, String nombre, String apellido, String email, String password, String celular,
-			LocalDate fecha_nacimiento) {
+			LocalDate fecha_nacimiento, int idrol) {
 		super();
 		this.tipo_doc = tipo_doc;
 		this.nro_doc = nro_doc;
@@ -32,6 +32,7 @@ public class Asistente {
 		this.fecha_nacimiento = fecha_nacimiento;
 		this.tipo_doc = tipo_doc;
 		this.nro_doc = nro_doc;
+		this.idrol = idrol;
 	}
 	
 	public Asistente() {
@@ -94,6 +95,13 @@ public class Asistente {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public int getRol() {
+		return idrol;
+	}
+	public void setRol(int idrol) {
+		this.idrol = idrol;
 	}
 	
 	@Override

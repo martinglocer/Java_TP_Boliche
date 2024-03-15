@@ -44,9 +44,11 @@ public class RegisterUser extends HttpServlet {
 		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
 		String celular = request.getParameter("celular");
 		String password = request.getParameter("password");
+		String idrolStr = request.getParameter("idrol");
+		int idrol = Integer.parseInt(idrolStr);
 		
 		
-		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento);
+		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento, idrol);
 		log.addAsistente(a);
 		response.sendRedirect("indexUsuarios");
 		

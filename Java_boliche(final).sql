@@ -255,7 +255,7 @@ CREATE TABLE `fiesta_lugar` (
 
 LOCK TABLES `fiesta_lugar` WRITE;
 /*!40000 ALTER TABLE `fiesta_lugar` DISABLE KEYS */;
-INSERT INTO `fiesta_lugar` VALUES (1,1,'2023-11-11','13:00:00'),(2,1,'2023-11-18','15:00:00'),(2,2,'2023-11-25','15:00:00'),(3,3,'2023-11-25','23:00:00'),(1,4,'2023-12-09','13:00:00'),(4,4,'2023-12-16','14:00:00'),(2,3,'2023-12-20','18:00:00'),(4,1,'2023-12-27','20:30:00'),(4,4,'2024-01-07','23:00:00'),(2,4,'2024-01-23','16:00:00'),(2,4,'2024-01-27','17:00:00');
+INSERT INTO `fiesta_lugar` VALUES (1,1,'2023-11-11','13:00:00'),(2,1,'2023-11-18','15:00:00'),(2,2,'2023-11-25','15:00:00'),(3,3,'2023-11-25','23:00:00'),(1,4,'2023-12-09','13:00:00'),(4,4,'2023-12-16','14:00:00'),(2,3,'2023-12-20','18:00:00'),(4,1,'2023-12-27','20:30:00'),(4,4,'2024-01-07','23:00:00'),(2,4,'2024-01-23','16:00:00'),(2,4,'2024-01-27','17:00:00'),(4,1,'2024-11-09','23:00:00');
 /*!40000 ALTER TABLE `fiesta_lugar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,7 +320,8 @@ DROP TABLE IF EXISTS `rol`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rol` (
   `idrol` int unsigned NOT NULL,
-  `descripcion` varchar(45) NOT NULL,
+  `nombre_rol` varchar(45) NOT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idrol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -331,7 +332,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (1,'admin'),(2,'usuario');
+INSERT INTO `rol` VALUES (1,'admin','Puede manipular todas las funcionalidades de la aplicación.'),(2,'usuario','Se limita a comprar entradas y ver eventos futuros.');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -344,4 +345,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-14 11:45:05
+-- Dump completed on 2024-03-15 11:50:17

@@ -28,6 +28,7 @@
                         <th>Email</th>
                         <th>Celular</th>
                         <th>Fecha de nacimiento</th>
+                        <th>Rol</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,7 @@
                             <td><%=a.getEmail()%></td>
                             <td><%=a.getCelular()%></td>
                             <td><%=a.getFecha_nacimiento()%></td>
+                            <td><%=a.getRol()%></td>
                             <td><a href="SvEditarUsuario?tipo_doc_editar=<%=a.getTipo_doc()%>&nro_doc_editar=<%= a.getNro_doc() %>">Editar</a></td>
                             <td>
 	                            <form action="SvEliminarUsuario" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">

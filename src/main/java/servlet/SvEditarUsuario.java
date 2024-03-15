@@ -62,10 +62,12 @@ public class SvEditarUsuario extends HttpServlet {
 		String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
 		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
 		String celular = request.getParameter("celular");
+		String idrolStr = request.getParameter("idrol");
+		int idrol = Integer.parseInt(idrolStr);
 		String password = request.getParameter("password");
 		
 		
-		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento);
+		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento, idrol);
 		DataAsistente da = new DataAsistente();
 		da.actualizarAsist(a);
 		

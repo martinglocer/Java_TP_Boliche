@@ -20,6 +20,7 @@
 			<p>Fecha de nacimiento: <%=a.getFecha_nacimiento()%></p>
 			<p>Celular: <%=a.getCelular()%></p>
 			<p>Contraseña: <%=a.getPassword()%></p>
+			<p>Rol: <%=a.getRol()%></p>
 		</div>
 		<div>
 			<form action="SvEliminarUsuario" method="post">

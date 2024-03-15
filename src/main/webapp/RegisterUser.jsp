@@ -18,6 +18,7 @@
 			<p><input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento"></p>
 			<p><input type="text" name="celular" placeholder="Celular"></p>
 			<p><input type="password" name="password" placeholder="Contraseña"></p>
+			<p><input type="text" name="idrol" placeholder="Rol"></p>
 			<button type="submit"> Registrar Usuario </button>
 		</form>
 	</div>
