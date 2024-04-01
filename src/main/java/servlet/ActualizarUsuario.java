@@ -42,15 +42,17 @@ public class ActualizarUsuario extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
 		String email = request.getParameter("email");
+		String celular = request.getParameter("celular");
 		String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
 		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
-		String celular = request.getParameter("celular");
+		String saldo_Str = request.getParameter("saldo");
+		float saldo = Float.parseFloat(saldo_Str);
 		String password = request.getParameter("password");
 		String idrolStr = request.getParameter("idrol");
 		int idrol = Integer.parseInt(idrolStr);
 		
 		
-		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, password, celular, fecha_nacimiento,idrol);
+		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, celular, fecha_nacimiento, saldo, password, idrol);
 		l.actualizarDatos(a);
 		
 		System.out.println("Nombre del usuario es: "+nombre);

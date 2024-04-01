@@ -15,6 +15,11 @@ import entities.Fiesta_lugar;
 import entities.Lugar;
 import entities.Asistente;
 
+import data.DataFiesta_lugar;
+import data.DataFiesta;
+import data.DataLugar;
+import data.DataAsistente;
+
 public class DataEntrada {
 
 	public LinkedList<Entrada> getAll(){
@@ -139,6 +144,9 @@ public class DataEntrada {
 	
 	public Entrada getById(int identrada) {
 		Entrada ent=null;
+		DataFiesta df = new DataFiesta();
+		DataLugar dl = new DataLugar();
+		DataAsistente da = new DataAsistente();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
@@ -155,12 +163,11 @@ public class DataEntrada {
 				Asistente asis = new Asistente();
 				asis.setTipo_doc(rs.getString("tipo_doc"));
 				asis.setNro_doc(rs.getInt("nro_doc"));
+				Asistente a = da.getByDocumento(asis);
 				
-				Fiesta f = new Fiesta();
-				f.setIdfiesta(rs.getInt("idfiesta"));
+				Fiesta f = df.getById(rs.getInt("idfiesta"));
 				
-				Lugar l = new Lugar();
-				l.setIdlugar(rs.getInt("idlugar"));
+				Lugar l = dl.getById(rs.getInt("idlugar"));
 				
 				Fiesta_lugar fiesta_lug = new Fiesta_lugar();
 				fiesta_lug.setFiesta(f);
@@ -168,6 +175,7 @@ public class DataEntrada {
 				fiesta_lug.setFecha_fiesta(rs.getObject("fecha_evento", LocalDate.class));
 				fiesta_lug.setHora_fiesta(rs.getObject("hora_evento", LocalTime.class));
 				
+				ent.setAsistente(a);
 				ent.setFecha_compra(rs.getObject("fecha_compra", LocalDate.class));
 				ent.setHora_compra(rs.getObject("hora_compra", LocalTime.class));
 			}
@@ -192,6 +200,9 @@ public class DataEntrada {
 	
 	public Entrada getOne(Entrada ent) {
 		Entrada en = new Entrada();
+		DataFiesta df = new DataFiesta();
+		DataLugar dl = new DataLugar();
+		DataAsistente da = new DataAsistente();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
@@ -202,28 +213,35 @@ public class DataEntrada {
 					
 			stmt.setInt(1, ent.getIdentrada());
 			rs=stmt.executeQuery();
+			System.out.println("getOne de Entrada");
 			if(rs!=null && rs.next()) {
 				Asistente asis = new Asistente();
 				asis.setTipo_doc(rs.getString("tipo_doc"));
 				asis.setNro_doc(rs.getInt("nro_doc"));
+				System.out.println(asis);
+				//Asistente a = da.getByDocumento(asis);
 				
-				Fiesta f = new Fiesta();
-				f.setIdfiesta(rs.getInt("idfiesta"));
 				
-				Lugar l = new Lugar();
-				l.setIdlugar(rs.getInt("idlugar"));
+				Fiesta f = df.getById(rs.getInt("idfiesta"));
+				System.out.println(f);
+				
+				Lugar l = dl.getById(rs.getInt("idlugar"));
+				System.out.println(l);
 				
 				Fiesta_lugar fiesta_lug = new Fiesta_lugar();
 				fiesta_lug.setFiesta(f);
 				fiesta_lug.setLugar(l);
 				fiesta_lug.setFecha_fiesta(rs.getObject("fecha_evento", LocalDate.class));
 				fiesta_lug.setHora_fiesta(rs.getObject("hora_evento", LocalTime.class));
-				
 				System.out.println(fiesta_lug);
 				
+				//en.setAsistente(a);
+				en.setAsistente(asis);
 				en.setIdentrada(rs.getInt("identrada"));
 				en.setFecha_compra(rs.getObject("fecha_compra", LocalDate.class));
 				en.setHora_compra(rs.getObject("hora_compra", LocalTime.class));
+				en.setFiesta_lugar(fiesta_lug);
+				System.out.println(en);
 				
 				
 			}
@@ -242,28 +260,20 @@ public class DataEntrada {
 		return en;
 	}
 	
-	public void actualizarEntrada(Fiesta_lugar fl, LocalDate fe_nueva, LocalTime ho_nueva) {
+	public void actualizarEntrada(Entrada ent, LocalDate fc_nueva, LocalTime hc_nueva) {
 	    PreparedStatement stmt = null;
 	    try {
 	        stmt = DbConnector.getInstancia().getConn().
-	                prepareStatement("update fiesta_lugar set fecha_evento = ?, hora_evento = ? where idfiesta = ? and idlugar = ? and fecha_evento = ? and hora_evento = ?");
+	                prepareStatement("update entrada set fecha_compra = ?, hora_compra = ? where identrada = ?");
 	        
-	        Fiesta f = fl.getFiesta();
-			Lugar l = fl.getLugar(); 
-	        
-			stmt.setObject(1, fe_nueva);
-			stmt.setObject(2, ho_nueva);
-	        stmt.setInt(3, f.getIdfiesta());
-	        stmt.setInt(4, l.getIdlugar());
-	        stmt.setObject(5, fl.getFecha_fiesta());
-			stmt.setObject(6, fl.getHora_fiesta());
+	    
+			stmt.setObject(1, fc_nueva);
+			stmt.setObject(2, hc_nueva);
+	        stmt.setInt(3, ent.getIdentrada());
 			
-	        System.out.println(f.getIdfiesta());
-	        System.out.println(l.getIdlugar());
-	        System.out.println(fl.getFecha_fiesta());
-	        System.out.println(fl.getHora_fiesta());
-	        System.out.println(fe_nueva);
-	        System.out.println(ho_nueva);
+	        System.out.println(ent.getIdentrada());
+	        System.out.println(fc_nueva);
+	        System.out.println(hc_nueva);
 
 	        stmt.executeUpdate();
 

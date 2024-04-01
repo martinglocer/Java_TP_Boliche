@@ -62,7 +62,7 @@
 								<td><%=fl.getHora_fiesta()%></td>
 								<td><%=ent.getFecha_compra()%></td>
 								<td><%=ent.getHora_compra()%></td>
-								<td></td><!-- editar -->
+								<td><a href="SvEditarEntrada?id_editar=<%=ent.getIdentrada()%>">Editar</a></td>
 								<td>
 		                            <form action="SvEliminarEntrada" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta entrada?');">
 		                                <input type="hidden" name="identrada" value="<%=ent.getIdentrada()%>">

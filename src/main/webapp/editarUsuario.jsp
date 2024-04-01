@@ -19,6 +19,7 @@
 			<p><input type="email" name="email" placeholder="Email" value="<%=a.getEmail()%>"></p>
 			<p><input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" value="<%=a.getFecha_nacimiento()%>"></p>
 			<p><input type="text" name="celular" placeholder="Celular" value="<%=a.getCelular()%>"></p>
+			<p><input type="number" name="saldo" placeholder="Saldo" value="<%=a.getSaldo()%>"></p>
 			<p><input type="text" name="idrol" placeholder="Rol" value="<%=a.getRol()%>"></p>
 			<p><input type="text" name="password" placeholder="Contraseña" value="<%=a.getPassword()%>"></p>
 			<button type="submit"> Guardar cambios </button>

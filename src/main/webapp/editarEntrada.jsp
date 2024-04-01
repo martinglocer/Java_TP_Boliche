@@ -27,10 +27,12 @@
 			<p>Número de documento<input type="number" name="nro_doc" placeholder="Número de documento" value="<%=asis.getNro_doc()%>"></p>
 			<p>Id de la fiesta<input type="number" name="id_fiesta" placeholder="Id fiesta" value= "<%=f.getIdfiesta()%>"></p>
 			<p>Id del lugar<input type="number" name="id_lugar" placeholder="Id lugar" value="<%=l.getIdlugar()%>"></p>
-			<p>Fecha del evento<input type="time" name="fecha_fiesta" placeholder="Fecha del evento" value="<%=fl.getFecha_fiesta()%>" ></p>
+			<p>Fecha del evento<input type="date" name="fecha_fiesta" placeholder="Fecha del evento" value="<%=fl.getFecha_fiesta()%>" ></p>
 			<p>Hora del evento<input type="time" name="hora_fiesta" placeholder="Hora de realización del evento" value="<%=fl.getHora_fiesta()%>" ></p>
-			<p>Fecha de compra<input type="time" name="fecha_compra" readonly placeholder="Fecha de la compra" value="<%=ent.getFecha_compra()%>" ></p>
-			<p>Hora de compra<input type="time" name="hora_compra" readonly placeholder="Hora de la compra" value="<%=ent.getHora_compra()%>" ></p>
+			<p>Fecha de compra<input type="date" name="fecha_compra_vieja" readonly placeholder="Fecha de compra actual" value="<%=ent.getFecha_compra()%>" ></p>
+			<p>Elegir nueva fecha de compra<input type="date" name="fecha_compra_nueva" placeholder="Nueva fecha de compra" ></p>
+			<p>Hora de compra<input type="time" name="hora_compra_vieja" readonly placeholder="Hora de compra actual" value="<%=ent.getHora_compra()%>" ></p>
+			<p>Elegir nueva fecha de compra<input type="time" name="hora_compra_nueva" placeholder="Nueva hora de compra" ></p>
 			<button type="submit"> Guardar cambios </button>
 		</form>
 		

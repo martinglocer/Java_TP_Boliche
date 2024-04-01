@@ -19,19 +19,18 @@ public class Asistente {
 	
 
 
-	public Asistente(String tipo_doc, int nro_doc, String nombre, String apellido, String email, String password, String celular,
-			LocalDate fecha_nacimiento, int idrol) {
+	public Asistente(String tipo_doc, int nro_doc, String nombre, String apellido, String email, String celular, LocalDate fecha_nacimiento,
+			float saldo, String password, int idrol) {
 		super();
 		this.tipo_doc = tipo_doc;
 		this.nro_doc = nro_doc;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
-		this.password = password;
 		this.celular = celular;
 		this.fecha_nacimiento = fecha_nacimiento;
-		this.tipo_doc = tipo_doc;
-		this.nro_doc = nro_doc;
+		this.saldo = saldo;
+		this.password = password;
 		this.idrol = idrol;
 	}
 	
