@@ -30,6 +30,8 @@ public class SvFiesta_lugar extends HttpServlet {
 		DataFiesta_lugar dfl = new DataFiesta_lugar();
 		LinkedList<Fiesta_lugar> listaFiestas_lugares = dfl.getAll();
 		
+		System.out.println(listaFiestas_lugares);
+		
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("listaFiestas_lugares", listaFiestas_lugares);
 		

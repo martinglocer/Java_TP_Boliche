@@ -31,9 +31,11 @@ public class SvEditarFiesta_lugar extends HttpServlet {
 		Lugar l = new Lugar();
 		
 		int id_editar1 = Integer.parseInt(request.getParameter("idfiesta_edit"));
+		System.out.println(id_editar1);
 		f.setIdfiesta(id_editar1);
 		
 		int id_editar2 = Integer.parseInt(request.getParameter("idlugar_edit"));
+		System.out.println(id_editar2);
 		l.setIdlugar(id_editar2);
 		
 		String fecha_fiestaStr = request.getParameter("fecha_edit");
@@ -42,7 +44,10 @@ public class SvEditarFiesta_lugar extends HttpServlet {
 		LocalTime hora_fiesta = LocalTime.parse(hora_fiestaStr);		
 		Fiesta_lugar fl = new Fiesta_lugar(f, l, fecha_fiesta, hora_fiesta);
 		
+		System.out.println(fl);
+		
 		Fiesta_lugar fiesta_lugar = dfl.getOne(fl);
+		System.out.println(fiesta_lugar);
 		
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("fiesta_lugarEditar", fiesta_lugar);

@@ -22,7 +22,7 @@ public class DataFiesta_lugar {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select fl.fecha_evento, fl.hora_evento, f.nombre_fiesta, l.nombre_lugar, l.direccion, l.ciudad \r\n"
+			rs= stmt.executeQuery("select fl.fecha_evento, fl.hora_evento, f.idfiesta, f.nombre_fiesta, f.descripcion, l.idlugar, l.nombre_lugar, l.direccion, l.capacidad, l.ciudad \r\n"
 					+ "from fiesta_lugar fl \r\n"
 					+ "inner join fiesta f \r\n"
 					+ "on f.idfiesta = fl.idfiesta \r\n"
@@ -33,11 +33,15 @@ public class DataFiesta_lugar {
 			if(rs!=null) {
 				while(rs.next()) {
 					Lugar l = new Lugar();
+					l.setIdlugar(rs.getInt("l.idlugar"));
 					l.setNombre_lugar(rs.getString("l.nombre_lugar"));
 					l.setDireccion(rs.getString("l.direccion"));
+					l.setCapacidad(rs.getInt("l.capacidad"));
 					l.setCiudad(rs.getString("l.ciudad"));
 					Fiesta f = new Fiesta();
+					f.setIdfiesta(rs.getInt("f.idfiesta"));
 					f.setNombre_fiesta(rs.getString("f.nombre_fiesta"));
+					f.setDescripcion(rs.getString("f.descripcion"));
 					Fiesta_lugar fl=new Fiesta_lugar();
 					fl.setFecha_fiesta(rs.getObject("fl.fecha_evento", LocalDate.class));
 					fl.setHora_fiesta(rs.getObject("fl.hora_evento", LocalTime.class));
@@ -145,8 +149,8 @@ public class DataFiesta_lugar {
 				f.setIdfiesta(idfiesta);
 				fl.setLugar(l);
 				fl.setFiesta(f);
-				fl.setFecha_fiesta(rs.getTimestamp("fecha_fiesta").toLocalDateTime().toLocalDate());
-				fl.setHora_fiesta(rs.getTimestamp("hora_fiesta").toLocalDateTime().toLocalTime());
+				fl.setFecha_fiesta(rs.getTimestamp("fecha_evento").toLocalDateTime().toLocalDate());
+				fl.setHora_fiesta(rs.getTimestamp("hora_evento").toLocalDateTime().toLocalTime());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -160,6 +164,7 @@ public class DataFiesta_lugar {
 			}
 		}
 		
+	System.out.println(fl);	
 	return fl;
 	
 	}
@@ -291,7 +296,7 @@ public class DataFiesta_lugar {
         PreparedStatement stmt = null;
 
         try {
-        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from fiesta_lugar where idfiesta=? and idlugar=? and fecha_fiesta=? and hora_fiesta = ?");
+        stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from fiesta_lugar where idfiesta=? and idlugar=? and fecha_evento=? and hora_evento = ?");
         
         Lugar dell = delfl.getLugar();
         Fiesta delf = delfl.getFiesta();
