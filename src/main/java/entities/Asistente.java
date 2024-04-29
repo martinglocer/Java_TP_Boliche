@@ -34,6 +34,12 @@ public class Asistente {
 		this.idrol = idrol;
 	}
 	
+	public Asistente(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+	
 	public Asistente() {
 		// TODO Auto-generated constructor stub
 	}
