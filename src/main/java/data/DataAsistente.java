@@ -255,8 +255,8 @@ public class DataAsistente {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into asistente(tipo_doc, nro_doc, nombre, apellido, email, fecha_nacimiento, celular, password, idrol)"
-							+ " values(?,?,?,?,?,?,?,?,?)"
+							"insert into asistente(tipo_doc, nro_doc, nombre, apellido, email, fecha_nacimiento, celular, password, idrol, saldo)"
+							+ " values(?,?,?,?,?,?,?,?,?,?)"
 							);
 			stmt.setString(1, a.getTipo_doc());
 			stmt.setInt(2, a.getNro_doc());
@@ -267,6 +267,7 @@ public class DataAsistente {
 			stmt.setString(7, a.getCelular());
 			stmt.setString(8, a.getPassword());
 			stmt.setInt(9, a.getRol());
+			stmt.setFloat(10, a.getSaldo());
 			System.out.println("password es: "+a.getPassword());
 			stmt.executeUpdate();
 
@@ -286,21 +287,22 @@ public class DataAsistente {
 	
 	public void actualizarAsist(Asistente asi) {
         PreparedStatement stmt= null;
-        try {
-            stmt=DbConnector.getInstancia().getConn().
-                    prepareStatement("update asistente set nombre = ?, apellido = ?, email = ?, password = ?, celular = ?, " 
-                    				 +"fecha_nacimiento= ?, tipo_doc = ?, nro_doc = ?, idrol = ? where tipo_doc = ? and nro_doc = ?");
-			stmt.setString(1, asi.getNombre());
+        try {stmt = DbConnector.getInstancia().getConn().prepareStatement(
+            	    "UPDATE asistente SET nombre = ?, apellido = ?, email = ?, password = ?, celular = ?, saldo = ?, " +
+            	    "fecha_nacimiento = ?, tipo_doc = ?, nro_doc = ?, idrol = ? WHERE tipo_doc = ? AND nro_doc = ?");
+            
+            stmt.setString(1, asi.getNombre());
 			stmt.setString(2, asi.getApellido());
 			stmt.setString(3, asi.getEmail());
 			stmt.setString(4, asi.getPassword());
 			stmt.setString(5, asi.getCelular());
-			stmt.setObject(6, asi.getFecha_nacimiento());
-			stmt.setString(7, asi.getTipo_doc());
-			stmt.setInt(8, asi.getNro_doc());
-			stmt.setInt(9, asi.getRol());
-			stmt.setString(10, asi.getTipo_doc());
-			stmt.setInt(11, asi.getNro_doc());
+			stmt.setFloat(6, asi.getSaldo());
+			stmt.setObject(7, asi.getFecha_nacimiento());
+			stmt.setString(8, asi.getTipo_doc());
+			stmt.setInt(9, asi.getNro_doc());
+			stmt.setInt(10, asi.getRol());
+			stmt.setString(11, asi.getTipo_doc());
+			stmt.setInt(12, asi.getNro_doc());
 
             stmt.executeUpdate();
 

@@ -4,31 +4,36 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
-		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
+		
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/login.css">
 		<title>Login</title>
 	</head>
 	<body>
-		<h1>Incio de sesión</h1>
-		<% if (request.getParameter("dni") != null) { %>
+		<div> <h1>Incio de sesión</h1> </div>
+		<% if (request.getParameter("email") != null) { %>
         	<% if (request.getParameter("error") != null && request.getParameter("error").equals("true")) { %>
             	<% if (request.getParameter("incorrectPassword") != null && request.getParameter("incorrectPassword").equals("true")) { %>
                 	<p style="color: red;">Contraseña incorrecta. Por favor, inténtelo de nuevo.</p>
-            	<% } else if (request.getParameter("dniNotFound") != null && request.getParameter("dniNotFound").equals("true")) { %>
-                	<p style="color: red;">El DNI ingresado no se encontró. Por favor, verifique y vuelva a intentarlo.</p>
+            	<% } else if (request.getParameter("emailNotFound") != null && request.getParameter("emailNotFound").equals("true")) { %>
+                	<p style="color: red;">El Email ingresado no se encontró. Por favor, verifique y vuelva a intentarlo.</p>
             	<% } else { %>
-                	<p style="color: red;">DNI o contraseña incorrectos. Por favor, inténtelo de nuevo.</p>
+                	<p style="color: red;">Email o contraseña incorrectos. Por favor, inténtelo de nuevo.</p>
             	<% } %>
         	<% } %>
     	<% } %>
+	
+		<div >
 		<form action="LoginServlet" method="post">
-			<p><label>DNI</label><p>
-			<p><input type="text" name="dni" value="<%= request.getParameter("dni") != null ? request.getParameter("dni") : "" %>"></p>
+			<p><label>Email</label><p>
+			<p><input type="text" name="email" value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>"></p>
 			<p><label>Contraseña</label><p>
 			<p><input type="password" name="password" value=""></p>
 			<button type="submit"> Enviar </button>
 		</form>
+		</div>
 		
+		<div>
+		<a class= register-link href="RegisterUser.jsp">Todavia no tienes una cuenta creada? Registrate aqui!</a></div>
 	
 	</body>
 </html>

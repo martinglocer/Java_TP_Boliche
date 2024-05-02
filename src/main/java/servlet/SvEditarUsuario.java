@@ -63,6 +63,7 @@ public class SvEditarUsuario extends HttpServlet {
 		String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
 		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
 		String saldo_Str = request.getParameter("saldo");
+		System.out.println("Saldo STR es: "+saldo_Str);
 		float saldo = Float.parseFloat(saldo_Str);
 		String password = request.getParameter("password");
 		String idrolStr = request.getParameter("idrol");
@@ -75,11 +76,11 @@ public class SvEditarUsuario extends HttpServlet {
 		
 		response.sendRedirect("indexUsuarios");
 		
-		System.out.println("Nombre del usuario es: "+nombre);
-		System.out.println("apellido es: "+apellido);
-		System.out.println("celular es: "+celular);
-		System.out.println("email es: "+email);
-		
+		System.out.println("Nombre del usuario es: "+a.getNombre());
+		System.out.println("apellido es: "+a.getApellido());
+		System.out.println("celular es: "+a.getCelular());
+		System.out.println("email es: "+a.getEmail());
+		System.out.println("Saldo es: "+a.getSaldo());
 	}
 
 }

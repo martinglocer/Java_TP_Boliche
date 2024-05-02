@@ -44,6 +44,7 @@ public class RegisterUser extends HttpServlet {
 		String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
 		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
 		String saldo_Str = request.getParameter("saldo");
+		System.out.println("saldo es: "+saldo_Str);
 		float saldo = Float.parseFloat(saldo_Str);
 		String password = request.getParameter("password");
 		String idrolStr = request.getParameter("idrol");
@@ -59,6 +60,7 @@ public class RegisterUser extends HttpServlet {
 		System.out.println("apellido es: "+apellido);
 		System.out.println("telefono es: "+celular);
 		System.out.println("password es: "+password);
+		System.out.println("saldo es: "+saldo);
 
 	}
 
