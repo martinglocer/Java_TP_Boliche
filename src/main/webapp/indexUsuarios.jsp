@@ -4,19 +4,21 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/index.css">
 		<title>Usuarios</title>
 	</head>
 <body>
-	<h1>Menu usuarios</h1>
+	<h1>Usuarios</h1>
 		
 		<div>	
-			<nav>
-            	<ul>
-            		<li><a href="indexUsuarios">Listar usuarios</a></li>
-            		<li><a href="buscarUsuario.jsp">Buscar usuarios por tipo y numero de documento</a></li>
-                	<li><a href="RegisterUser.jsp">Registrar un usuario</a></li>
-                	<li><a href="actualizarUsuario.jsp">Modificar un usuario</a></li>
-                	<li><a href="buscarUsuario.jsp">Eliminar un usuario</a></li>
+			<nav id="menu">
+            	<ul class=opc>
+            		<li><a class=button-link href="indexUsuarios">Listar usuarios</a></li>
+            		<li><a class=button-link href="buscarUsuario.jsp">Buscar usuarios por tipo y numero de documento</a></li>
+                	<li><a class=button-link href="RegisterUser.jsp">Registrar un usuario</a></li>
+                	<li><a class=button-link href="actualizarUsuario.jsp">Modificar un usuario</a></li>
+                	<li><a class=button-link href="buscarUsuario.jsp">Eliminar un usuario</a></li>
+                	<li><a class="button-link back-to-main" href="index.jsp">Volver al menú principal</a></li>
             	</ul>
         	</nav>
         </div>

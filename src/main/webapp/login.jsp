@@ -13,11 +13,11 @@
 		<% if (request.getParameter("email") != null) { %>
         	<% if (request.getParameter("error") != null && request.getParameter("error").equals("true")) { %>
             	<% if (request.getParameter("incorrectPassword") != null && request.getParameter("incorrectPassword").equals("true")) { %>
-                	<p style="color: red;">Contraseña incorrecta. Por favor, inténtelo de nuevo.</p>
+                	<p id=warning style="color: red;">Contraseña incorrecta. Por favor, inténtelo de nuevo.</p>
             	<% } else if (request.getParameter("emailNotFound") != null && request.getParameter("emailNotFound").equals("true")) { %>
-                	<p style="color: red;">El Email ingresado no se encontró. Por favor, verifique y vuelva a intentarlo.</p>
+                	<p id=warning style="color: red;">El Email ingresado no se encontró. Por favor, verifique y vuelva a intentarlo.</p>
             	<% } else { %>
-                	<p style="color: red;">Email o contraseña incorrectos. Por favor, inténtelo de nuevo.</p>
+                	<p id=warning style="color: red;">Email o contraseña incorrectos. Por favor, inténtelo de nuevo.</p>
             	<% } %>
         	<% } %>
     	<% } %>

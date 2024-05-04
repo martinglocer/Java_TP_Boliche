@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  /*background-image: url('imagenes/foto_boliche_1.jpg');*/
+  /*background-size: cover; */
+  /*background-position: center; */
+}
+
+/*
+#background-image {
+  width: 100%; 
+  height: 500px;
+  background-image: url('imagenes/foto_boliche_1.jpg');
+  background-size: cover;
+  background-position: center; 
+}
+*/
+
+.container {
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  color: #004040;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+h2 {
+	color: #004040;
+	margin-left: 20px;
+}
+
+/* Estilo para el menú */
+
+nav {
+  margin-left: 20px; 
+  background-color: #f5f5f5;
+}
+
+/* Hacerlo así puede estar bueno
+nav#menu {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    padding: 10px; 
+}
+*/
+
+nav ul {
+  list-style-type: none; 
+  padding: 0;
+  text-align: center; 
+}
+
+nav li {
+  display: inline; 
+}
+
+.opc li {
+	display: block; 
+  	margin-bottom: 10px;
+  	text-align: left;
+}
+
+nav li:not(:last-child) {
+  margin-right: 10px; 
+}
+
+}
+
+/* Estilo para enlaces */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #2980b9;
+}
+
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none; /* Quita la subrayado predeterminado */
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.back-to-main {
+    background-color: #ff5733; 
+    margin-top: 20px; 
+}
+
+
+.button-link:hover {
+    background-color: #45a049;
+}
+
+.back-to-main:hover {
+	background-color: #800000;
+}

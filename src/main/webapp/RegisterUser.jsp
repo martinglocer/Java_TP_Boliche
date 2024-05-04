@@ -10,18 +10,40 @@
 	<title>Registrarse</title>
 </head>
 <body>
-	<h1>Registro de usuario</h1>
+	<div> <h1>Registro de usuario</h1> </div>
+	<%
+		String error = (String) session.getAttribute("error");
+    	if (error != null) {
+    %>
+        <p id=warning style="color: red;"><%= error %></p>
+    <%
+    }
+    session.removeAttribute("error");
+    %>
 	<div>
 		<form action="RegisterUser" method="post">
-			<p><input type="text" name="tipo_doc" placeholder="Tipo de documento"></p>
-			<p><input type="text" name="nro_doc" placeholder="Número de documento"></p>
-			<p><input type="text" name="nombre" placeholder="Nombre"></p>
-			<p><input type="text" name="apellido" placeholder="Apellido"></p>
-			<p><input type="email" name="email" placeholder="Email"></p>
-			<p><input type="text" name="celular" placeholder="Celular"></p>
-			<p>Fecha de nacimiento <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento"></p>
-			<p><input type="text" name="saldo" placeholder="Saldo"></p>
-			<p><input type="password" name="password" placeholder="Contraseña"></p>
+			<p>
+				<label>Tipo de documento</label>
+				<select name="tipo_doc">
+          		  <option value="">Seleccione un tipo</option>
+          		  <option value="1">DNI</option>
+        		</select>
+        	<p>
+			<p><label>Número de documento</label><p>
+			<p><input type="text" name="nro_doc"></p>
+			<p><label>Nombre</label><p>
+			<p><input type="text" name="nombre"></p>
+			<p><label>Apellido</label><p>
+			<p><input type="text" name="apellido"></p>
+			<p><label>Email</label><p>
+			<p><input type="email" name="email"></p>
+			<p><label>Celular</label><p>
+			<p><input type="text" name="celular"></p>
+			<p>Fecha de nacimiento</p><p><input type="date" name="fecha_nacimiento"></p>
+			<p><label>Saldo</label><p>
+			<p><input type="text" name="saldo"></p>
+			<p><label>Contraseña</label><p>
+			<p><input type="password" name="password"></p>
 			<p>
         		<select name="idrol">
           		  <option value="">Seleccione un rol</option>
@@ -29,7 +51,7 @@
           		  <option value="2">Usuario estándar</option>
         		</select>
     		</p>
-			<button type="submit"> Registrar Usuario </button>
+			<button type="submit"> Registrarme </button>
 		</form>
 	</div>
 </body>

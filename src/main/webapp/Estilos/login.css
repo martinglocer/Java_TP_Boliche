@@ -18,6 +18,19 @@ body {
     color: #333;
   }
   
+  div {
+  	display: flex;
+  	justify-content: center; 
+  	align-items: center;  
+  	margin-top: 10px;
+  }
+  
+   #warning {
+  	display: flex;
+  	justify-content: center; 
+  	align-items: center;  
+  }
+  
   /* Estilos para el formulario de inicio de sesión */
   
  form {
@@ -27,6 +40,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 400px; /* Ancho máximo del formulario */
   margin: 0 auto; /* Centrar horizontalmente en la página */
+  margin-bottom: 30px;
 }
 
 label {
