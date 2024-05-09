@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class Asistente {
 	
+	private int idasistente;
 	private String tipo_doc;
 	private int nro_doc;
 	private String nombre;
@@ -42,6 +43,24 @@ public class Asistente {
 	
 	public Asistente() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	public int getIdasistente() {
+		return idasistente;
+	}
+
+	public void setIdasistente(int idasistente) {
+		this.idasistente = idasistente;
+	}
+
+	public int getIdrol() {
+		return idrol;
+	}
+
+	public void setIdrol(int idrol) {
+		this.idrol = idrol;
 	}
 
 	public String getTipo_doc() {

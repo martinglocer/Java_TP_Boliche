@@ -29,7 +29,7 @@ public class DataEntrada {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select ent.identrada\r\n"
+			rs= stmt.executeQuery("select ent.identrada, asis.idasistente \r\n"
 					+ "  , asis.tipo_doc, asis.nro_doc, asis.nombre, asis.apellido\r\n"
 					+ "  , f.nombre_fiesta\r\n"
 					+ "  , l.nombre_lugar, l.direccion, l.ciudad\r\n"
@@ -47,7 +47,7 @@ public class DataEntrada {
 					+ "  on fl.idlugar=l.idlugar\r\n"
 					+ "left join asistente asis \r\n"
 					//+ "  #on ent.tipo_doc = asis.tipo_doc \r\n"
-					+ "  on ent.nro_doc = asis.nro_doc \r\n"
+					+ "  on ent.idasistente = asis.idasistente \r\n"
 					+ "order by ent.identrada, fl.fecha_evento asc, fl.hora_evento asc;");
 					
 			if(rs!=null) {
@@ -57,6 +57,7 @@ public class DataEntrada {
 					ent.setFecha_compra(rs.getObject("ent.fecha_compra", LocalDate.class));
 					ent.setHora_compra(rs.getObject("ent.hora_compra", LocalTime.class));
 					Asistente asis = new Asistente();
+					asis.setIdasistente(rs.getInt("asis.idasistente"));
 					asis.setTipo_doc(rs.getString("asis.tipo_doc"));
 					asis.setNro_doc(rs.getInt("asis.nro_doc"));
 					asis.setNombre(rs.getString("asis.nombre"));
@@ -108,23 +109,22 @@ public class DataEntrada {
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-							"insert into Entrada(tipo_doc, nro_doc, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra)\r\n" 
+							"insert into Entrada(idasistente, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra)\r\n" 
 						+ "values(?,?,?,?,?,?,?,?)"
 						,PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			stmt.setString(1, a.getTipo_doc());
-			stmt.setInt(2, a.getNro_doc());
-			stmt.setInt(3, f.getIdfiesta());
-			stmt.setInt(4, l.getIdlugar());
-			stmt.setObject(5, fl.getFecha_fiesta());
-			stmt.setObject(6, fl.getHora_fiesta());
-			stmt.setObject(7, en.getFecha_compra());
-			stmt.setObject(8, en.getHora_compra());
+			stmt.setInt(1, a.getIdasistente());
+			stmt.setInt(2, f.getIdfiesta());
+			stmt.setInt(3, l.getIdlugar());
+			stmt.setObject(4, fl.getFecha_fiesta());
+			stmt.setObject(5, fl.getHora_fiesta());
+			stmt.setObject(6, en.getFecha_compra());
+			stmt.setObject(7, en.getHora_compra());
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			
 			if (keyResultSet!= null && keyResultSet.next()) {
-				l.setIdlugar(keyResultSet.getInt(1));
+				en.setIdentrada(keyResultSet.getInt(1));
 			} 
 
 			
@@ -142,7 +142,8 @@ public class DataEntrada {
     }
 	
 	
-	public Entrada getById(int identrada) {
+	public Entrada getById(Entrada en) {
+		
 		Entrada ent=null;
 		DataFiesta df = new DataFiesta();
 		DataLugar dl = new DataLugar();
@@ -151,10 +152,13 @@ public class DataEntrada {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select identrada, tipo_doc, nro_doc, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra\r\n"
-					+ "from entrada where identrada = ?"
-					);
-			stmt.setInt(1, identrada);
+					"select e.identrada, a.tipo_doc, a.nro_doc, e.idfiesta, e.idlugar, e.fecha_evento, e.hora_evento, e.fecha_compra, e.hora_compra\r\n"
+					+ "from entrada e \r\n"
+					+ "inner join asistente a \r\n"
+					+ "		on a.idasistente = e.idasistente \r\n"
+					+ "where identrada = ?");
+			
+			stmt.setInt(1, en.getIdentrada());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				ent=new Entrada();
@@ -198,7 +202,7 @@ public class DataEntrada {
 	
 	
 	
-	public Entrada getOne(Entrada ent) {
+/*	public Entrada getOne(Entrada ent) {
 		Entrada en = new Entrada();
 		DataFiesta df = new DataFiesta();
 		DataLugar dl = new DataLugar();
@@ -258,7 +262,7 @@ public class DataEntrada {
 		}
 		
 		return en;
-	}
+	}*/
 	
 	public void actualizarEntrada(Entrada ent, LocalDate fc_nueva, LocalTime hc_nueva) {
 	    PreparedStatement stmt = null;

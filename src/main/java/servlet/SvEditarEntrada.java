@@ -39,7 +39,7 @@ public class SvEditarEntrada extends HttpServlet {
 		System.out.println(id_editar);
 		
 		//Entrada entrada = den.getById(id_editar);
-		Entrada entrada = den.getOne(ent);
+		Entrada entrada = den.getById(ent);
 		 
 		
 		 

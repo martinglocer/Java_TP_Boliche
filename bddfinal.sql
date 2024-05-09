@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `boliche_java` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `boliche_java`;
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
 -- Host: localhost    Database: boliche_java
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,24 +25,24 @@ DROP TABLE IF EXISTS `asistente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `asistente` (
+  `idasistente` int NOT NULL AUTO_INCREMENT,
   `tipo_doc` varchar(20) NOT NULL,
-  `nro_doc` int NOT NULL,
+  `nro_doc` varchar(25) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `apellido` varchar(60) NOT NULL,
-  `email` varchar(65) DEFAULT NULL,
-  `celular` varchar(20) DEFAULT NULL,
-  `fecha_nacimiento` date DEFAULT NULL,
+  `email` varchar(65) NOT NULL,
+  `celular` varchar(25) DEFAULT NULL,
+  `fecha_nacimiento` date NOT NULL,
   `saldo` float DEFAULT '0',
-  `password` varchar(30) DEFAULT NULL,
+  `password` varchar(30) NOT NULL,
   `idrol` int unsigned NOT NULL,
-  PRIMARY KEY (`tipo_doc`,`nro_doc`),
+  PRIMARY KEY (`idasistente`),
+  UNIQUE KEY `uc_tipo_nro_doc` (`tipo_doc`,`nro_doc`) /*!80000 INVISIBLE */,
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `celular_UNIQUE` (`celular`),
-  KEY `nro_doc_idx` (`nro_doc`),
-  KEY `fk_asistente_rol_idx` (`idrol`),
-  KEY `fk_asis_rol_idx` (`idrol`),
-  CONSTRAINT `fk_asis_rol` FOREIGN KEY (`idrol`) REFERENCES `rol` (`idrol`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_asisf_rol_idx` (`idrol`),
+  CONSTRAINT `fk_asisf_rol` FOREIGN KEY (`idrol`) REFERENCES `rol` (`idrol`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='									';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `asistente` (
 
 LOCK TABLES `asistente` WRITE;
 /*!40000 ALTER TABLE `asistente` DISABLE KEYS */;
-INSERT INTO `asistente` VALUES ('dni',12345678,'John','Doe','johndoe@gmail.com','3417692314','2001-02-12',3000,'P@ssword',1),('dni',38214678,'Julia','Roberts','juliarob@gmail.com','3413805555','1970-03-01',200000,'julia123',2),('dni',38976231,'Leo','Di Caprio','leo123','3415629809','1996-12-25',100000,'leo123',2),('dni',40897343,'Pepe','Mujica','pepemujica@gmail.com','3412560934','1999-04-03',0,'pepe123',2),('dni',44624123,'Pedro','Calabrese','pecalabrese@gamil.com','3412314567','2003-01-28',70000,'pedro123',2),('dni',44630606,'Santiago','Spini','santiagospini@gmail.com','3413206430','2003-01-23',10000,'santi123',1),('dni',353469090,'Bill','Gates','bill123','3415690231','1972-09-15',1000000,'bill123',2),('dni',416572309,'Avril','Del Prado','avrudelprado@gmail.com','3412769812','2003-02-10',5000,'avril123',2),('dni',423901234,'Julia','Diaz','juliadiaz@gmail.com','3412318365','2000-12-09',7000,'julia123',2),('dni ',43216980,'Lourdes','Gomez','lougom@gmail.com','3412314507','2002-06-09',4000,'lourdes123',2);
+INSERT INTO `asistente` VALUES (18,'dni','12333','ale','glocer','aleglocer@gmail.com','34119','1998-06-19',5000,'3210',2),(19,'dni','12345678','John','Doe','johndoe@gmail.com','3417692314','2001-02-12',3000,'P@ssword',1),(20,'dni','38214678','Julia','Roberts','juliarob@gmail.com','3413805555','1970-03-01',200000,'julia123',2),(21,'dni','38976231','Leo','Di Caprio','leo123','3415629809','1996-12-25',100000,'leo123',2),(22,'dni','40897343','Pepe','Mujica','pepemujica@gmail.com','3412560934','1999-04-03',0,'pepe123',2),(23,'dni','43378974','Martin','Glocer','martinglocer@gmail.com','3415069505','2001-05-12',0,'martin123',1),(24,'dni','44624123','Pedro','Calabrese','pecalabrese@gamil.com','3412314567','2003-01-28',70000,'pedro123',2),(25,'dni','44630606','Santiago','Spini','santiagospini@gmail.com','3413206430','2003-01-23',10000,'santi123',1),(26,'DNI','78945612','Cristiano','Ronaldo','cr7@gg.com','852147','1985-10-17',7500,'cr777',1),(27,'dni','111222333','zeide','kuschner','zeide@gt.com','998877','1943-02-16',1500,'1221',2),(28,'dni','353469090','Bill','Gates','bill123','3415690231','1972-09-15',1000000,'bill123',2),(29,'dni','416572309','Avril','Del Prado','avrudelprado@gmail.com','3412769812','2003-02-10',5000,'avril123',2),(30,'dni','423901234','Julia','Diaz','juliadiazzzz@gmail.com','3412318365','2000-12-09',7000,'julia123',2),(31,'dni ','43216980','Lourdes','Gomez','lougom@gmail.com','3412314507','2002-06-09',4000,'lourdes123',2);
 /*!40000 ALTER TABLE `asistente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,16 +138,15 @@ DROP TABLE IF EXISTS `consumicion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `consumicion` (
-  `tipo_doc` varchar(20) NOT NULL,
-  `nro_doc` int NOT NULL,
+  `idconsumicion` int NOT NULL AUTO_INCREMENT,
+  `idasistente` int NOT NULL,
   `idbebida` int NOT NULL,
   `fecha_hora_compra` datetime NOT NULL,
-  PRIMARY KEY (`tipo_doc`,`nro_doc`,`idbebida`,`fecha_hora_compra`),
-  KEY `nro_docu_idx` (`nro_doc`),
-  KEY `id_bebida_idx` (`idbebida`),
-  CONSTRAINT `id_bebida` FOREIGN KEY (`idbebida`) REFERENCES `bebidas` (`idbebida`) ON DELETE CASCADE,
-  CONSTRAINT `nro_docu` FOREIGN KEY (`nro_doc`) REFERENCES `asistente` (`nro_doc`) ON DELETE CASCADE,
-  CONSTRAINT `tipo_docu` FOREIGN KEY (`tipo_doc`) REFERENCES `asistente` (`tipo_doc`) ON DELETE CASCADE
+  PRIMARY KEY (`idconsumicion`),
+  KEY `fk_con_beb_idx` (`idbebida`),
+  KEY `fk_con_asisf` (`idasistente`),
+  CONSTRAINT `fk_con_asisf` FOREIGN KEY (`idasistente`) REFERENCES `asistente` (`idasistente`),
+  CONSTRAINT `fk_con_beb` FOREIGN KEY (`idbebida`) REFERENCES `bebidas` (`idbebida`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -169,28 +168,19 @@ DROP TABLE IF EXISTS `entrada`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `entrada` (
   `identrada` int NOT NULL AUTO_INCREMENT,
-  `tipo_doc` varchar(20) NOT NULL,
-  `nro_doc` int NOT NULL,
+  `idasistente` int NOT NULL,
   `idfiesta` int NOT NULL,
   `idlugar` int NOT NULL,
   `fecha_evento` date NOT NULL,
   `hora_evento` time NOT NULL,
-  `fecha_compra` date NOT NULL,
-  `hora_compra` time NOT NULL,
+  `fecha_compra` date DEFAULT NULL,
+  `hora_compra` time DEFAULT NULL,
   PRIMARY KEY (`identrada`),
-  KEY `id_fiesta_idx` (`idfiesta`),
-  KEY `id_lugar_idx` (`idlugar`),
-  KEY `fecha_hora_idx` (`fecha_evento`),
-  KEY `horaevento_idx` (`hora_evento`),
-  KEY `fk_entrada_asis_tipo_doc_idx` (`tipo_doc`),
-  KEY `fk_entrada_asis_nro_doc_idx` (`nro_doc`),
-  CONSTRAINT `fechaevento` FOREIGN KEY (`fecha_evento`) REFERENCES `fiesta_lugar` (`fecha_evento`) ON DELETE CASCADE,
-  CONSTRAINT `fk_entrada_asis_nro_doc` FOREIGN KEY (`nro_doc`) REFERENCES `asistente` (`nro_doc`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  CONSTRAINT `fk_entrada_asis_tipo_doc` FOREIGN KEY (`tipo_doc`) REFERENCES `asistente` (`tipo_doc`) ON DELETE CASCADE,
-  CONSTRAINT `fk_id_fiesta` FOREIGN KEY (`idfiesta`) REFERENCES `fiesta_lugar` (`idfiesta`),
-  CONSTRAINT `fk_id_lugar` FOREIGN KEY (`idlugar`) REFERENCES `fiesta_lugar` (`idlugar`),
-  CONSTRAINT `horaevento` FOREIGN KEY (`hora_evento`) REFERENCES `fiesta_lugar` (`hora_evento`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_entf_fl_idx` (`idfiesta`,`idlugar`,`fecha_evento`,`hora_evento`),
+  KEY `fk_entrada_asistente` (`idasistente`),
+  CONSTRAINT `fk_entf_fl` FOREIGN KEY (`idfiesta`, `idlugar`, `fecha_evento`, `hora_evento`) REFERENCES `fiesta_lugar` (`idfiesta`, `idlugar`, `fecha_evento`, `hora_evento`),
+  CONSTRAINT `fk_entrada_asistente` FOREIGN KEY (`idasistente`) REFERENCES `asistente` (`idasistente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +189,6 @@ CREATE TABLE `entrada` (
 
 LOCK TABLES `entrada` WRITE;
 /*!40000 ALTER TABLE `entrada` DISABLE KEYS */;
-INSERT INTO `entrada` VALUES (2,'dni ',38214678,1,1,'2023-11-11','13:00:00','2023-11-07','13:24:54'),(3,'dni ',38976231,1,1,'2023-11-11','13:00:00','2023-11-07','17:04:45'),(5,'dni ',12345678,4,4,'2023-12-16','14:00:00','2023-11-06','16:12:04'),(8,'dni ',44630606,2,1,'2023-11-18','15:00:00','2023-11-02','11:54:07');
 /*!40000 ALTER TABLE `entrada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,4 +334,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-15 11:50:17
+-- Dump completed on 2024-05-09 12:13:22

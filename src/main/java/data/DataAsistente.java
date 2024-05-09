@@ -270,6 +270,11 @@ public class DataAsistente {
 			stmt.setFloat(10, a.getSaldo());
 			System.out.println("password es: "+a.getPassword());
 			stmt.executeUpdate();
+			keyResultSet=stmt.getGeneratedKeys();
+						
+			if (keyResultSet!= null && keyResultSet.next()) {
+				a.setIdasistente(keyResultSet.getInt(1));
+			} 
 
 			
 		}  catch (SQLException e) {
