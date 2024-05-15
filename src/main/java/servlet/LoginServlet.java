@@ -37,9 +37,9 @@ public class LoginServlet extends HttpServlet {
 		
 		Asistente a = new Asistente(email, password);
 	 	if (validateUser(a)) {
-    		response.sendRedirect("index.jsp");
+    		response.sendRedirect("menu.jsp");
     	} else {
-    		String redirectURL = "login.jsp?error=true&email=" + email;
+    		String redirectURL = "index.jsp?error=true&email=" + email;
 			if (isEmailFound(a)) {
 				redirectURL += "&incorrectPassword=true";
 			} else {

@@ -18,7 +18,7 @@
                 	<li><a class=button-link href="RegisterUser.jsp">Registrar un usuario</a></li>
                 	<li><a class=button-link href="actualizarUsuario.jsp">Modificar un usuario</a></li>
                 	<li><a class=button-link href="buscarUsuario.jsp">Eliminar un usuario</a></li>
-                	<li><a class="button-link back-to-main" href="index.jsp">Volver al menú principal</a></li>
+                	<li><a class="button-link back-to-main" href="menu.jsp">Volver al menú principal</a></li>
             	</ul>
         	</nav>
         </div>
