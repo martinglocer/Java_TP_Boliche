@@ -5,9 +5,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/index.css">
+		
 		<title>Entradas</title>
 	</head>
 <body>
+	
+	<%@ include file="menu_cabecera.jsp" %>
 	<h1>Entrada</h1>
 		
 		<div>	

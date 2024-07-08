@@ -8,6 +8,8 @@
 		<title>Lugares</title>
 	</head>
 <body>
+	
+	<%@ include file="menu_cabecera.jsp" %>
 	<h1>Lugares</h1>
 		
 		<div>	

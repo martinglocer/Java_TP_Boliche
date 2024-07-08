@@ -8,6 +8,8 @@
 		<title>Fiestas organizadas (Fiesta_lugar)</title>
 	</head>
 <body>
+	
+	<%@ include file="menu_cabecera.jsp" %>
 	<h1>Fiestas y lugares</h1>
 		
 		<div>	

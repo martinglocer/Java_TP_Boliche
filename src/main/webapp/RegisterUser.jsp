@@ -28,8 +28,8 @@
           		  <option value="">Seleccione un tipo</option>
           		  <option value="DNI">DNI</option>
         		</select>
-        	<p>
-			<p><label>Número de documento</label><p>
+        	</p>
+			<p><label>Número de documento</label></p>
 			<p><input type="text" name="nro_doc"></p>
 			<p><label>Nombre</label><p>
 			<p><input type="text" name="nombre"></p>
