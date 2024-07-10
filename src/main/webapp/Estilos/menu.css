@@ -14,6 +14,21 @@
     padding: 0;
     list-style-type: none;
     background-color: #444; /* Color de fondo del menú */
+    position: relative;
+}
+
+.menu nav ul.menu-items {
+	margin-left: 72px;
+    text-align: left; /* Alineación a la izquierda para los elementos normales */
+}
+
+.menu nav ul.menu-corners {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: -10px;
 }
 
 .menu nav ul li {
@@ -30,7 +45,9 @@
 }
 
 .menu nav ul li a:hover,
-.menu .dropdown:hover .dropbtn {
+.menu .dropdown:hover .dropbtn 
+#volver:hover,
+#logout:hover {
     background-color: #555; /* Color de fondo al pasar el mouse */
 }
 
@@ -58,3 +75,27 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.back-to-main {
+    background-color: #ff5733; 
+    margin-top: 20px; 
+}
+
+#volver {
+    position: absolute;
+    top: 0;  
+    left: 0; 
+    padding: 14px 20px;
+    background-color: #444; 
+}
+
+#logout {
+    position: absolute;
+    top: 0;  
+    right: 0;
+    padding: 14px 20px;
+    background-color: #444; 
+    white-space: nowrap;
+}
+
+

@@ -40,9 +40,17 @@ public class LoginServlet extends HttpServlet {
 		Asistente a = new Asistente(email, password);
 	 	if (validateUser(a)) {
 	 		HttpSession session = request.getSession();
-	 		int rol = a.getRol();
-	 		session.setAttribute("rol", rol);
-    		response.sendRedirect("menu.jsp");
+	 		session.setAttribute("user", a); // Guarda el objeto Asistente en la sesión
+	 		
+	 		Asistente loggedInUser = da.getByEmail(a); 
+	        int rol = loggedInUser.getRol();
+
+	 		if (rol == 1) { // 1 es el rol de admin
+	 		    session.setAttribute("isAdmin", true);
+	 		} else {
+	 		    session.setAttribute("isAdmin", false);
+	 		}
+	 		response.sendRedirect("menu.jsp");
     	} else {
     		String redirectURL = "index.jsp?error=true&email=" + email;
 			if (isEmailFound(a)) {

@@ -10,14 +10,14 @@
 <body>
     <div class="menu">
         <nav>
-            <ul>
-                <!-- Opciones admin -->
-                <li><a href="indexUsuarios.jsp">Usuarios</a></li>
-                <li><a href="indexLugares.jsp">Lugares</a></li>
-                <li><a href="indexFiestas.jsp">Fiestas</a></li>
-                <li><a href="indexFiesta_lugar.jsp">Fiesta en lugar</a></li>
+            <ul class="menu-items">
                 <!-- Opciones usuario -->
                 <li><a href="indexEntrada.jsp">Entradas</a></li>
+                <li><a href="indexFiestas">Eventos futuros</a></li>
+            </ul>
+            <ul class="menu-corners">
+                <li><a href="menu.jsp" id="volver">Home</a></li>
+                <li><a href="index.jsp" id="logout">Cerrar sesión</a></li>
             </ul>
         </nav>
     </div>

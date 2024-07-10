@@ -9,7 +9,7 @@
 	</head>
 <body>
 	
-	<%@ include file="menu_cabecera.jsp" %>
+	<%@ include file="menu_cabecera_admin.jsp" %>
 	<h1>Fiestas</h1>
 		
 		<div>	
