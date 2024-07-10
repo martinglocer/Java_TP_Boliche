@@ -26,7 +26,7 @@
 				<label>Tipo de documento</label>
 				<select name="tipo_doc">
           		  <option value="">Seleccione un tipo</option>
-          		  <option value="DNI">DNI</option>
+          		  <option value="DNI">dni</option>
         		</select>
         	<p>
 			<p><label>Número de documento</label><p>

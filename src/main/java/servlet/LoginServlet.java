@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -37,6 +39,9 @@ public class LoginServlet extends HttpServlet {
 		
 		Asistente a = new Asistente(email, password);
 	 	if (validateUser(a)) {
+	 		HttpSession session = request.getSession();
+	 		int rol = a.getRol();
+	 		session.setAttribute("rol", rol);
     		response.sendRedirect("index.jsp");
     	} else {
     		String redirectURL = "login.jsp?error=true&email=" + email;

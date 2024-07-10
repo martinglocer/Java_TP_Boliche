@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="java.io.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -16,12 +18,29 @@
 			<nav>
             	<ul>
             		<!-- Opciones admin -->
-                	<li><a class=button-link href="indexUsuarios.jsp">Usuarios</a></li>    
+            		
+						<%--HttpSession session = request.getSession();--%>
+						<%--Integer rol = (Integer) session.getAttribute("rol");--%>
+					
+					<%-- <% if ("admin".equals(rol)) { %>
+    					<h1>Bienvenido Administrador</h1>
+    					<li><a class=button-link href="indexUsuarios.jsp">Usuarios</a></li>    
+                		<li><a class=button-link href="indexLugares.jsp">Lugares</a></li>     
+                		<li><a class=button-link href="indexFiestas.jsp">Fiestas</a></li>   
+                		<li><a class=button-link href="indexFiesta_lugar.jsp">Fiesta en lugar</a></li>  <!-- CRUD Dependiente -->
+					<% } else { %>
+    					<h1>Bienvenido Usuario</h1>
+    					<li><a class=button-link href="indexEntrada.jsp">Comprar entrada</a></li> <!-- Caso de Uso EPIC -->    
+					<% } %> --%>
+					
+					<li><a class=button-link href="indexUsuarios.jsp">Usuarios</a></li>    
                 	<li><a class=button-link href="indexLugares.jsp">Lugares</a></li>     
                 	<li><a class=button-link href="indexFiestas.jsp">Fiestas</a></li>   
                 	<li><a class=button-link href="indexFiesta_lugar.jsp">Fiesta en lugar</a></li>  <!-- CRUD Dependiente -->
-                	<!-- Opciones usuario -->          
-                	<li><a class=button-link href="indexEntrada.jsp">Comprar entrada</a></li> <!-- Caso de Uso EPIC -->    
+                	
+                	
+    				<li><a class=button-link href="indexEntrada.jsp">Comprar entrada</a></li> <!-- Caso de Uso EPIC -->    
+                	
             	</ul>
         	</nav>
         	<div id="background-image">
