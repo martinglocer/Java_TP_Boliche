@@ -24,17 +24,19 @@ public class SvFiesta_lugar_disponibles extends HttpServlet {
         super();
            }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		DataFiesta_lugar dfl = new DataFiesta_lugar();
 		LinkedList<Fiesta_lugar> listaFiestas_lugares = dfl.getDisponibles();
+		
+		System.out.println(listaFiestas_lugares);
 		
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("listaFiestas_lugares", listaFiestas_lugares);
 		
 		response.sendRedirect("mostrarFiestas_lugares.jsp");
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

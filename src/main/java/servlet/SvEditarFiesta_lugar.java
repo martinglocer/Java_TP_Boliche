@@ -27,32 +27,44 @@ public class SvEditarFiesta_lugar extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Fiesta f = new Fiesta();
-		Lugar l = new Lugar();
-		
-		int id_editar1 = Integer.parseInt(request.getParameter("idfiesta_edit"));
-		System.out.println(id_editar1);
-		f.setIdfiesta(id_editar1);
-		
-		int id_editar2 = Integer.parseInt(request.getParameter("idlugar_edit"));
-		System.out.println(id_editar2);
-		l.setIdlugar(id_editar2);
-		
-		String fecha_fiestaStr = request.getParameter("fecha_edit");
-		LocalDate fecha_fiesta = LocalDate.parse(fecha_fiestaStr);
-		String hora_fiestaStr = request.getParameter("hora_edit");
-		LocalTime hora_fiesta = LocalTime.parse(hora_fiestaStr);		
-		Fiesta_lugar fl = new Fiesta_lugar(f, l, fecha_fiesta, hora_fiesta);
-		
-		System.out.println(fl);
-		
-		Fiesta_lugar fiesta_lugar = dfl.getOne(fl);
-		System.out.println(fiesta_lugar);
-		
-		HttpSession misesion = request.getSession();
-		misesion.setAttribute("fiesta_lugarEditar", fiesta_lugar);
-		
-		response.sendRedirect("editarFiesta_lugar.jsp");
+		// Obtener parámetros de la solicitud
+	    int idFiesta = Integer.parseInt(request.getParameter("idfiesta_edit"));
+	    int idLugar = Integer.parseInt(request.getParameter("idlugar_edit"));
+	    String fechaStr = request.getParameter("fecha_edit");
+	    String horaStr = request.getParameter("hora_edit");
+
+	    // Parsear fecha y hora
+	    LocalDate fecha = LocalDate.parse(fechaStr);
+	    LocalTime hora = LocalTime.parse(horaStr);
+
+	    // Crear objetos Fiesta, Lugar y Fiesta_lugar
+	    Fiesta f = new Fiesta();
+	    f.setIdfiesta(idFiesta);
+
+	    Lugar l = new Lugar();
+	    l.setIdlugar(idLugar);
+
+	    Fiesta_lugar fl = new Fiesta_lugar(f, l, fecha, hora);
+
+	    // Obtener Fiesta_lugar completo desde DataFiesta_lugar
+	    Fiesta_lugar fiestaLugar = dfl.getOne(fl);
+
+	    // Verificar que fiestaLugar no sea null antes de continuar
+	    if (fiestaLugar == null) {
+	        request.setAttribute("error", "No se encontraron los datos necesarios.");
+	        request.getRequestDispatcher("error.jsp").forward(request, response);
+	        return;
+	    }
+
+	    // Establecer atributos en la sesión
+	    HttpSession session = request.getSession();
+	    session.setAttribute("fiesta_lugarEditar", fiestaLugar);
+	    session.setAttribute("f", fiestaLugar.getFiesta());
+	    session.setAttribute("l", fiestaLugar.getLugar());
+	    session.setAttribute("fl", fiestaLugar);
+
+	    // Redirigir a editarFiesta_lugar.jsp
+	    response.sendRedirect("editarFiesta_lugar.jsp");
 	}
 
 	

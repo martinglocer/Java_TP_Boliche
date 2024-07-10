@@ -42,9 +42,9 @@ public class LoginServlet extends HttpServlet {
 	 		HttpSession session = request.getSession();
 	 		int rol = a.getRol();
 	 		session.setAttribute("rol", rol);
-    		response.sendRedirect("index.jsp");
+    		response.sendRedirect("menu.jsp");
     	} else {
-    		String redirectURL = "login.jsp?error=true&email=" + email;
+    		String redirectURL = "index.jsp?error=true&email=" + email;
 			if (isEmailFound(a)) {
 				redirectURL += "&incorrectPassword=true";
 			} else {

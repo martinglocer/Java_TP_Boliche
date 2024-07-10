@@ -8,6 +8,8 @@
 		<title>Lugares</title>
 	</head>
 <body>
+	
+	<%@ include file="menu_cabecera.jsp" %>
 	<h1>Lugares</h1>
 		
 		<div>	
@@ -18,7 +20,7 @@
                 	<li><a class=button-link href="registrarLugar.jsp">Registrar un lugar</a></li>                
                 	<li><a class=button-link href="actualizarLugar.jsp">Modificar un lugar</a></li>
                 	<li><a class=button-link href="eliminarLugar.jsp">Eliminar un lugar</a></li>
-                	<li><a class="button-link back-to-main" href="index.jsp">Volver al menú principal</a></li>
+                	<li><a class="button-link back-to-main" href="menu.jsp">Volver al menú principal</a></li>
             	</ul>
         	</nav>
         </div>
