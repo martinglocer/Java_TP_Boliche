@@ -14,6 +14,7 @@ import entities.Fiesta;
 import entities.Lugar;
 import entities.Asistente;
 import entities.Entrada;
+import data.DataAsistente;
 import data.DataEntrada;
 
 @WebServlet(name = "RegistrarEntrada", urlPatterns = {"/RegistrarEntrada"})
@@ -44,6 +45,10 @@ public class RegistrarEntrada extends HttpServlet {
 		asis.setTipo_doc(tipo_doc);
 		asis.setNro_doc(nro_doc);
 		
+		DataAsistente da = new DataAsistente();
+		Asistente asist = da.getByDocumento(asis);
+		int idasist = asist.getIdasistente();
+		System.out.println(idasist);
 		
 		String idfiestaStr = request.getParameter("idfiesta");
 		int idfiesta = Integer.parseInt(idfiestaStr);
@@ -69,18 +74,19 @@ public class RegistrarEntrada extends HttpServlet {
         // Formatear la hora actual en el formato "hh:mm:ss"
         //String hora_actual = horaActual.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         
-		Entrada ent = new Entrada(identrada, asis, fl, fecha_actual, horaActual);
+		Entrada ent = new Entrada(identrada, idasist, idfiesta, idlugar, fecha_fiesta, hora_fiesta, fecha_actual, horaActual);
 		
 		
 		System.out.println("Id de la entrada es: "+ identrada);
-		System.out.println("Tipo de documento es: "+ tipo_doc);
-		System.out.println("Número de documento es: "+ nro_doc);
+		System.out.println("Id del asistente es: "+ idasist);
 		System.out.println("Id fiesta es: "+ idfiesta);
 		System.out.println("Id lugar es: "+ idlugar);
 		System.out.println("Fecha de la fiesta es: "+ fecha_fiesta);
 		System.out.println("Hora de la fiesta es: "+ hora_fiesta);
 		System.out.println("Fecha de la compra es: "+ fecha_actual);
 		System.out.println("Hora de la compra es: "+ horaActual);
+		
+		System.out.println(ent);
 		
 		dent.add(ent);
 		

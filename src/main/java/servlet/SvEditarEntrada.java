@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import data.DataEntrada;
+import data.DataAsistente;
 import data.DataFiesta_lugar;
 import entities.Entrada;
 import entities.Fiesta;
@@ -77,6 +78,10 @@ public class SvEditarEntrada extends HttpServlet {
 		asis.setTipo_doc(tipo_doc);
 		asis.setNro_doc(nro_doc);
 		
+		DataAsistente da = new DataAsistente();
+		Asistente asist = da.getByDocumento(asis);
+		int idasist = asis.getIdasistente();
+		
 		String idfiestaStr = request.getParameter("id_fiesta");
 		int idfiesta = Integer.parseInt(idfiestaStr);
 		f.setIdfiesta(idfiesta);
@@ -105,7 +110,7 @@ public class SvEditarEntrada extends HttpServlet {
 		fl.setFecha_fiesta(fecha_fiesta);
 		fl.setHora_fiesta(hora_fiesta);
 		
-		Entrada entrada = new Entrada(identrada, asis, fl, fecha_compra_vieja, hora_compra_vieja);
+		Entrada entrada = new Entrada(identrada, idasist, idfiesta, idlugar, fecha_fiesta, hora_fiesta, fecha_compra_vieja, hora_compra_vieja);
 		
 		den.actualizarEntrada(entrada, fecha_compra_nueva, hora_compra_nueva);
 		

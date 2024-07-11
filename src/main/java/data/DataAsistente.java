@@ -193,7 +193,7 @@ public class DataAsistente {
 		System.out.println("getByDocumento de Asistente");
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select tipo_doc, nro_doc, nombre, apellido, email, celular, fecha_nacimiento, saldo, password, idrol\r\n"
+					"select idasistente, tipo_doc, nro_doc, nombre, apellido, email, celular, fecha_nacimiento, saldo, password, idrol\r\n"
 					+ "from asistente \r\n"
 					+ "where tipo_doc=? and nro_doc=?"
 					);
@@ -246,6 +246,68 @@ public class DataAsistente {
 		
 		System.out.println(a);
 		System.out.println("sale de getByDocumento, vuelve a getOne de Entrada");
+		return a;
+	}
+	
+	public Asistente getById(int idasis) {
+		Asistente a=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		System.out.println("getById de Asistente");
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select idasistente, tipo_doc, nro_doc, nombre, apellido, email, celular, fecha_nacimiento, saldo, password, idrol\r\n"
+					+ "from asistente \r\n"
+					+ "where idasistente=?"
+					);
+			stmt.setInt(1, idasis);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				
+				a=new Asistente(null,0,null,null,null,null,null,0,null,0);
+				a.setTipo_doc(rs.getString("tipo_doc"));
+				a.setNro_doc(rs.getInt("nro_doc"));
+				a.setNombre(rs.getString("nombre"));
+				a.setApellido(rs.getString("apellido"));
+				a.setEmail(rs.getString("email"));
+				a.setCelular(rs.getString("celular"));
+				a.setFecha_nacimiento(rs.getObject("fecha_nacimiento", LocalDate.class));
+				a.setSaldo(rs.getFloat("saldo"));
+				a.setPassword(rs.getString("password"));
+				a.setRol(rs.getInt("idrol"));
+				
+				/*
+				a = new Asistente(
+	                    rs.getString("tipo_doc"),
+	                    rs.getInt("nro_doc"),
+	                    rs.getString("nombre"),
+	                    rs.getString("apellido"),
+	                    rs.getString("email"),
+	                    rs.getString("celular"),
+	                    rs.getObject("fecha_nacimiento", LocalDate.class),
+	                    rs.getFloat("saldo"),
+	                    rs.getString("password"),
+	                    rs.getInt("idrol")     
+	            );
+	            */
+				System.out.println("Usuario encontrado");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Usuario no encontrado");
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Usuario no encontrado");
+			}
+		}
+		
+		System.out.println(a);
+		System.out.println("sale de getById, vuelve a getOne de Entrada");
 		return a;
 	}
 	

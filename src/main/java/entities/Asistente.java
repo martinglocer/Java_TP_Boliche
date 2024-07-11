@@ -130,7 +130,7 @@ public class Asistente {
 	
 	@Override
 	public String toString() {
-		return "Assistant [tipo_doc=" + tipo_doc + ", nro_doc=" + nro_doc + ", nombre=" + nombre + ", apellido="
+		return "Assistant [id_asistente=" + idasistente + ", tipo_doc=" + tipo_doc + ", nro_doc=" + nro_doc + ", nombre=" + nombre + ", apellido="
 				+ apellido + ", email=" + email + ", fecha_nacimiento=" + fecha_nacimiento + ", celular=" + celular
 				+ ", saldo=" + saldo + ", password=" + password + "]";
 				

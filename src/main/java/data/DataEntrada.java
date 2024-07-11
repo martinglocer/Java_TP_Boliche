@@ -31,8 +31,8 @@ public class DataEntrada {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
 			rs= stmt.executeQuery("select ent.identrada, asis.idasistente \r\n"
 					+ "  , asis.tipo_doc, asis.nro_doc, asis.nombre, asis.apellido\r\n"
-					+ "  , f.nombre_fiesta\r\n"
-					+ "  , l.nombre_lugar, l.direccion, l.ciudad\r\n"
+					+ "  , f.idfiesta, f.nombre_fiesta\r\n"
+					+ "  , l.idlugar, l.nombre_lugar, l.direccion, l.ciudad\r\n"
 					+ "  , fl.fecha_evento, fl.hora_evento\r\n"
 					+ "  , ent.fecha_compra, ent.hora_compra\r\n"
 					+ "from entrada ent \r\n"
@@ -62,7 +62,7 @@ public class DataEntrada {
 					asis.setNro_doc(rs.getInt("asis.nro_doc"));
 					asis.setNombre(rs.getString("asis.nombre"));
 					asis.setApellido(rs.getString("asis.apellido"));
-					ent.setAsistente(asis);
+					ent.setIdasistente(rs.getInt("asis.idasistente"));
 					Fiesta f = new Fiesta();
 					f.setNombre_fiesta(rs.getString("f.nombre_fiesta"));
 					Lugar l = new Lugar();
@@ -74,7 +74,10 @@ public class DataEntrada {
 					fl.setHora_fiesta(rs.getObject("fl.hora_evento", LocalTime.class));
 					fl.setFiesta(f);
 					fl.setLugar(l);
-					ent.setFiesta_lugar(fl);
+					ent.setIdfiesta(rs.getInt("f.idfiesta"));
+					ent.setIdlugar(rs.getInt("l.idlugar"));
+					ent.setFecha_evento(rs.getObject("fl.fecha_evento", LocalDate.class));
+					ent.setHora_evento(rs.getObject("fl.hora_evento", LocalTime.class));
 		
 					System.out.println("IdEntrada: " + ent.getIdentrada() + ", Tipo_doc: " + asis.getTipo_doc() + ", Nro_doc: " + asis.getNro_doc());
 					ents.add(ent);
@@ -100,11 +103,6 @@ public class DataEntrada {
 	
 	public void add(Entrada en) {
 		
-		
-		Fiesta_lugar fl = en.getFiesta_lugar();
-		Fiesta f = fl.getFiesta();
-		Lugar l = fl.getLugar();
-		Asistente a = en.getAsistente();
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
@@ -113,11 +111,11 @@ public class DataEntrada {
 						+ "values(?,?,?,?,?,?,?,?)"
 						,PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			stmt.setInt(1, a.getIdasistente());
-			stmt.setInt(2, f.getIdfiesta());
-			stmt.setInt(3, l.getIdlugar());
-			stmt.setObject(4, fl.getFecha_fiesta());
-			stmt.setObject(5, fl.getHora_fiesta());
+			stmt.setInt(1, en.getIdasistente());
+			stmt.setInt(2, en.getIdfiesta());
+			stmt.setInt(3, en.getIdlugar());
+			stmt.setObject(4, en.getFecha_evento());
+			stmt.setObject(5, en.getHora_evento());
 			stmt.setObject(6, en.getFecha_compra());
 			stmt.setObject(7, en.getHora_compra());
 			stmt.executeUpdate();
@@ -179,7 +177,7 @@ public class DataEntrada {
 				fiesta_lug.setFecha_fiesta(rs.getObject("fecha_evento", LocalDate.class));
 				fiesta_lug.setHora_fiesta(rs.getObject("hora_evento", LocalTime.class));
 				
-				ent.setAsistente(a);
+				ent.setIdasistente(a.getIdasistente());
 				ent.setFecha_compra(rs.getObject("fecha_compra", LocalDate.class));
 				ent.setHora_compra(rs.getObject("hora_compra", LocalTime.class));
 			}
