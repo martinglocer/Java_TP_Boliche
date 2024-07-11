@@ -13,7 +13,7 @@
             <ul class="menu-items">
                 <!-- Opciones usuario -->
                 <li><a href="indexEntrada.jsp">Entradas</a></li>
-                <li><a href="indexFiestas">Eventos futuros</a></li>
+                <li><a href="fiesta_lugar_disponibles">Eventos futuros</a></li>
             </ul>
             <ul class="menu-corners">
                 <li><a href="menu.jsp" id="volver">Home</a></li>
