@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
 <meta charset="UTF-8">
 <title>Actualizar fiesta con su lugar y fecha</title>
 </head>

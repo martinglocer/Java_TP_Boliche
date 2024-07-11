@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import = "java.util.LinkedList"%>
 <%@page import = "entities.Fiesta"%>
@@ -9,7 +9,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
-	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
+	<%-- <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css"> --%>
 	<title>Mostrar fiestas</title>
 </head>
 <body>

@@ -17,7 +17,7 @@
 	
 	
 	
-			<nav>
+		
             	
             		<!-- Opciones admin -->
             		<% 
@@ -42,7 +42,7 @@
 					
                 	
   
-        	</nav>
+    
         	<div id="background-image">
         	</div>
       

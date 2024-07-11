@@ -40,14 +40,22 @@ public class SvEditarFiesta_lugar extends HttpServlet {
 	    // Crear objetos Fiesta, Lugar y Fiesta_lugar
 	    Fiesta f = new Fiesta();
 	    f.setIdfiesta(idFiesta);
+	    
+	    System.out.println(f);
 
 	    Lugar l = new Lugar();
 	    l.setIdlugar(idLugar);
+	    
+	    System.out.println(l);
 
 	    Fiesta_lugar fl = new Fiesta_lugar(f, l, fecha, hora);
+	    
+	    System.out.println(fl);
 
 	    // Obtener Fiesta_lugar completo desde DataFiesta_lugar
 	    Fiesta_lugar fiestaLugar = dfl.getOne(fl);
+	    
+	    System.out.println(fl);
 
 	    // Verificar que fiestaLugar no sea null antes de continuar
 	    if (fiestaLugar == null) {
@@ -55,7 +63,9 @@ public class SvEditarFiesta_lugar extends HttpServlet {
 	        request.getRequestDispatcher("error.jsp").forward(request, response);
 	        return;
 	    }
-
+	    
+	    System.out.println(fiestaLugar);
+	    
 	    // Establecer atributos en la sesión
 	    HttpSession session = request.getSession();
 	    session.setAttribute("fiesta_lugarEditar", fiestaLugar);
