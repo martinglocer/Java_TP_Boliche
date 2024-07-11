@@ -12,6 +12,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
 		<title>Editar Entrada</title>
 	</head>
 	<body>

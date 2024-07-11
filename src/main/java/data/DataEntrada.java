@@ -108,7 +108,7 @@ public class DataEntrada {
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 							"insert into Entrada(idasistente, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra)\r\n" 
-						+ "values(?,?,?,?,?,?,?,?)"
+						+ "values(?,?,?,?,?,?,?)"
 						,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setInt(1, en.getIdasistente());

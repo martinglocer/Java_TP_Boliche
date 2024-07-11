@@ -45,10 +45,15 @@ public class RegistrarEntrada extends HttpServlet {
 		asis.setTipo_doc(tipo_doc);
 		asis.setNro_doc(nro_doc);
 		
+		
+		
 		DataAsistente da = new DataAsistente();
 		Asistente asist = da.getByDocumento(asis);
+		
+		System.out.println("el asissssssstt:"+asist);
+		
 		int idasist = asist.getIdasistente();
-		System.out.println(idasist);
+		System.out.println("Id asistente:"+idasist);
 		
 		String idfiestaStr = request.getParameter("idfiesta");
 		int idfiesta = Integer.parseInt(idfiestaStr);

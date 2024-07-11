@@ -20,6 +20,22 @@ public class Asistente {
 	
 
 
+	public Asistente(int idAsistente, String tipo_doc, int nro_doc, String nombre, String apellido, String email, String celular, LocalDate fecha_nacimiento,
+			float saldo, String password, int idrol) {
+		super();
+		this.idasistente = idAsistente;
+		this.tipo_doc = tipo_doc;
+		this.nro_doc = nro_doc;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.celular = celular;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.saldo = saldo;
+		this.password = password;
+		this.idrol = idrol;
+	}
+	
 	public Asistente(String tipo_doc, int nro_doc, String nombre, String apellido, String email, String celular, LocalDate fecha_nacimiento,
 			float saldo, String password, int idrol) {
 		super();
