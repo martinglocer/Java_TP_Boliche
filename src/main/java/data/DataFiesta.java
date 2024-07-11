@@ -79,7 +79,7 @@ public class DataFiesta {
 	
 	
 	public Fiesta getById(int idfiesta) {
-		Fiesta f=null;
+		Fiesta f=new Fiesta(0,null,null);
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
@@ -89,7 +89,6 @@ public class DataFiesta {
 			stmt.setInt(1, idfiesta);
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				f=new Fiesta(0,null,null);
 				f.setIdfiesta(rs.getInt("idfiesta"));
 				f.setNombre_fiesta(rs.getString("nombre_fiesta"));
 				f.setDescripcion(rs.getString("descripcion"));

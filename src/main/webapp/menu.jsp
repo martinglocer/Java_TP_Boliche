@@ -19,8 +19,8 @@
 	    if (loggedInUser == null) {
 	        response.sendRedirect("index.jsp");
 	    } else {
-	        Boolean isAdminAttr = (Boolean) session.getAttribute("isAdmin");
-	        boolean isAdmin = isAdminAttr != null && isAdminAttr;
+	        boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+	        /* boolean isAdmin = isAdminAttr != null && isAdminAttr; */
 	%>
 	
 		<% if (isAdmin) { %>

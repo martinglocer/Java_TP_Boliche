@@ -82,7 +82,7 @@ public class DataLugar {
 		
 		
 		public Lugar getById(int idlugar) {
-			Lugar l=null;
+			Lugar l=new Lugar(0,null,null,0,null);
 			PreparedStatement stmt=null;
 			ResultSet rs=null;
 			try {
@@ -92,7 +92,6 @@ public class DataLugar {
 				stmt.setInt(1, idlugar);
 				rs=stmt.executeQuery();
 				if(rs!=null && rs.next()) {
-					l=new Lugar(0,null,null,0,null);
 					l.setIdlugar(rs.getInt("idlugar"));
 					l.setNombre_lugar(rs.getString("nombre_lugar"));
 					l.setDireccion(rs.getString("direccion"));

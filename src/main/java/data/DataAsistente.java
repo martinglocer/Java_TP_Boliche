@@ -108,7 +108,7 @@ public class DataAsistente {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select idasistente tipo_doc, nro_doc, nombre, apellido, email, fecha_nacimiento, celular, saldo, idrol, "
+					"select idasistente, tipo_doc, nro_doc, nombre, apellido, email, fecha_nacimiento, celular, saldo, idrol, "
 					+ "password  from asistente where email=?"
 					);
 			stmt.setString(1, asi.getEmail());
