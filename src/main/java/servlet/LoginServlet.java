@@ -41,6 +41,7 @@ public class LoginServlet extends HttpServlet {
 		Asistente a = new Asistente(email, password);
 	 	if (validateUser(a)) {
 	 		HttpSession session = request.getSession();
+	 		session.setMaxInactiveInterval(30 * 60); // La sesión se configura para expirar después de 30 minutos de inactividad
 	 		
 	 		Asistente loggedInUser = da.getByEmail(a); 
 	 		session.setAttribute("user", loggedInUser); // Guarda el objeto Asistente en la sesión
