@@ -17,7 +17,7 @@
             </ul>
             <ul class="menu-corners">
                 <li><a href="menu.jsp" id="volver">Home</a></li>
-                <li><a href="index.jsp" id="logout">Cerrar sesión</a></li>
+                <li><a href="Logout" id="logout">Cerrar sesión</a></li>
             </ul>
         </nav>
     </div>

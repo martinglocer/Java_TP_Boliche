@@ -8,36 +8,28 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
-import entities.Lugar;
+@WebServlet(name = "Logout", urlPatterns = "/Logout")
 
-import data.DataLugar;
-
-@WebServlet(name = "indexLugares", urlPatterns = {"/indexLugares"})
-
-public class SvLugar extends HttpServlet {
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		DataLugar dl = new DataLugar();
-		
-		LinkedList<Lugar> lugares = dl.getAll();
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("listaLugares", lugares);
-		
-		response.sendRedirect("mostrarLugares.jsp");
-		
-	}
+    
+    public Logout() {
+        super();
+    }
 
-	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        System.out.println("Cierre de sesion");
+        response.sendRedirect("index.jsp");
+    }
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		doGet(request, response);
 	}
 
 }

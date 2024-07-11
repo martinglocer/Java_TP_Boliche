@@ -8,11 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.LinkedList;
+// import java.util.LinkedList;
 
 import data.DataAsistente;
 import entities.Asistente;
 
+@WebServlet(name = "LoginServlet", urlPatterns = "/LoginServlet")
 
 public class LoginServlet extends HttpServlet {
 	
@@ -40,9 +41,9 @@ public class LoginServlet extends HttpServlet {
 		Asistente a = new Asistente(email, password);
 	 	if (validateUser(a)) {
 	 		HttpSession session = request.getSession();
-	 		session.setAttribute("user", a); // Guarda el objeto Asistente en la sesión
 	 		
 	 		Asistente loggedInUser = da.getByEmail(a); 
+	 		session.setAttribute("user", loggedInUser); // Guarda el objeto Asistente en la sesión
 	        int rol = loggedInUser.getRol();
 
 	 		if (rol == 1) { // 1 es el rol de admin
