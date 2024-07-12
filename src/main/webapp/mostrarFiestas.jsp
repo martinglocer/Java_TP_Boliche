@@ -3,20 +3,27 @@
 <%@page import = "java.util.LinkedList"%>
 <%@page import = "entities.Fiesta"%>
 <%@page import = "jakarta.servlet.http.HttpSession" %>
-<% %>
+<%@page import = "entities.Asistente"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
-	<%-- <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css"> --%>
 	<title>Mostrar fiestas</title>
 </head>
 <body>
-	<h1>Lista de fiestas registradas</h1>
-	<%
-		LinkedList<Fiesta> listaFiestas = (LinkedList) request.getSession().getAttribute("listaFiestas");
-	%>
+
+	<% 
+        // HttpSession session = request.getSession();
+        Asistente loggedInUser = (Asistente) session.getAttribute("user");
+        if (loggedInUser == null) {
+            response.sendRedirect("index.jsp");
+        } else { %>
+            <% int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
+            if (isAdmin == 1) { %>
+                <%@ include file="menu_cabecera_admin.jsp" %>
+				<h1>Lista de fiestas registradas</h1>
+				<%LinkedList<Fiesta> listaFiestas = (LinkedList) request.getSession().getAttribute("listaFiestas");%>
 				<div>
 					<table>
 						<thead>
@@ -47,6 +54,10 @@
 						</tbody>
 					</table>
 				</div>
+            <% } else if (isAdmin == 2) {
+                response.sendRedirect("errorUsuario.jsp");
+               } %>
+    <% } %>
 	
 </body>
 </html>

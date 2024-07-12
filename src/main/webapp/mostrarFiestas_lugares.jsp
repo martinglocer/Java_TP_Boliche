@@ -6,7 +6,7 @@
 <%@page import = "entities.Fiesta"%>
 <%@page import = "jakarta.servlet.http.HttpSession" %>
 <%@page import = "java.time.LocalDateTime" %>
-<% %>
+<%@page import = "entities.Asistente"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +15,18 @@
 	<title>Mostrar fiestas_lugares</title>
 </head>
 <body>
-	<h1>Lista de fiestas registradas</h1>
-	<%
-		LinkedList<Fiesta_lugar> listaFiestas_lugares = (LinkedList) request.getSession().getAttribute("listaFiestas_lugares");
-	%>
+					
+	<% 
+        // HttpSession session = request.getSession();
+        Asistente loggedInUser = (Asistente) session.getAttribute("user");
+        if (loggedInUser == null) {
+            response.sendRedirect("index.jsp");
+        } else { %>
+            <% int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
+            if (isAdmin == 1) { %>
+                <%@ include file="menu_cabecera_admin.jsp" %>
+				<h1>Lista de fiestas registradas</h1>
+				<%LinkedList<Fiesta_lugar> listaFiestas_lugares = (LinkedList) request.getSession().getAttribute("listaFiestas_lugares");%>
 				<div>
 					<table>
 						<thead>
@@ -59,6 +67,10 @@
 						</tbody>
 					</table>
 				</div>
+            <% } else if (isAdmin == 2) {
+                response.sendRedirect("errorUsuario.jsp");
+               } %>
+    <% } %>
 	
 </body>
 </html>

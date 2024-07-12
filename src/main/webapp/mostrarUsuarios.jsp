@@ -15,25 +15,34 @@
 <title>Mostrar usuarios</title>
 </head>
 <body>
-	<h1>Lista de usuarios registrados</h1>
-   
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Apellido</th>
-                        <th>Nombre</th>
-                        <th>Tipo documento</th>
-                        <th>Nro documento</th>
-                        <th>Email</th>
-                        <th>Celular</th>
-                        <th>Fecha de nacimiento</th>
-                        <th>Rol</th>
-                        <th>Saldo</th>
-                        <th>---</th>
-                        <th>---</th>
-                    </tr>
-                </thead>
+	
+	<% 
+        // HttpSession session = request.getSession();
+        Asistente loggedInUser = (Asistente) session.getAttribute("user");
+        if (loggedInUser == null) {
+            response.sendRedirect("index.jsp");
+        } else { %>
+            <% int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
+            if (isAdmin == 1) { %>
+                <%@ include file="menu_cabecera_admin.jsp" %>
+				<h1>Lista de usuarios registrados</h1>
+        		<div>
+          		  <table>
+              		  <thead>
+                  		  <tr>
+                     		<th>Apellido</th>
+                     	  	<th>Nombre</th>
+                     	   	<th>Tipo documento</th>
+                     	  	<th>Nro documento</th>
+                      	  	<th>Email</th>
+                        	<th>Celular</th>
+                        	<th>Fecha de nacimiento</th>
+                        	<th>Rol</th>
+                        	<th>Saldo</th>
+                        	<th>---</th>
+                        	<th>---</th>
+                   		 </tr>
+                   	</thead>
                 <tbody>
                     <% for (Asistente a : listaUsuarios) { %>
                         <tr>
@@ -59,6 +68,10 @@
                 </tbody>
             </table>
         </div>
+            <% } else if (isAdmin == 2) {
+                response.sendRedirect("errorUsuario.jsp");
+               } %>
+    <% } %>
 
 </body>
 </html>

@@ -2,21 +2,28 @@
 <%@page import="entities.Lugar" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import = "entities.Asistente"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
-		<meta charset="UTF-8">
+<head>
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
+	<meta charset="UTF-8">
+	<%LinkedList<Lugar> ll = (LinkedList) request.getSession().getAttribute("listaLugares");%>
+	<title>Lugares</title>
+</head>
+<body>
 		
-		<%
-			LinkedList<Lugar> ll = (LinkedList) request.getSession().getAttribute("listaLugares");
-		%>
-		
-		<title>Lugares</title>
-	</head>
-	<body>
-		<div>
-			<h1>Lugares</h1>
+	<% 
+        // HttpSession session = request.getSession();
+        Asistente loggedInUser = (Asistente) session.getAttribute("user");
+        if (loggedInUser == null) {
+            response.sendRedirect("index.jsp");
+        } else { %>
+            <% int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
+            if (isAdmin == 1) { %>
+                <%@ include file="menu_cabecera_admin.jsp" %>
+				<div>
+					<h1>Lugares</h1>
 				<div>
 					<table>
 						<thead>
@@ -52,8 +59,10 @@
 				</div>
 		
 		</div>
-		
+            <% } else if (isAdmin == 2) {
+                response.sendRedirect("errorUsuario.jsp");
+               } %>
+    <% } %>			
 			
-			
-	</body>
+</body>
 </html>

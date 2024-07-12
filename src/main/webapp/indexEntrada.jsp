@@ -24,6 +24,7 @@
                     <nav>
                         <ul class=opc>
                             <li><a class=button-link href="indexEntrada">Listar todas las entradas</a></li>  <!-- admin -->
+                            <li><a class=button-link href="registrarEntrada.jsp">Registrar una entrada</a></li> <!-- admin -->
                             <li><a class=button-link href="actualizarEntrada.jsp">Modificar una entrada</a></li> <!-- admin -->
                             <li><a class=button-link href="eliminarEntrada.jsp">Eliminar una entrada</a></li> <!-- admin -->
                             <li><a class="button-link back-to-main" href="menu.jsp">Volver al menú principal</a></li>

@@ -20,11 +20,19 @@
 	<title>Mostrar entradas</title>
 </head>
 <body>
-	<%@ include file="menu_cabecera_usuario.jsp" %>
-	<h1>Lista de todas las entradas</h1>
-	<%
-		LinkedList<Entrada> listaEntradas = (LinkedList) request.getSession().getAttribute("listaEntradas");
-	%>
+	
+	<% 
+        // HttpSession session = request.getSession();
+        Asistente loggedInUser = (Asistente) session.getAttribute("user");
+        if (loggedInUser == null) {
+            response.sendRedirect("index.jsp");
+        } else { %>
+            <% int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
+            if (isAdmin == 1) { %>
+                <%@ include file="menu_cabecera_admin.jsp" %>
+				<h1>Lista de todas las entradas</h1>
+				<%LinkedList<Entrada> listaEntradas = (LinkedList<Entrada>) request.getSession().getAttribute("listaEntradas");%>
+				
 				<div>
 					<table>
 						<thead>
@@ -81,6 +89,10 @@
 						</tbody>
 					</table>
 				</div>
+            <% } else if (isAdmin == 2) {
+                response.sendRedirect("errorUsuario.jsp");
+               } %>
+    <% } %>
 	
 </body>
 </html>
