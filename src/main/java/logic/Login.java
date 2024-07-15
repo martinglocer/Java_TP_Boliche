@@ -49,6 +49,10 @@ public class Login {
 		return da.getByUser(asist);
 	}
 	
+	public Asistente getByEmail(Asistente a) {
+		return da.getByEmail(a);	
+	}
+	
 	public void addAsistente(Asistente asist) {
 		da.add(asist);
 	}

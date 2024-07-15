@@ -24,28 +24,28 @@
 		<form action="RegisterUser" method="post">
 			<p>
 				<label>Tipo de documento</label>
-				<select name="tipo_doc">
+				<select name="tipo_doc" required>
           		  <option value="">Seleccione un tipo</option>
           		  <option value="DNI">dni</option>
         		</select>
         	</p>
 			<p><label>Número de documento</label></p>
-			<p><input type="text" name="nro_doc"></p>
+			<p><input type="text" name="nro_doc" required></p>
 			<p><label>Nombre</label><p>
-			<p><input type="text" name="nombre"></p>
+			<p><input type="text" name="nombre" required></p>
 			<p><label>Apellido</label><p>
-			<p><input type="text" name="apellido"></p>
+			<p><input type="text" name="apellido" required></p>
 			<p><label>Email</label><p>
-			<p><input type="email" name="email"></p>
+			<p><input type="email" name="email" required></p>
 			<p><label>Celular</label><p>
-			<p><input type="text" name="celular"></p>
-			<p>Fecha de nacimiento</p><p><input type="date" name="fecha_nacimiento"></p>
+			<p><input type="text" name="celular" required></p>
+			<p>Fecha de nacimiento</p><p><input type="date" name="fecha_nacimiento" required></p>
 			<p><label>Saldo</label><p>
-			<p><input type="text" name="saldo"></p>
+			<p><input type="text" name="saldo" required></p>
 			<p><label>Contraseña</label><p>
-			<p><input type="password" name="password"></p>
+			<p><input type="password" name="password" required></p>
 			<p>
-        		<select name="idrol">
+        		<select name="idrol" required>
           		  <option value="">Seleccione un rol</option>
           		  <option value="1">Administrador</option>
           		  <option value="2">Usuario estándar</option>

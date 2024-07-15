@@ -81,10 +81,17 @@ public class RegisterUser extends HttpServlet {
 	        response.sendRedirect("RegisterUser.jsp"); 
 	        return; 
 	    }
-		
+			    
 		Asistente a = new Asistente(tipo_doc, nro_doc, nombre, apellido, email, celular, fecha_nacimiento, saldo, password, idrol);
-		log.addAsistente(a);
-		response.sendRedirect("indexUsuarios");
+	    Asistente asi = log.getByEmail(a);
+	    if (asi != null) {
+	    	HttpSession session = request.getSession();
+	        session.setAttribute("error", "Ya existe un usuario con ese Email");
+	        response.sendRedirect("RegisterUser.jsp");
+	    } else {
+	    	log.addAsistente(a);
+			response.sendRedirect("indexUsuarios");
+	    }
 		
 		System.out.println("Dni es: "+nro_doc);
 		System.out.println("nombre es: "+nombre);
