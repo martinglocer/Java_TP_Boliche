@@ -26,10 +26,10 @@
     <h1>Compra tu entrada</h1>
     <div>
         <form action="RegistrarEntrada" method="post">
-            <p><input type="text" name="tipo_doc" placeholder="Tipo de documento"></p>
-            <p><input type="number" name="nro_doc" placeholder="Número de documento"></p>
+            <p><input type="hidden" name="tipo_doc" placeholder="Tipo de documento" value="<%=loggedInUser.getTipo_doc()%>"></p>
+            <p><input type="hidden" name="nro_doc" placeholder="Número de documento" value= "<%=loggedInUser.getNro_doc()%>"></p>
             <div id="fiestas">
-                <%-- Aquí es donde mostraremos las tarjetas de las fiestas --%>
+                <!-- Aquí es donde mostraremos las tarjetas de las fiestas -->
                 <%
                     
                     LinkedList<Fiesta_lugar> fiestas = (LinkedList<Fiesta_lugar>) session.getAttribute("fiestasDisponibles");

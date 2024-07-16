@@ -86,10 +86,6 @@ public class RegistrarEntrada extends HttpServlet {
 		
 		System.out.println(ent);
 		
-		dent.add(ent);
-		
-		response.sendRedirect("indexEntrada");
-
 	}
 
 }
