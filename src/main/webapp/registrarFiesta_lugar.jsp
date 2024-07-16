@@ -1,38 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="entities.Asistente" %>
+<%@ page import="entities.Asistente, java.util.LinkedList, entities.Fiesta, entities.Lugar" %>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
-<meta charset="UTF-8">
-<title>Registrar fiesta_lugar</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
+    <title>Registrar fiesta con lugar</title>
 </head>
 <body>
-
-	<% 
-        // HttpSession session = request.getSession();
+    <% 
         Asistente loggedInUser = (Asistente) session.getAttribute("user");
         if (loggedInUser == null) {
             response.sendRedirect("index.jsp");
-        } else { %>
-            <% int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
-            if (isAdmin == 1) { %>
+        } else {
+            int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
+            if (isAdmin == 1) { // Administrador
+    %>
                 <%@ include file="menu_cabecera_admin.jsp" %>
-				<h1>Registro de una nueva fiesta con su lugar y fecha de realización</h1>
-				<div>
-					<form action="RegistrarFiesta_lugar" method="post">
-						<p><input type="number" name="idfiesta" placeholder="Id de la fiesta (ya existente)"></p>
-						<p><input type="number" name="idlugar" placeholder="Id del lugar (ya existente)"></p>
-						<p><input type="date" name="fecha_fiesta" placeholder="Fecha realizarse la fiesta"></p>
-							<p><input type="time" name="hora_fiesta" placeholder="Hora a realizar la fiesta"></p>
-						<button type="submit"> Registrar </button>
-					</form>
-				</div>
-            <% } else if (isAdmin == 2) {
+                <h1>Registro de una nueva fiesta con su lugar y fecha de realización</h1>
+                <div class="card-container">
+                    <form action="RegistrarFiesta_lugar" method="post">
+                        <p>
+                            <label>Selecciona la fiesta:</label>
+                            <select name="idfiesta" required>
+                                <option value="">Seleccione una fiesta</option>
+                                <% 
+                                    @SuppressWarnings("unchecked")
+                                    LinkedList<Fiesta> fiestas = (LinkedList<Fiesta>) session.getAttribute("fiestas");
+                                    for (Fiesta fiesta : fiestas) {
+                                %>
+                                    <option value="<%= fiesta.getIdfiesta() %>"><%= fiesta.getNombre_fiesta() %></option>
+                                <% } %>
+                            </select>
+                        </p>
+                        <p>
+                            <label>Selecciona el lugar:</label>
+                            <select name="idlugar" required>
+                                <option value="">Seleccione un lugar</option>
+                                <% 
+                                    @SuppressWarnings("unchecked")
+                                    LinkedList<Lugar> lugares = (LinkedList<Lugar>) session.getAttribute("lugares");
+                                    for (Lugar lugar : lugares) {
+                                %>
+                                    <option value="<%= lugar.getIdlugar() %>"><%= lugar.getNombre_lugar() %></option>
+                                <% } %>
+                            </select>
+                        </p>
+                        <p><label>Fecha de realización:</label></p>
+                        <p><input type="date" name="fecha_fiesta" required></p>
+                        <p><label>Hora de realización:</label></p>
+                        <p><input type="time" name="hora_fiesta" required></p>
+                        <button type="submit">Registrar</button>
+                    </form>
+                </div>
+    <% 
+            } else { // Usuario estándar
                 response.sendRedirect("errorUsuario.jsp");
-               } %>
-    <% } %>
-
+            }
+        }
+    %>
 </body>
 </html>

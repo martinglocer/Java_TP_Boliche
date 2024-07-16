@@ -26,7 +26,7 @@
             			<ul class=opc>
                 			<li><a class=button-link href="indexFiesta_lugar">Listar todas las fiestas organizadas</a></li>
                 			<li><a class=button-link href="fiesta_lugar_disponibles">Listar las futuras fiestas disponibles</a></li>
-                			<li><a class=button-link href="registrarFiesta_lugar.jsp">Registrar una nueva fiesta con su lugar y fecha de realización</a></li>                
+                			<li><a class=button-link href="Sv_fiestas_para_fiesta_lugar">Registrar una nueva fiesta con su lugar y fecha de realización</a></li>                
                 			<li><a class=button-link href="actualizarFiesta_lugar.jsp">Modificar una fiesta_lugar</a></li>
                 			<li><a class=button-link href="eliminarFiesta_lugar.jsp">Eliminar una fiesta_lugar</a></li>
                 			<li><a class="button-link back-to-main" href="menu.jsp">Volver al menú principal</a></li>

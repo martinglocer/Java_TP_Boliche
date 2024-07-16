@@ -300,4 +300,14 @@
     <servlet-name>Sv_fiesta_lugar_disponibles_para_entradas</servlet-name>
     <url-pattern>/Sv_fiesta_lugar_disponibles_para_entradas</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Sv_fiestas_para_fiesta_lugar</display-name>
+    <servlet-name>Sv_fiestas_para_fiesta_lugar</servlet-name>
+    <servlet-class>servlet.Sv_fiestas_para_fiesta_lugar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Sv_fiestas_para_fiesta_lugar</servlet-name>
+    <url-pattern>/Sv_fiestas_para_fiesta_lugar</url-pattern>
+  </servlet-mapping>
 </web-app>
