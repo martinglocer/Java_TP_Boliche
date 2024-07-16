@@ -17,6 +17,17 @@ public class Entrada {
 	
 	public Entrada() {}
 	
+	public Entrada(int idasistente, int idfiesta, int idlugar, LocalDate fecha_evento, LocalTime hora_evento, LocalDate fecha_compra, LocalTime hora_compra) {
+		super();
+		this.idasistente = idasistente;
+		this.idfiesta = idfiesta;
+		this.idlugar = idlugar;
+		this.fecha_evento = fecha_evento;
+		this.hora_evento = hora_evento;
+		this.fecha_compra = fecha_compra;
+		this.hora_compra = hora_compra;
+	}
+	
 	public Entrada(int identrada, int idasistente, int idfiesta, int idlugar, LocalDate fecha_evento, LocalTime hora_evento, LocalDate fecha_compra, LocalTime hora_compra) {
 		super();
 		this.identrada = identrada;

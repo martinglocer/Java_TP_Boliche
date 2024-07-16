@@ -38,13 +38,11 @@ public class RegistrarEntrada extends HttpServlet {
 		Asistente asis = new Asistente();
 		
 		String tipo_doc = request.getParameter("tipo_doc");
-		
 		String nro_docStr = request.getParameter("nro_doc");
 		int nro_doc = Integer.parseInt(nro_docStr);
 		
 		asis.setTipo_doc(tipo_doc);
 		asis.setNro_doc(nro_doc);
-		
 		
 		
 		DataAsistente da = new DataAsistente();
@@ -55,34 +53,29 @@ public class RegistrarEntrada extends HttpServlet {
 		int idasist = asist.getIdasistente();
 		System.out.println("Id asistente:"+idasist);
 		
-		String idfiestaStr = request.getParameter("idfiesta");
-		int idfiesta = Integer.parseInt(idfiestaStr);
-		f.setIdfiesta(idfiesta);
+		String fiestaSeleccionada = request.getParameter("fiesta");
+        String[] fiestaDetails = fiestaSeleccionada.split("_");
+        int idfiesta = Integer.parseInt(fiestaDetails[0]);
+        int idlugar = Integer.parseInt(fiestaDetails[1]);
+        LocalDate fecha_fiesta = LocalDate.parse(fiestaDetails[2]);
+        LocalTime hora_fiesta = LocalTime.parse(fiestaDetails[3]);
+
+        LocalDate fecha_actual = LocalDate.now();
+        LocalTime horaActual = LocalTime.now();
+
+        Entrada ent = new Entrada(0,idasist, idfiesta, idlugar, fecha_fiesta, hora_fiesta, fecha_actual, horaActual);
+
+        dent.add(ent);
+
+        response.sendRedirect("indexEntrada");
 		
-		String idlugarStr = request.getParameter("idlugar");
-		int idlugar = Integer.parseInt(idlugarStr);
-		l.setIdlugar(idlugar);
 		
-		String fecha_fiestaStr = request.getParameter("fecha_fiesta");
-		LocalDate fecha_fiesta = LocalDate.parse(fecha_fiestaStr);
-		String hora_fiestaStr = request.getParameter("hora_fiesta");
-		LocalTime hora_fiesta = LocalTime.parse(hora_fiestaStr);
-		
-		Fiesta_lugar fl = new Fiesta_lugar(f, l, fecha_fiesta, hora_fiesta );
-		
-		
-		int identrada = 0;
-		LocalDate fecha_actual = LocalDate.now();
-		
-		LocalTime horaActual = LocalTime.now();
-        
         // Formatear la hora actual en el formato "hh:mm:ss"
         //String hora_actual = horaActual.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         
-		Entrada ent = new Entrada(identrada, idasist, idfiesta, idlugar, fecha_fiesta, hora_fiesta, fecha_actual, horaActual);
 		
 		
-		System.out.println("Id de la entrada es: "+ identrada);
+		// System.out.println("Id de la entrada es: "+ identrada);
 		System.out.println("Id del asistente es: "+ idasist);
 		System.out.println("Id fiesta es: "+ idfiesta);
 		System.out.println("Id lugar es: "+ idlugar);

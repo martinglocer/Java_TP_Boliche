@@ -290,4 +290,14 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Sv_fiesta_lugar_disponibles_para_entradas</display-name>
+    <servlet-name>Sv_fiesta_lugar_disponibles_para_entradas</servlet-name>
+    <servlet-class>servlet.Sv_fiesta_lugar_disponibles_para_entradas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Sv_fiesta_lugar_disponibles_para_entradas</servlet-name>
+    <url-pattern>/Sv_fiesta_lugar_disponibles_para_entradas</url-pattern>
+  </servlet-mapping>
 </web-app>

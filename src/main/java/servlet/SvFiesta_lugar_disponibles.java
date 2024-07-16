@@ -25,7 +25,7 @@ public class SvFiesta_lugar_disponibles extends HttpServlet {
            }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 		DataFiesta_lugar dfl = new DataFiesta_lugar();
 		LinkedList<Fiesta_lugar> listaFiestas_lugares = dfl.getDisponibles();
 		

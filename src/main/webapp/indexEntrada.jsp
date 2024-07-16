@@ -37,7 +37,7 @@
                 <div>    
                     <nav>
                         <ul class=opc>
-                            <li><a class=button-link href="registrarEntrada.jsp">Adquirir entrada</a></li> <!-- USUARIO (CU Epic) -->
+                            <li><a class=button-link href="Sv_fiesta_lugar_disponibles_para_entradas">Adquirir entrada</a></li> <!-- USUARIO (CU Epic) -->
                             <li><a class="button-link back-to-main" href="menu.jsp">Volver al menú principal</a></li>
                         </ul>
                     </nav>

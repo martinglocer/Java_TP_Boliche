@@ -29,7 +29,7 @@
 			<p><input type="text" name="email" value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>"></p>
 			<p><label>Contraseña</label><p>
 			<p><input type="password" name="password" value=""></p>
-			<button type="submit"> Enviar </button>
+			<button type="submit"> Ingresar </button>
 		</form>
 		</div>
 		
