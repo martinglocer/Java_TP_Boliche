@@ -98,4 +98,11 @@
     white-space: nowrap;
 }
 
-
+#mi_perfil {
+    position: absolute;
+    top: 0;
+    right: 120px; /* Ajusta este valor según sea necesario */
+    padding: 14px 20px;
+    background-color: #444;
+    white-space: nowrap;
+}

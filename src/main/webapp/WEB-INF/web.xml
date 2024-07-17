@@ -310,4 +310,14 @@
     <servlet-name>Sv_fiestas_para_fiesta_lugar</servlet-name>
     <url-pattern>/Sv_fiestas_para_fiesta_lugar</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvEditar_MiPerfil</display-name>
+    <servlet-name>SvEditar_MiPerfil</servlet-name>
+    <servlet-class>servlet.SvEditar_MiPerfil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvEditar_MiPerfil</servlet-name>
+    <url-pattern>/SvEditar_MiPerfil</url-pattern>
+  </servlet-mapping>
 </web-app>

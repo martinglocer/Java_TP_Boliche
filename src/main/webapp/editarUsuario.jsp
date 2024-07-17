@@ -22,6 +22,7 @@
 				<% Asistente a = (Asistente) request.getSession().getAttribute("usuEditar"); %>
 				<h1>Datos del usuario</h1>
 				<form action="SvEditarUsuario" method="post">
+					<p><input type="hidden" name="id_user" placeholder="Id del usuario" value="<%=a.getIdasistente()%>"></p>
 					<p><input type="text" name="tipo_doc" placeholder="Tipo de documento" value="<%=a.getTipo_doc()%>"></p>
 					<p><input type="text" name="nro_doc" placeholder="Numero de documento" value="<%=a.getNro_doc()%>"></p>
 					<p><input type="text" name="nombre" placeholder="Nombre" value="<%=a.getNombre()%>"></p>
