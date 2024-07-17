@@ -32,16 +32,16 @@
                 <!-- Aquí es donde mostraremos las tarjetas de las fiestas -->
                 <%
                     
-                    LinkedList<Fiesta_lugar> fiestas = (LinkedList<Fiesta_lugar>) session.getAttribute("fiestasDisponibles");
-                    if (fiestas != null && !fiestas.isEmpty()) {
-                        for (Fiesta_lugar fiesta : fiestas) {
+                    LinkedList<Fiesta_lugar> eventos = (LinkedList<Fiesta_lugar>) session.getAttribute("fiestasDisponibles");
+                    if (eventos != null && !eventos.isEmpty()) {
+                        for (Fiesta_lugar evento : eventos) {
                 %>
                 <div class="card">
-                    <input type="radio" name="fiesta" value="<%= fiesta.getFiesta().getIdfiesta() %>_<%= fiesta.getLugar().getIdlugar() %>_<%= fiesta.getFecha_fiesta() %>_<%= fiesta.getHora_fiesta() %>">
-                    <p>Fiesta: <%= fiesta.getFiesta().getNombre_fiesta() %></p>
-                    <p>Lugar: <%= fiesta.getLugar().getNombre_lugar() %></p>
-                    <p>Fecha: <%= fiesta.getFecha_fiesta() %></p>
-                    <p>Hora: <%= fiesta.getHora_fiesta() %></p>
+                    <input type="radio" name="evento" value="<%= evento.getFiesta().getIdfiesta() %>_<%= evento.getLugar().getIdlugar() %>_<%= evento.getFecha_fiesta() %>_<%= evento.getHora_fiesta() %>">
+                    <p>Fiesta: <%= evento.getFiesta().getNombre_fiesta() %></p>
+                    <p>Lugar: <%= evento.getLugar().getNombre_lugar() %></p>
+                    <p>Fecha: <%= evento.getFecha_fiesta() %></p>
+                    <p>Hora: <%= evento.getHora_fiesta() %></p>
                 </div>
                 <%
                         }

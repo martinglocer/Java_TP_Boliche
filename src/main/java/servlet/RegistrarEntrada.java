@@ -36,6 +36,7 @@ public class RegistrarEntrada extends HttpServlet {
 		Fiesta f = new Fiesta();
 		Lugar l = new Lugar();
 		Asistente asis = new Asistente();
+		Fiesta_lugar fl = new Fiesta_lugar();
 		
 		String tipo_doc = request.getParameter("tipo_doc");
 		String nro_docStr = request.getParameter("nro_doc");
@@ -53,17 +54,25 @@ public class RegistrarEntrada extends HttpServlet {
 		int idasist = asist.getIdasistente();
 		System.out.println("Id asistente:"+idasist);
 		
-		String fiestaSeleccionada = request.getParameter("fiesta");
+		String fiestaSeleccionada = request.getParameter("evento");
         String[] fiestaDetails = fiestaSeleccionada.split("_");
+        
         int idfiesta = Integer.parseInt(fiestaDetails[0]);
+        f.setIdfiesta(idfiesta);
         int idlugar = Integer.parseInt(fiestaDetails[1]);
+        l.setIdlugar(idlugar);
         LocalDate fecha_fiesta = LocalDate.parse(fiestaDetails[2]);
+        fl.setFecha_fiesta(fecha_fiesta);
         LocalTime hora_fiesta = LocalTime.parse(fiestaDetails[3]);
+        fl.setHora_fiesta(hora_fiesta);
 
+        fl.setFiesta(f);
+        fl.setLugar(l);
+        
         LocalDate fecha_actual = LocalDate.now();
         LocalTime horaActual = LocalTime.now();
 
-        Entrada ent = new Entrada(0,idasist, idfiesta, idlugar, fecha_fiesta, hora_fiesta, fecha_actual, horaActual);
+        Entrada ent = new Entrada(0,asist, fl, fecha_actual, horaActual);
 
         dent.add(ent);
 
@@ -76,7 +85,7 @@ public class RegistrarEntrada extends HttpServlet {
 		
 		
 		// System.out.println("Id de la entrada es: "+ identrada);
-		System.out.println("Id del asistente es: "+ idasist);
+		System.out.println("Id del asistente es: "+ asist.getIdasistente());
 		System.out.println("Id fiesta es: "+ idfiesta);
 		System.out.println("Id lugar es: "+ idlugar);
 		System.out.println("Fecha de la fiesta es: "+ fecha_fiesta);

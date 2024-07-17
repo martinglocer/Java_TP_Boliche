@@ -80,7 +80,6 @@ public class SvEditarEntrada extends HttpServlet {
 		
 		DataAsistente da = new DataAsistente();
 		Asistente asist = da.getByDocumento(asis);
-		int idasist = asis.getIdasistente();
 		
 		String idfiestaStr = request.getParameter("id_fiesta");
 		int idfiesta = Integer.parseInt(idfiestaStr);
@@ -110,7 +109,7 @@ public class SvEditarEntrada extends HttpServlet {
 		fl.setFecha_fiesta(fecha_fiesta);
 		fl.setHora_fiesta(hora_fiesta);
 		
-		Entrada entrada = new Entrada(identrada, idasist, idfiesta, idlugar, fecha_fiesta, hora_fiesta, fecha_compra_vieja, hora_compra_vieja);
+		Entrada entrada = new Entrada(identrada, asist, fl, fecha_compra_vieja, hora_compra_vieja);
 		
 		den.actualizarEntrada(entrada, fecha_compra_nueva, hora_compra_nueva);
 		
