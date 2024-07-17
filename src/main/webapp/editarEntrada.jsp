@@ -12,7 +12,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
 	<title>Editar Entrada</title>
 </head>
 <body>
@@ -30,9 +30,10 @@
 					DataAsistente da = new DataAsistente();
 					DataFiesta df = new DataFiesta();
 					DataLugar dl = new DataLugar();
-					Asistente asist = da.getById(ent.getIdasistente());
-					Fiesta fies = df.getById(ent.getIdfiesta());
-					Lugar lug = dl.getById(ent.getIdlugar());
+					Asistente asist = ent.getAsistente();
+					Fiesta_lugar fl = ent.getFiesta_lugar();
+					Fiesta fies = fl.getFiesta();
+					Lugar lug = fl.getLugar();
 				%>
 				<h1>Datos de la entrada</h1>
 				<form action="SvEditarEntrada" method="post">
@@ -41,8 +42,8 @@
 					<p>Número de documento<input type="number" name="nro_doc" placeholder="Número de documento" value="<%=asist.getNro_doc()%>"></p>
 					<p>Id de la fiesta<input type="number" name="id_fiesta" placeholder="Id fiesta" value= "<%=fies.getIdfiesta()%>"></p>
 					<p>Id del lugar<input type="number" name="id_lugar" placeholder="Id lugar" value="<%=lug.getIdlugar()%>"></p>
-					<p>Fecha del evento<input type="date" name="fecha_fiesta" placeholder="Fecha del evento" value="<%=ent.getFecha_evento()%>" ></p>
-					<p>Hora del evento<input type="time" name="hora_fiesta" placeholder="Hora de realización del evento" value="<%=ent.getHora_evento()%>" ></p>
+					<p>Fecha del evento<input type="date" name="fecha_fiesta" placeholder="Fecha del evento" value="<%=fl.getFecha_fiesta()%>" ></p>
+					<p>Hora del evento<input type="time" name="hora_fiesta" placeholder="Hora de realización del evento" value="<%=fl.getHora_fiesta()%>" ></p>
 					<p>Fecha de compra<input type="date" name="fecha_compra_vieja" readonly placeholder="Fecha de compra actual" value="<%=ent.getFecha_compra()%>" ></p>
 					<p>Elegir nueva fecha de compra<input type="date" name="fecha_compra_nueva" placeholder="Nueva fecha de compra" ></p>
 					<p>Hora de compra<input type="time" name="hora_compra_vieja" readonly placeholder="Hora de compra actual" value="<%=ent.getHora_compra()%>" ></p>

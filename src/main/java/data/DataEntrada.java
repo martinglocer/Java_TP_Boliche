@@ -170,6 +170,7 @@ public class DataEntrada {
 				asis.setTipo_doc(rs.getString("a.tipo_doc"));
 				asis.setNro_doc(rs.getInt("a.nro_doc"));
 				Asistente a = da.getByDocumento(asis);
+				ent.setAsistente(a);
 				
 				Fiesta f = df.getById(rs.getInt("e.idfiesta"));
 				
@@ -180,8 +181,8 @@ public class DataEntrada {
 				fiesta_lug.setLugar(l);
 				fiesta_lug.setFecha_fiesta(rs.getObject("fecha_evento", LocalDate.class));
 				fiesta_lug.setHora_fiesta(rs.getObject("hora_evento", LocalTime.class));
+				ent.setFiesta_lugar(fiesta_lug);
 				
-				ent.setAsistente(a);
 				ent.setFecha_compra(rs.getObject("fecha_compra", LocalDate.class));
 				ent.setHora_compra(rs.getObject("hora_compra", LocalTime.class));
 			}

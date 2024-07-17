@@ -11,7 +11,6 @@
 <%@page import = "data.DataLugar"%>
 <%@page import = "jakarta.servlet.http.HttpSession" %>
 <%@page import = "java.time.LocalDateTime" %>
-<% %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,13 +58,14 @@
 								DataAsistente da = new DataAsistente();
 								DataFiesta df = new DataFiesta();
 								DataLugar dl = new DataLugar();
-								Asistente asist = da.getById(ent.getIdasistente());
-								Fiesta fies = df.getById(ent.getIdfiesta());
-								Lugar lug = dl.getById(ent.getIdlugar());
+								Asistente asist = ent.getAsistente();
+								Fiesta_lugar fl = ent.getFiesta_lugar();
+								Fiesta fies = fl.getFiesta();
+								Lugar lug = fl.getLugar();
 							%>
 							<tr>
 								<td><%=ent.getIdentrada()%></td>
-								<td><%=ent.getIdasistente()%></td>
+								<td><%=asist.getIdasistente() %></td>
 								<td><%=asist.getNro_doc()%></td>
 								<td><%=asist.getNombre()%></td>
 								<td><%=asist.getApellido()%></td>
@@ -73,8 +73,8 @@
 								<td><%=lug.getNombre_lugar()%></td>
 								<td><%=lug.getDireccion()%></td>
 								<td><%=lug.getCiudad()%></td>
-								<td><%=ent.getFecha_evento()%></td>
-								<td><%=ent.getHora_evento()%></td>
+								<td><%=fl.getFecha_fiesta() %></td>
+								<td><%=fl.getHora_fiesta() %></td>
 								<td><%=ent.getFecha_compra()%></td>
 								<td><%=ent.getHora_compra()%></td>
 								<td><a href="SvEditarEntrada?identrada_edit=<%=ent.getIdentrada()%>">Editar</a></td>
