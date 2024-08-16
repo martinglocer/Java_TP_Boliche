@@ -25,14 +25,14 @@
 	
 		<% if (isAdmin) { %>
 			<%@ include file="menu_cabecera_admin.jsp" %>
-			<h1>Bienvenido Administrador!</h1>
+			<h1>Bienvenido Administrador <%=loggedInUser.getNombre()%>!</h1>
 			<!-- <li><a class=button-link href="indexUsuarios.jsp">Usuarios</a></li>    
 			<li><a class=button-link href="indexLugares.jsp">Lugares</a></li>     
 			<li><a class=button-link href="indexFiestas.jsp">Fiestas</a></li>   
 			<li><a class=button-link href="indexFiesta_lugar.jsp">Fiesta en lugar</a></li>  CRUD Dependiente -->
 		<% } else { %>
 			<%@ include file="menu_cabecera_usuario.jsp" %>
-			<h1>Bienvenido Usuario!</h1>
+			<h1>Bienvenido Usuario <%=loggedInUser.getNombre()%>!</h1>
 			<!-- <li><a class=button-link href="indexEntrada.jsp">Comprar entrada</a></li>
 			<li><a class=button-link href="indexFiestas">Ver eventos futuros</a></li>     -->
 		<% } %>

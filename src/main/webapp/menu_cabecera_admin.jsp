@@ -17,12 +17,16 @@
                 <li><a href="indexFiestas.jsp">Fiestas</a></li>
                 <li><a href="indexFiesta_lugar.jsp">Fiesta en lugar</a></li>
                 <li><a href="indexEntrada.jsp">Entradas</a></li>
-                <li><a href="mi_perfil.jsp" id="mi_perfil">Mi perfil</a></li>
+           <!-- <li><a href="mi_perfil.jsp" id="mi_perfil">Mi perfil</a></li> -->
             </ul>
             <ul class="menu-corners">
-                <li><a href="menu.jsp" id="volver">Home</a></li>
-                <li><a href="Logout" id="logout">Cerrar sesión</a></li>
-            </ul>
+    			<li><a href="menu.jsp" id="volver">Home</a></li>
+  				  <!-- Contenedor para las opciones de perfil y logout -->
+    			<div class="profile-logout">
+        			<li><a href="mi_perfil.jsp" id="mi_perfil">Mi perfil</a></li>
+        			<li><a href="Logout" id="logout">Cerrar sesión</a></li>
+    			</div>
+			</ul>
         </nav>
     </div>
 </body>

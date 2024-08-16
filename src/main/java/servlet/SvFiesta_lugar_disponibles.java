@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import jakarta.servlet.http.HttpSession;
-
+import entities.Asistente;
 import entities.Fiesta_lugar;
 import data.DataFiesta_lugar;
 
@@ -34,7 +34,12 @@ public class SvFiesta_lugar_disponibles extends HttpServlet {
 		HttpSession misesion = request.getSession();
 		misesion.setAttribute("listaFiestas_lugares", listaFiestas_lugares);
 		
-		response.sendRedirect("mostrarFiestas_lugares.jsp");
+		Asistente loggedInUser = (Asistente) misesion.getAttribute("user");
+		if (1 == loggedInUser.getIdrol()) {
+			response.sendRedirect("mostrarFiestas_lugares.jsp");
+		} else {
+			response.sendRedirect("mostrar_eventos_usuarios.jsp");
+		}
 	}
 
 
