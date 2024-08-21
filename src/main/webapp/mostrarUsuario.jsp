@@ -31,6 +31,7 @@
 						<p>Email: <%=a.getEmail()%></p>
 						<p>Fecha de nacimiento: <%=a.getFecha_nacimiento()%></p>
 						<p>Celular: <%=a.getCelular()%></p>
+						<p>Rol: <%= a.getIdrol() == 1 ? "Administrador" : "Usuario normal" %></p>
 						<p>Contraseña: <%=a.getPassword()%></p>
 					</div>
 				<% } else {%> 
