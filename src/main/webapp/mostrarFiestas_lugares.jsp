@@ -7,6 +7,7 @@
 <%@page import = "jakarta.servlet.http.HttpSession" %>
 <%@page import = "java.time.LocalDateTime" %>
 <%@page import = "entities.Asistente"%>
+<%@page import = "java.util.stream.Collectors"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,23 @@
             if (isAdmin == 1) { %>
                 <%@ include file="menu_cabecera_admin.jsp" %>
 				<h1>Lista de fiestas registradas</h1>
-				<%LinkedList<Fiesta_lugar> listaFiestas_lugares = (LinkedList) request.getSession().getAttribute("listaFiestas_lugares");%>
+				<%
+					LinkedList<Fiesta_lugar> listaFiestas_lugares = (LinkedList) request.getSession().getAttribute("listaFiestas_lugares");
+					String searchQuery = request.getParameter("searchQuery");
+
+					if (searchQuery != null && !searchQuery.isEmpty()) {
+						listaFiestas_lugares = listaFiestas_lugares.stream() 
+						.filter(lf -> lf.getFiesta().getNombre_fiesta().toLowerCase().contains(searchQuery.toLowerCase())||
+								lf.getLugar().getNombre_lugar().toLowerCase().contains(searchQuery.toLowerCase()))
+						.collect(Collectors.toCollection(LinkedList::new));
+					}
+				%>
+				<!-- Formulario de búsqueda -->
+				<form method="get" action="">
+					<input type="text" name="searchQuery" placeholder="Buscar por nombre de fiesta o lugar" value="<%= searchQuery != null ? searchQuery : "" %>">
+					<button type="submit">Buscar</button>
+				</form>				
+				
 				<div>
 					<table>
 						<thead>

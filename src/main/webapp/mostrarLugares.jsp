@@ -3,12 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import = "entities.Asistente"%>
+<%@page import = "java.util.stream.Collectors"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
 	<meta charset="UTF-8">
-	<%LinkedList<Lugar> ll = (LinkedList) request.getSession().getAttribute("listaLugares");%>
 	<title>Lugares</title>
 </head>
 <body>
@@ -24,6 +24,22 @@
                 <%@ include file="menu_cabecera_admin.jsp" %>
 				<div>
 					<h1>Lugares</h1>
+				<%
+					LinkedList<Lugar> ll = (LinkedList<Lugar>) request.getSession().getAttribute("listaLugares");
+					String searchQuery = request.getParameter("searchQuery");
+
+					if (searchQuery != null && !searchQuery.isEmpty()) {
+						ll = ll.stream() 
+						.filter(lu -> lu.getNombre_lugar().toLowerCase().contains(searchQuery.toLowerCase()))
+						.collect(Collectors.toCollection(LinkedList::new));
+					}
+				%>
+				<!-- Formulario de búsqueda -->
+				<form method="get" action="">
+					<input type="text" name="searchQuery" placeholder="Buscar por nombre de lugar" value="<%= searchQuery != null ? searchQuery : "" %>">
+					<button type="submit">Buscar</button>
+				</form>					
+					
 				<div>
 					<table>
 						<thead>
