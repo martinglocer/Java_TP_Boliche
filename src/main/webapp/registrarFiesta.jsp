@@ -22,8 +22,8 @@
 				<h1>Registro de una nueva fiesta</h1>
 				<div>
 					<form action="RegistrarFiesta" method="post">
-						<p><input type="text" name="nombre_fiesta" placeholder="Nombre de la fiesta"></p>
-						<p><input type="text" name="descripcion" placeholder="Descripción de la fiesta"></p>
+						<p><input type="text" name="nombre_fiesta" placeholder="Nombre de la fiesta" required></p>
+						<p><input type="text" name="descripcion" placeholder="Descripción de la fiesta" required></p>
 						<button type="submit"> Registrar </button>
 					</form>
 				</div>

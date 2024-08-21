@@ -24,8 +24,15 @@
 					<p>Ingrese el tipo y numero de documento del usuario</p>
 					<div>
 						<form action="SvBuscarUsuario" method="get">
-							<p><input type="text" name="tipo_doc_editar" placeholder="Tipo"></p>
-							<p><input type="text" name="nro_doc_editar" placeholder="Número"></p>
+							<p>
+                				<label>Tipo de documento</label>
+                				<select name="tipo_doc_editar" placeholder="Tipo" required>
+                    				<option value="">Seleccione un tipo</option>
+                    				<option value="DNI">DNI</option>
+                				</select>
+           					</p>
+							<p><label>Número de documento</label></p>
+							<p><input type="text" name="nro_doc_editar" placeholder="Número" required></p>
 							<button type="submit"> Mostrar usuario </button>
 						</form>
 					</div>

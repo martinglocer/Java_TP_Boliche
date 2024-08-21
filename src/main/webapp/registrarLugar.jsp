@@ -22,10 +22,10 @@
 				<h1>Registro de nuevo lugar</h1>
 				<div>
 					<form action="RegistrarLugar" method="post">
-						<p><input type="text" name="nombre_lugar" placeholder="Nombre"></p>
-						<p><input type=text name="direccion" placeholder="Dirección"></p>
-						<p><input type="number" name="capacidad" placeholder="Capacidad"></p>
-						<p><input type="text" name="ciudad" placeholder="Ciudad"></p>
+						<p><input type="text" name="nombre_lugar" placeholder="Nombre" required></p>
+						<p><input type=text name="direccion" placeholder="Dirección" required></p>
+						<p><input type="number" name="capacidad" placeholder="Capacidad" required></p>
+						<p><input type="text" name="ciudad" placeholder="Ciudad" required></p>
 						<button type="submit"> Registrar </button>
 					</form>
 				</div>
