@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import = "java.util.LinkedList"%>
+<%@page import = "java.util.stream.Collectors"%>
 <%@page import = "entities.Asistente"%>
 <%@page import = "jakarta.servlet.http.HttpSession" %>
 <% %>
@@ -8,11 +9,8 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
-<meta charset="UTF-8">
-<%
-	LinkedList<Asistente> listaUsuarios = (LinkedList) request.getSession().getAttribute("listaUsuarios");
-%>
-<title>Mostrar usuarios</title>
+	<meta charset="UTF-8">
+	<title>Mostrar usuarios</title>
 </head>
 <body>
 	
@@ -26,6 +24,24 @@
             if (isAdmin == 1) { %>
                 <%@ include file="menu_cabecera_admin.jsp" %>
 				<h1>Lista de usuarios registrados</h1>
+				<%
+					LinkedList<Asistente> listaUsuarios = (LinkedList) request.getSession().getAttribute("listaUsuarios");
+					String searchQuery = request.getParameter("searchQuery");
+
+					if (searchQuery != null && !searchQuery.isEmpty()) {
+						listaUsuarios = listaUsuarios.stream()
+						.filter(a -> a.getApellido().toLowerCase().contains(searchQuery.toLowerCase()) ||
+									 a.getNombre().toLowerCase().contains(searchQuery.toLowerCase()))
+						.collect(Collectors.toCollection(LinkedList::new));
+					}
+				%>
+				
+				<!-- Formulario de búsqueda -->
+				<form method="get" action="">
+					<input type="text" name="searchQuery" placeholder="Buscar por nombre o apellido" value="<%= searchQuery != null ? searchQuery : "" %>">
+					<button type="submit">Buscar</button>
+				</form>
+				
         		<div>
           		  <table>
               		  <thead>

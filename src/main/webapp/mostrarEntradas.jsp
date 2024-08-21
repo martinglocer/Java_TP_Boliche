@@ -10,6 +10,7 @@
 <%@page import = "data.DataFiesta"%>
 <%@page import = "data.DataLugar"%>
 <%@page import = "jakarta.servlet.http.HttpSession" %>
+<%@page import = "java.util.stream.Collectors"%>
 <%@page import = "java.time.LocalDateTime" %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +31,22 @@
             if (isAdmin == 1) { %>
                 <%@ include file="menu_cabecera_admin.jsp" %>
 				<h1>Lista de todas las entradas</h1>
-				<%LinkedList<Entrada> listaEntradas = (LinkedList<Entrada>) request.getSession().getAttribute("listaEntradas");%>
+				<%
+					LinkedList<Entrada> listaEntradas = (LinkedList<Entrada>) request.getSession().getAttribute("listaEntradas");
+					String searchQuery = request.getParameter("searchQuery");
+
+					if (searchQuery != null && !searchQuery.isEmpty()) {
+						listaEntradas = listaEntradas.stream()
+						.filter(ent -> ent.getAsistente().getApellido().toLowerCase().contains(searchQuery.toLowerCase()) ||
+									   ent.getAsistente().getNombre().toLowerCase().contains(searchQuery.toLowerCase()))
+						.collect(Collectors.toCollection(LinkedList::new));
+					}
+				%>
+				<!-- Formulario de búsqueda -->
+				<form method="get" action="">
+					<input type="text" name="searchQuery" placeholder="Buscar por nombre o apellido" value="<%= searchQuery != null ? searchQuery : "" %>">
+					<button type="submit">Buscar</button>
+				</form>
 				
 				<div>
 					<table>
