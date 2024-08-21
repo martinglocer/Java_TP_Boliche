@@ -5,7 +5,6 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
-	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
 	<meta charset="UTF-8">
 	<title>Mostrar Usuario</title>
 </head>
@@ -33,6 +32,14 @@
 						<p>Celular: <%=a.getCelular()%></p>
 						<p>Rol: <%= a.getIdrol() == 1 ? "Administrador" : "Usuario normal" %></p>
 						<p>Contraseña: <%=a.getPassword()%></p>
+					</div>
+					<div>
+						<a href="SvEditarUsuario?tipo_doc_editar=<%=a.getTipo_doc()%>&nro_doc_editar=<%= a.getNro_doc() %>">Editar</a>
+                        <form action="SvEliminarUsuario" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+	                    	<input type="hidden" name="tipo_doc" value="<%=a.getTipo_doc()%>">
+	                        <input type="hidden" name="nro_doc" value="<%= a.getNro_doc() %>">
+	                        <button type="submit"> Borrar </button>
+	                    </form>				
 					</div>
 				<% } else {%> 
 						<p>No existe el usuario con los datos ingresados </p>
