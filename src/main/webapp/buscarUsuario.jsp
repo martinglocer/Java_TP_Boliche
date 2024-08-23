@@ -36,7 +36,7 @@
 							<button type="submit"> Mostrar usuario </button>
 						</form>
 					</div>
-					<a href="indexUsuarios.jsp">Volver</a>
+					<a class="button-link back-to-main" href="indexUsuarios.jsp">Volver</a>
             <% } else if (isAdmin == 2) {
                 response.sendRedirect("errorUsuario.jsp");
                } %>

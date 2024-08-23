@@ -5,6 +5,8 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo2.css">
+	<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/menu.css">
 	<meta charset="UTF-8">
 	<title>Mostrar Usuario</title>
 </head>
@@ -44,7 +46,7 @@
 				<% } else {%> 
 						<p>No existe el usuario con los datos ingresados </p>
 				<% } %>
-					<a href="buscarUsuario.jsp">Volver</a>
+					<a class="button-link back-to-main" href="buscarUsuario.jsp">Volver</a>
             <% } else if (isAdmin == 2) {
                 response.sendRedirect("errorUsuario.jsp");
                } %>
