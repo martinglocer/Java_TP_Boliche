@@ -44,6 +44,7 @@
 				<% } else {%> 
 						<p>No existe el usuario con los datos ingresados </p>
 				<% } %>
+					<a href="buscarUsuario.jsp">Volver</a>
             <% } else if (isAdmin == 2) {
                 response.sendRedirect("errorUsuario.jsp");
                } %>

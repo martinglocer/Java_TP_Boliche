@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="entities.Asistente" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,12 @@
     <title>Registrarse</title>
 </head>
 <body>
+	<% Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+       if (isAdmin != null && isAdmin) { // Mostrar solo si es admin %>
+    	  	<%@ include file="menu_cabecera_admin.jsp" %>
+			<% Asistente a = (Asistente) request.getSession().getAttribute("usuMostrar"); %>     
+		<% } %>
+
     <div> <h1>Registro de usuario</h1> </div>
     <%
         String error = (String) session.getAttribute("error");
@@ -45,7 +52,6 @@
             <p><label>Contraseña</label><p>
             <p><input type="password" name="password" required></p>
             <%
-                Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
                 if (isAdmin != null && isAdmin) { // Mostrar solo si es admin
             %>
                 <p>
