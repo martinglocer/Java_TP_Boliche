@@ -34,6 +34,8 @@
 		<% } %>
 		<ul class="opc">
 			<li><a class=button-link href="Editar_mi_perfil.jsp">Editar perfil</a></li>
+			<li><a class="button-link" href="SvMisEntradas?id_user=<%= loggedInUser.getIdasistente() %>">Ver Mis entradas</a></li>
+			<li><a class="button-link back-to-main" href="menu.jsp">Volver al menú principal</a></li>
 		</ul>    
 	<% } %>
 	

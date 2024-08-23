@@ -20,6 +20,7 @@ import data.DataFiesta;
 import data.DataLugar;
 import data.DataAsistente;
 
+
 public class DataEntrada {
 
 	public LinkedList<Entrada> getAll(){
@@ -203,6 +204,87 @@ public class DataEntrada {
 		return ent;
 	}
 	
+	
+	public LinkedList<Entrada> getByUser(Asistente a){
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		LinkedList<Entrada> ents = new LinkedList<>();
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("select ent.identrada, asis.idasistente \r\n"
+					+ "  , asis.tipo_doc, asis.nro_doc, asis.nombre, asis.apellido\r\n"
+					+ "  , f.idfiesta, f.nombre_fiesta\r\n"
+					+ "  , l.idlugar, l.nombre_lugar, l.direccion, l.ciudad\r\n"
+					+ "  , fl.fecha_evento, fl.hora_evento\r\n"
+					+ "  , ent.fecha_compra, ent.hora_compra\r\n"
+					+ "from entrada ent \r\n"
+					+ "left join fiesta_lugar fl \r\n"
+					+ "  on ent.idfiesta = fl.idfiesta \r\n"
+					+ "  and ent.idlugar = fl.idlugar \r\n"
+					+ "  and ent.fecha_evento = fl.fecha_evento \r\n"
+					+ "  and ent.hora_evento = fl.hora_evento\r\n"
+					+ "left join fiesta f\r\n"
+					+ "  on ent.idfiesta=f.idfiesta\r\n"
+					+ "left join lugar l\r\n"
+					+ "  on fl.idlugar=l.idlugar\r\n"
+					+ "left join asistente asis \r\n"
+					//+ "  #on ent.tipo_doc = asis.tipo_doc \r\n"
+					+ "  on ent.idasistente = asis.idasistente \r\n"
+					+ "where ent.idasistente = ? \r\n"
+					+ "order by fl.fecha_evento asc, fl.hora_evento asc;");
+			
+			 stmt.setInt(1, a.getIdasistente());
+			 rs=stmt.executeQuery();
+			 
+			if(rs!=null) {
+				while(rs.next()) {
+					Entrada ent = new Entrada();
+					ent.setIdentrada(rs.getInt("ent.identrada"));
+					ent.setFecha_compra(rs.getObject("ent.fecha_compra", LocalDate.class));
+					ent.setHora_compra(rs.getObject("ent.hora_compra", LocalTime.class));
+					Asistente asis = new Asistente();
+					asis.setIdasistente(rs.getInt("asis.idasistente"));
+					asis.setTipo_doc(rs.getString("asis.tipo_doc"));
+					asis.setNro_doc(rs.getInt("asis.nro_doc"));
+					asis.setNombre(rs.getString("asis.nombre"));
+					asis.setApellido(rs.getString("asis.apellido"));
+					ent.setAsistente(asis);
+					Fiesta f = new Fiesta();
+					f.setIdfiesta(rs.getInt("f.idfiesta"));
+					f.setNombre_fiesta(rs.getString("f.nombre_fiesta"));
+					Lugar l = new Lugar();
+					l.setIdlugar(rs.getInt("l.idlugar"));
+					l.setNombre_lugar(rs.getString("l.nombre_lugar"));
+					l.setDireccion(rs.getString("l.direccion"));
+					l.setCiudad(rs.getString("l.ciudad"));
+					Fiesta_lugar fl = new Fiesta_lugar();
+					fl.setFecha_fiesta(rs.getObject("fl.fecha_evento", LocalDate.class));
+					fl.setHora_fiesta(rs.getObject("fl.hora_evento", LocalTime.class));
+					fl.setFiesta(f);
+					fl.setLugar(l);
+					ent.setFiesta_lugar(fl);
+							
+					System.out.println("IdEntrada: " + ent.getIdentrada() + ", Tipo_doc: " + asis.getTipo_doc() + ", Nro_doc: " + asis.getNro_doc());
+					ents.add(ent);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return ents;
+	}
 	
 	
 /*	public Entrada getOne(Entrada ent) {

@@ -320,4 +320,14 @@
     <servlet-name>SvEditar_MiPerfil</servlet-name>
     <url-pattern>/SvEditar_MiPerfil</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvMisEntradas</display-name>
+    <servlet-name>SvMisEntradas</servlet-name>
+    <servlet-class>servlet.SvMisEntradas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvMisEntradas</servlet-name>
+    <url-pattern>/SvMisEntradas</url-pattern>
+  </servlet-mapping>
 </web-app>
