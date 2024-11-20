@@ -6,6 +6,8 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.LocalTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="data.DataFiesta_lugar" %>
+<%@ page import="entities.Fiesta_lugar" %>
 
 <!DOCTYPE html>
 <html>
@@ -40,9 +42,18 @@
             <%@ include file="menu_cabecera_usuario.jsp" %>
         <% }
     %>
+    
+    <%  DataFiesta_lugar dfl = new DataFiesta_lugar();
+        Fiesta_lugar fl = dfl.getByData(idFiesta, idLugar, fechaEvento, horaEvento); 
+    %>
+    
 	<div class="container">
-    	<h1>Comentarios del evento</h1>
+    	<h1>Comentarios del evento: <%= fl.getFiesta().getNombre_fiesta() %></h1> 
 
+	    <p>
+	        <strong>Fecha y hora:</strong> <%= fl.getFecha_fiesta() %> a las <%= fl.getHora_fiesta() %><br>
+	        <strong>Lugar:</strong> <%= fl.getLugar().getNombre_lugar() %><br>
+	    </p>
     	<%
      
         	DataComentario dataComentario = new DataComentario();
