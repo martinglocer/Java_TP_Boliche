@@ -330,4 +330,14 @@
     <servlet-name>SvMisEntradas</servlet-name>
     <url-pattern>/SvMisEntradas</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvAgregarComentario</display-name>
+    <servlet-name>SvAgregarComentario</servlet-name>
+    <servlet-class>servlet.SvAgregarComentario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvAgregarComentario</servlet-name>
+    <url-pattern>/SvAgregarComentario</url-pattern>
+  </servlet-mapping>
 </web-app>

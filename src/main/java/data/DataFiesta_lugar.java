@@ -95,7 +95,7 @@ public class DataFiesta_lugar {
                          "and e.idlugar = fl.idlugar " +
                          "and e.idfiesta = fl.idfiesta " +
                          "where fl.fecha_evento >= current_timestamp() " +
-                         "group by fl.fecha_evento, fl.hora_evento, f.nombre_fiesta, l.nombre_lugar, l.direccion, l.ciudad " +
+                         "group by f.idfiesta, l.idlugar, fl.fecha_evento, fl.hora_evento, f.nombre_fiesta, l.nombre_lugar, l.direccion, l.ciudad " +
                          "having l.capacidad > entradas_vendidas " +
                          "order by fl.fecha_evento asc, fl.hora_evento asc;";
             System.out.println("Executing query: " + sql);

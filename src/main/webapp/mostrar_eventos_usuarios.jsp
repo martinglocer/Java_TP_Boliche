@@ -58,6 +58,7 @@
                             <th>Lugar</th>
                             <th>Direccion</th>
                             <th>Ciudad</th>
+                            <th>Comentarios</th>
                          </tr>
                     </thead>
                     <tbody>
@@ -71,6 +72,7 @@
                             <td><%= l.getNombre_lugar() %></td>
                             <td><%= l.getDireccion() %></td>
                             <td><%= l.getCiudad() %></td>
+                            <td><a href="comentarios.jsp?idFiesta=<%= f.getIdfiesta() %>&idLugar=<%= l.getIdlugar() %>&fechaEvento=<%= fl.getFecha_fiesta() %>&horaEvento=<%= fl.getHora_fiesta() %>">Ver comentarios</a></td> 
                         </tr>
                         <% } %>
                     </tbody>
