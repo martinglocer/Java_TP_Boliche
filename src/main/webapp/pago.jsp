@@ -1,0 +1,168 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="entities.Asistente" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Estilos/estilo1.css">
+    <meta charset="UTF-8">
+    <title>Pago con Stripe</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .payment-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #payment-element {
+            margin: 20px 0;
+        }
+
+        #submit {
+            background-color: #5469d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            transition: all 0.2s ease;
+        }
+
+        #submit:hover {
+            background-color: #4456b3;
+            transform: translateY(-1px);
+        }
+
+        #submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .payment-message {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <%
+        Asistente loggedInUser = (Asistente) session.getAttribute("user");
+        if (loggedInUser == null) {
+            response.sendRedirect("index.jsp");
+            return;
+        }
+
+        int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
+        if (isAdmin == 1) { %>
+            <%@ include file="menu_cabecera_admin.jsp" %>
+        <% } else if (isAdmin == 2) { %>
+            <%@ include file="menu_cabecera_usuario.jsp" %>
+        <% }
+    %>
+
+    <div class="payment-container">
+        <h1>Método de pago</h1>
+
+        <div id="payment-element"></div>
+
+        <button id="submit">Pagar</button>
+        <div id="payment-message" class="payment-message"></div>
+    </div>
+
+    <script>
+        const stripe = Stripe('pk_test_51QNLtpAgf9Xw1p1yUbZNyW1xMSZ1RfuYsBKQnaKLcIL18kP9Yy13fmgQU8oj2kFkQiRJ7kmM8OoNl1kpox1pznS700WYWps3S0');
+
+        let elements;
+        
+        initialize();
+
+        async function initialize() {
+            try {
+                const response = await fetch('/Java_TP_Boliche/SvCreatePaymentIntent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount: 1099 })
+                });
+
+                const data = await response.json();
+                
+                const appearance = {
+                    theme: 'stripe',
+                    variables: {
+                        colorPrimary: '#5469d4',
+                    }
+                };
+                
+                elements = stripe.elements({ 
+                    appearance,
+                    clientSecret: data.clientSecret
+                });
+
+                const paymentElement = elements.create('payment');
+                paymentElement.mount('#payment-element');
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('Error al cargar el formulario de pago. Por favor, intenta de nuevo.');
+            }
+        }
+
+        document.getElementById('submit').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const button = e.target;
+            button.disabled = true;
+            
+            try {
+                const { error, paymentIntent } = await stripe.confirmPayment({
+                    elements,
+                    redirect: 'if_required'
+                });
+
+                if (error) {
+                    showMessage(error.message);
+                    button.disabled = false;
+                } else if (paymentIntent.status === 'succeeded') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Pago exitoso!',
+                        text: 'Tu pago se ha procesado correctamente',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#4CAF50'
+                    }).then(() => {
+                        window.location.href = 'indexUsuarios.jsp';
+                    });
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                showMessage('Error al procesar el pago. Por favor, intenta de nuevo.');
+                button.disabled = false;
+            }
+        });
+
+        function showMessage(message) {
+            const messageElement = document.getElementById('payment-message');
+            messageElement.textContent = message;
+            setTimeout(() => {
+                messageElement.textContent = '';
+            }, 7000);
+        }
+    </script>
+</body>
+</html>

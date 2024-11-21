@@ -76,7 +76,7 @@ public class RegistrarEntrada extends HttpServlet {
 
         dent.add(ent);
 
-        response.sendRedirect("indexEntrada");
+        response.sendRedirect("pago.jsp");
 		
 		
         // Formatear la hora actual en el formato "hh:mm:ss"
@@ -94,6 +94,8 @@ public class RegistrarEntrada extends HttpServlet {
 		System.out.println("Hora de la compra es: "+ horaActual);
 		
 		System.out.println(ent);
+		
+		System.out.println(asist.getIdrol());
 		
 	}
 

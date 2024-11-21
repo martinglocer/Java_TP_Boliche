@@ -340,4 +340,14 @@
     <servlet-name>SvAgregarComentario</servlet-name>
     <url-pattern>/SvAgregarComentario</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvCreatePaymentIntent</display-name>
+    <servlet-name>SvCreatePaymentIntent</servlet-name>
+    <servlet-class>servlet.SvCreatePaymentIntent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvCreatePaymentIntent</servlet-name>
+    <url-pattern>/SvCreatePaymentIntent</url-pattern>
+  </servlet-mapping>
 </web-app>
