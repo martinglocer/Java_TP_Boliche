@@ -13,6 +13,7 @@
 	<% 
         // HttpSession session = request.getSession();
         Asistente loggedInUser = (Asistente) session.getAttribute("user");
+        System.out.println("Usuario rol en sesión: " + loggedInUser.getIdrol());
         if (loggedInUser == null) {
             response.sendRedirect("index.jsp");
         } else { %>

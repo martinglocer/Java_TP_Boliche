@@ -73,7 +73,21 @@ public class RegistrarEntrada extends HttpServlet {
         LocalTime horaActual = LocalTime.now();
 
         Entrada ent = new Entrada(0,asist, fl, fecha_actual, horaActual);
+        
+        // Verificar si la solicitud viene de Stripe
+        String stripeToken = request.getParameter("stripeToken"); // O el parámetro que Stripe envía en la respuesta
+        if (stripeToken != null) {
+            // El pago fue exitoso, registrar la entrada en la base de datos
+            dent.add(ent);
 
+            // Redirigir al usuario a indexUsuarios.jsp
+            response.sendRedirect("indexUsuarios.jsp"); 
+        } else {
+            // Redirigir al usuario al formulario de pago
+            response.sendRedirect("pago.jsp"); 
+        }
+
+        
         dent.add(ent);
 
         response.sendRedirect("pago.jsp");

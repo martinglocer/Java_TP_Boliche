@@ -66,7 +66,7 @@
     <%
         Asistente loggedInUser = (Asistente) session.getAttribute("user");
         if (loggedInUser == null) {
-            response.sendRedirect("index.jsp");
+        	response.sendRedirect(request.getContextPath() + "/index.jsp");
             return;
         }
 
@@ -96,11 +96,18 @@
 
         async function initialize() {
             try {
-                const response = await fetch('/Java_TP_Boliche/SvCreatePaymentIntent', {
+                const response = await fetch('<%= request.getContextPath() %>/SvCreatePaymentIntent', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ amount: 1099 })
                 });
+                
+                if (!response.ok) {
+                    // Log the error response
+                    const errorText = await response.text();
+                    console.error('Payment Intent Error:', errorText);
+                    throw new Error(errorText);
+                }
 
                 const data = await response.json();
                 
@@ -119,8 +126,8 @@
                 const paymentElement = elements.create('payment');
                 paymentElement.mount('#payment-element');
             } catch (error) {
-                console.error('Error:', error);
-                showMessage('Error al cargar el formulario de pago. Por favor, intenta de nuevo.');
+                console.error('Full Error:', error);
+                showMessage(`Error al crear el pago: ${error.message}`);
             }
         }
 
@@ -136,8 +143,10 @@
                 });
 
                 if (error) {
+                	console.error('Payment Error:', error);
                     showMessage(error.message);
                     button.disabled = false;
+                    return;
                 } else if (paymentIntent.status === 'succeeded') {
                     Swal.fire({
                         icon: 'success',
@@ -146,12 +155,55 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#4CAF50'
                     }).then(() => {
-                        window.location.href = 'indexUsuarios.jsp';
+                    	
+                    	window.location.href = '<%= request.getContextPath() %>/indexUsuarios.jsp';
+                    	
+                        // Verifica la sesión antes de redirigir
+                        /*
+                        fetch('/Java_TP_Boliche/SvValidateSession')
+                            .then(response => {
+                                if (response.status === 200) {
+                                    // Sesión válida, redirige al index de usuarios
+                                    window.location.href = '<%= request.getContextPath() %>/indexUsuarios.jsp';
+                                } else {
+                                    // Sesión inválida, muestra error y redirige al login
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Sesión inválida',
+                                        text: 'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        window.location.href = '<%= request.getContextPath() %>/index.jsp';
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error al verificar la sesión:', error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error de red',
+                                    text: 'No se pudo verificar la sesión. Por favor, intenta de nuevo.',
+                                    confirmButtonText: 'OK'
+                                });
+                            });
+                        */
                     });
                 }
             } catch (err) {
-                console.error('Error:', err);
-                showMessage('Error al procesar el pago. Por favor, intenta de nuevo.');
+            	console.error('Comprehensive Error:', err);
+                
+                // More detailed error handling
+                if (err.type === 'card_error') {
+                    showMessage(err.message);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de pago',
+                        text: 'No se pudo procesar el pago. Por favor, intenta de nuevo.',
+                        confirmButtonText: 'OK'
+                    });
+                }
+                
                 button.disabled = false;
             }
         });

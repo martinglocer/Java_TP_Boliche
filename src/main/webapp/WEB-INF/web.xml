@@ -350,4 +350,18 @@
     <servlet-name>SvCreatePaymentIntent</servlet-name>
     <url-pattern>/SvCreatePaymentIntent</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SvValidateSession</display-name>
+    <servlet-name>SvValidateSession</servlet-name>
+    <servlet-class>servlet.SvValidateSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SvValidateSession</servlet-name>
+    <url-pattern>/SvValidateSession</url-pattern>
+  </servlet-mapping>
+<session-config>
+    <session-timeout>30</session-timeout> <!-- Tiempo en minutos -->
+</session-config>
+
 </web-app>

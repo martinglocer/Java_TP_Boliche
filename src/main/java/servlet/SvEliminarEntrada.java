@@ -25,17 +25,16 @@ public class SvEliminarEntrada extends HttpServlet {
 	}
 
     @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-    	int id_entrada = Integer.parseInt(request.getParameter("identrada"));
-		Entrada en = new Entrada();
-		en.setIdentrada(id_entrada);
-		DataEntrada de = new DataEntrada();
-		
-		System.out.println(" id:" + en.getIdentrada());
-		de.deleteByID(en);
-		
-		response.sendRedirect("indexEntrada");
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id_entrada = Integer.parseInt(request.getParameter("identrada"));
+        Entrada en = new Entrada();
+        en.setIdentrada(id_entrada);
+        DataEntrada de = new DataEntrada();
+        
+        System.out.println(" id:" + en.getIdentrada());
+        de.deleteByID(en);
+        
+        response.sendRedirect(request.getContextPath() + "/indexEntrada.jsp");
+    }
 
 }

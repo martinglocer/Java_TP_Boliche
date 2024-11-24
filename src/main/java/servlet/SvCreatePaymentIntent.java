@@ -9,6 +9,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -67,14 +69,38 @@ public class SvCreatePaymentIntent extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().println(new Gson().toJson(responseData));
             
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute("user") == null) {
+                logger.warning("La sesión no contiene el usuario.");
+            } else {
+                logger.info("Usuario en sesión: " + session.getAttribute("user"));
+            }
+            
         } catch (StripeException e) {
-            logger.log(Level.SEVERE, "Error al crear el Payment Intent", e);
-            response.setStatus(500);
-            response.getWriter().println("Error al crear el Payment Intent: " + e.getMessage());
+        	// Log the full exception
+            logger.log(Level.SEVERE, "Stripe Payment Error", e);
+            
+            // Send a more informative error response
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Payment processing failed");
+            errorResponse.put("details", e.getMessage());
+            
+            response.getWriter().println(new Gson().toJson(errorResponse));
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error al procesar la solicitud", e);
-            response.setStatus(400);
-            response.getWriter().println("Error al procesar la solicitud: " + e.getMessage());
+        	// Similar detailed error handling
+            logger.log(Level.SEVERE, "Unexpected Error", e);
+            
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Unexpected server error");
+            errorResponse.put("details", e.getMessage());
+            
+            response.getWriter().println(new Gson().toJson(errorResponse));
         }
     }
 }
