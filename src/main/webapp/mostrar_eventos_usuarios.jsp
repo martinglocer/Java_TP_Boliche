@@ -58,6 +58,8 @@
                             <th>Lugar</th>
                             <th>Direccion</th>
                             <th>Ciudad</th>
+                            <th>Precio</th>
+                            <th>Comprar Entrada</th>
                             <th>Comentarios</th>
                          </tr>
                     </thead>
@@ -72,6 +74,8 @@
                             <td><%= l.getNombre_lugar() %></td>
                             <td><%= l.getDireccion() %></td>
                             <td><%= l.getCiudad() %></td>
+                            <td><%= fl.getPrecio() %></td>
+                            <td><a href="pago.jsp?idFiesta=<%= f.getIdfiesta() %>&idLugar=<%= l.getIdlugar() %>&fechaEvento=<%= fl.getFecha_fiesta() %>&horaEvento=<%= fl.getHora_fiesta() %>&precio=<%= fl.getPrecio() %>">Comprar Entrada</a></td>
                             <td><a href="comentarios.jsp?idFiesta=<%= f.getIdfiesta() %>&idLugar=<%= l.getIdlugar() %>&fechaEvento=<%= fl.getFecha_fiesta() %>&horaEvento=<%= fl.getHora_fiesta() %>">Ver comentarios</a></td> 
                         </tr>
                         <% } %>
