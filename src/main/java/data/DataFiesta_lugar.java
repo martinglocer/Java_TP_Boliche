@@ -211,8 +211,7 @@ public class DataFiesta_lugar {
 			stmt.setInt(1, f.getIdfiesta());
 			stmt.setInt(2,  l.getIdlugar());
 			stmt.setObject(3, f_lug.getFecha_fiesta());	
-			stmt.setObject(4, f_lug.getHora_fiesta());
-			stmt.setDouble(5, f_lug.getPrecio());		
+			stmt.setObject(4, f_lug.getHora_fiesta());	
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				/*fl= new Fiesta_lugar();*/
@@ -274,7 +273,7 @@ public class DataFiesta_lugar {
         }
     }
     
-    public void actualizarFiesta_lugar(Fiesta_lugar fl, LocalDate fe_nueva, LocalTime ho_nueva) {
+    public void actualizarFiesta_lugar(Fiesta_lugar fl, LocalDate fe_nueva, LocalTime ho_nueva, double pre_nuevo) {
         PreparedStatement stmt = null;
         try {
             stmt = DbConnector.getInstancia().getConn().
@@ -285,7 +284,7 @@ public class DataFiesta_lugar {
             
             stmt.setObject(1, fe_nueva);
             stmt.setObject(2, ho_nueva);
-            stmt.setDouble(3, fl.getPrecio());
+            stmt.setDouble(3, pre_nuevo);
             stmt.setInt(4, f.getIdfiesta());
             stmt.setInt(5, l.getIdlugar());
             stmt.setObject(6, fl.getFecha_fiesta());

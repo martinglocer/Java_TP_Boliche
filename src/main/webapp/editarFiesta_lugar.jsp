@@ -35,6 +35,8 @@
 				<p>Elegir fecha nueva del evento<input type="date" name="fecha_fiesta_nueva" placeholder="Fecha nueva de realización" ></p>
 				<p>Hora actual del evento<input type="time" name="hora_fiesta_vieja" readonly placeholder="Hora realización" value="<%=fl.getHora_fiesta()%>"></p>
 				<p>Elegir hora nueva del evento<input type="time" name="hora_fiesta_nueva" placeholder="Hora realización" ></p>
+				<p>Precio actual del evento<input type="number" name="precio_fiesta_viejo" readonly placeholder="Precio" value="<%=fl.getPrecio()%>"></p>
+				<p>Elegir nuevo precio del evento<input type="number" name="precio_fiesta_nuevo" placeholder="Precio" ></p>
 				<button type="submit"> Guardar cambios </button>
 			</form>
             <% } else if (isAdmin == 2) {

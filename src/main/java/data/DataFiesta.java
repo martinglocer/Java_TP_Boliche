@@ -51,7 +51,7 @@ public class DataFiesta {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select idfiesta, nombre_fiesta, descripcion from fiesta from asistente where idfiesta = ? "
+					"select idfiesta, nombre_fiesta, descripcion from fiesta where idfiesta = ? "
 					);
 			stmt.setInt(1, fie.getIdfiesta());
 			rs=stmt.executeQuery();
