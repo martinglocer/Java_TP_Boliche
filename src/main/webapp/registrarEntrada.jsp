@@ -71,19 +71,52 @@
     </div>
 
     <script>
+    
+	    document.addEventListener('DOMContentLoaded', function() {
+	        const errorDiv = document.getElementById('error-message');
+	        if (!errorDiv) {
+	            console.error('Elemento error-message no encontrado');
+	        } else {
+	            console.log('Elemento error-message existe');
+	        }
+	    });
+    	
         // Manejo de selección de evento
         document.querySelectorAll('input[name="evento"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 document.getElementById('payment-button').disabled = false;
+             	// Limpiar cualquier mensaje de error previo
+                document.getElementById('error-message').style.display = 'none';
             });
         });
 
         // Validación del formulario antes de enviar
         document.getElementById('purchase-form').addEventListener('submit', function(e) {
+        	console.log('Formulario enviado');
             const selectedEvent = document.querySelector('input[name="evento"]:checked');
+            const errorDiv = document.getElementById('error-message');
+            
+            if (!selectedEvent) {
+            	console.log('Ningún evento seleccionado');
+                e.preventDefault();
+                errorDiv.textContent = 'Por favor seleccione un evento';
+                errorDiv.style.display = 'block';
+                errorDiv.style.color = 'red'; 
+                errorDiv.style.backgroundColor = '#ffeeee';
+                return false;
+            } else {
+            	console.log('Evento seleccionado');
+            	// Asegurar que el mensaje de error esté oculto si se selecciona un evento
+                errorDiv.style.display = 'none';
+            }
+        });
+        
+        document.getElementById('purchase-form').addEventListener('submit', function(e) {
+            const selectedEvent = document.querySelector('input[name="evento"]:checked');
+            
             if (!selectedEvent) {
                 e.preventDefault();
-                showError('Por favor selecciona un evento');
+                alert('Por favor seleccione un evento');
                 return false;
             }
         });
