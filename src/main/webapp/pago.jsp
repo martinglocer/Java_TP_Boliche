@@ -66,7 +66,7 @@
     <%
         Asistente loggedInUser = (Asistente) session.getAttribute("user");
         if (loggedInUser == null) {
-        	response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
             return;
         }
 
@@ -101,9 +101,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ amount: 1099 })
                 });
-                
+
                 if (!response.ok) {
-                    // Log the error response
                     const errorText = await response.text();
                     console.error('Payment Intent Error:', errorText);
                     throw new Error(errorText);
@@ -135,7 +134,7 @@
             e.preventDefault();
             const button = e.target;
             button.disabled = true;
-            
+
             try {
                 const { error, paymentIntent } = await stripe.confirmPayment({
                     elements,
@@ -143,67 +142,43 @@
                 });
 
                 if (error) {
-                	console.error('Payment Error:', error);
+                    console.error('Payment Error:', error);
                     showMessage(error.message);
                     button.disabled = false;
                     return;
                 } else if (paymentIntent.status === 'succeeded') {
+                    const eventData = {
+                        id_user: '<%= loggedInUser.getIdasistente()%>',
+                        // Aquí debes incluir los detalles necesarios de la entrada, como evento o precio
+                        // Por ejemplo: evento_id: 1, fecha: '2024-12-12'
+                    };
+
+                    await fetch('<%= request.getContextPath() %>/SvRegistrarEntrada', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(eventData)
+                    });
+
                     Swal.fire({
                         icon: 'success',
                         title: '¡Pago exitoso!',
-                        text: 'Tu pago se ha procesado correctamente',
+                        text: 'Tu entrada ha sido registrada correctamente.',
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#4CAF50'
                     }).then(() => {
-                    	// Redirige al servlet SvMisEntradas
                         window.location.href = '<%= request.getContextPath() %>/SvMisEntradas';
-                    	
-                        // Verifica la sesión antes de redirigir
-                        /*
-                        fetch('/Java_TP_Boliche/SvValidateSession')
-                            .then(response => {
-                                if (response.status === 200) {
-                                    // Sesión válida, redirige al index de usuarios
-                                    window.location.href = '<%= request.getContextPath() %>/menu.jsp';
-                                } else {
-                                    // Sesión inválida, muestra error y redirige al login
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Sesión inválida',
-                                        text: 'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
-                                        confirmButtonText: 'OK'
-                                    }).then(() => {
-                                    	window.location.href = '<%= request.getContextPath() %>/index.jsp';
-                                    });
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error al verificar la sesión:', error);
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error de red',
-                                    text: 'No se pudo verificar la sesión. Por favor, intenta de nuevo.',
-                                    confirmButtonText: 'OK'
-                                });
-                            });
-                        */
                     });
                 }
             } catch (err) {
-            	console.error('Comprehensive Error:', err);
-                
-                // More detailed error handling
-                if (err.type === 'card_error') {
-                    showMessage(err.message);
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error de pago',
-                        text: 'No se pudo procesar el pago. Por favor, intenta de nuevo.',
-                        confirmButtonText: 'OK'
-                    });
-                }
-                
+                console.error('Comprehensive Error:', err);
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de pago',
+                    text: 'No se pudo procesar el pago. Por favor, intenta de nuevo.',
+                    confirmButtonText: 'OK'
+                });
+
                 button.disabled = false;
             }
         });

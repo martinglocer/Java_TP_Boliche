@@ -35,19 +35,17 @@ public class RegistrarEntrada extends HttpServlet {
 		DataEntrada dent = new DataEntrada();
 		Fiesta f = new Fiesta();
 		Lugar l = new Lugar();
-		Asistente asis = new Asistente();
 		Fiesta_lugar fl = new Fiesta_lugar();
 		
-		String tipo_doc = request.getParameter("tipo_doc");
-		String nro_docStr = request.getParameter("nro_doc");
-		int nro_doc = Integer.parseInt(nro_docStr);
+		String id_asi = request.getParameter("id_user");
+		System.out.println(id_asi);
+		int id_asi_editar = Integer.parseInt(id_asi);
 		
-		asis.setTipo_doc(tipo_doc);
-		asis.setNro_doc(nro_doc);
+
 		
 		
 		DataAsistente da = new DataAsistente();
-		Asistente asist = da.getByDocumento(asis);
+		Asistente asist = da.getById(id_asi_editar);
 		
 		System.out.println("el asissssssstt:"+asist);
 		
@@ -80,18 +78,13 @@ public class RegistrarEntrada extends HttpServlet {
             // El pago fue exitoso, registrar la entrada en la base de datos
             dent.add(ent);
 
-            // Redirigir al usuario a indexUsuarios.jsp
-            response.sendRedirect("indexUsuarios.jsp"); 
+            // Redirigir al servlet SvMisEntradas con el ID del usuario
+            response.sendRedirect("SvMisEntradas?id_user=" + asist.getIdasistente());
         } else {
             // Redirigir al usuario al formulario de pago
             response.sendRedirect("pago.jsp"); 
         }
 
-        
-        dent.add(ent);
-
-        response.sendRedirect("pago.jsp");
-		
 		
         // Formatear la hora actual en el formato "hh:mm:ss"
         //String hora_actual = horaActual.format(DateTimeFormatter.ofPattern("HH:mm:ss"));

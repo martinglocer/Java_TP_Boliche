@@ -32,6 +32,7 @@ public class SvMisEntradas extends HttpServlet {
 		Asistente a = new Asistente();
 		DataAsistente da = new DataAsistente();
 		String id_asi = request.getParameter("id_user");
+		System.out.println(id_asi);
 		int id_asi_editar = Integer.parseInt(id_asi);
 		a = da.getById(id_asi_editar);
 		DataEntrada de = new DataEntrada();

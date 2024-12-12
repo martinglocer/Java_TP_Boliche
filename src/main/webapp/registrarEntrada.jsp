@@ -32,6 +32,13 @@
         <form id="purchase-form" action="pago.jsp" method="post">
             <input type="hidden" name="tipo_doc" value="<%=loggedInUser.getTipo_doc()%>">
             <input type="hidden" name="nro_doc" value="<%=loggedInUser.getNro_doc()%>">
+            <input type="hidden" name="id_user" value="<%=loggedInUser.getIdasistente()%>">
+            <!-- Campos ocultos para los detalles del evento -->
+		    <input type="hidden" name="id_fiesta" id="id_fiesta">
+		    <input type="hidden" name="id_lugar" id="id_lugar">
+		    <input type="hidden" name="fecha_evento" id="fecha_evento">
+		    <input type="hidden" name="hora_evento" id="hora_evento">
+            
             
             <div id="fiestas">
                 <%
@@ -71,7 +78,7 @@
     </div>
 
     <script>
-    
+    	
 	    document.addEventListener('DOMContentLoaded', function() {
 	        const errorDiv = document.getElementById('error-message');
 	        if (!errorDiv) {
@@ -80,46 +87,29 @@
 	            console.log('Elemento error-message existe');
 	        }
 	    });
-    	
-        // Manejo de selección de evento
-        document.querySelectorAll('input[name="evento"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                document.getElementById('payment-button').disabled = false;
-             	// Limpiar cualquier mensaje de error previo
-                document.getElementById('error-message').style.display = 'none';
-            });
-        });
+	    
+	 // Manejo de selección de evento
+	    document.querySelectorAll('input[name="evento"]').forEach(radio => {
+	        radio.addEventListener('change', function() {
+	            document.getElementById('id_fiesta').value = this.getAttribute('data-idfiesta');
+	            document.getElementById('id_lugar').value = this.getAttribute('data-idlugar');
+	            document.getElementById('fecha_evento').value = this.getAttribute('data-fecha');
+	            document.getElementById('hora_evento').value = this.getAttribute('data-hora');
 
-        // Validación del formulario antes de enviar
-        document.getElementById('purchase-form').addEventListener('submit', function(e) {
-        	console.log('Formulario enviado');
-            const selectedEvent = document.querySelector('input[name="evento"]:checked');
-            const errorDiv = document.getElementById('error-message');
-            
-            if (!selectedEvent) {
-            	console.log('Ningún evento seleccionado');
-                e.preventDefault();
-                errorDiv.textContent = 'Por favor seleccione un evento';
-                errorDiv.style.display = 'block';
-                errorDiv.style.color = 'red'; 
-                errorDiv.style.backgroundColor = '#ffeeee';
-                return false;
-            } else {
-            	console.log('Evento seleccionado');
-            	// Asegurar que el mensaje de error esté oculto si se selecciona un evento
-                errorDiv.style.display = 'none';
-            }
-        });
-        
-        document.getElementById('purchase-form').addEventListener('submit', function(e) {
-            const selectedEvent = document.querySelector('input[name="evento"]:checked');
-            
-            if (!selectedEvent) {
-                e.preventDefault();
-                alert('Por favor seleccione un evento');
-                return false;
-            }
-        });
+	            document.getElementById('payment-button').disabled = false;
+	            document.getElementById('error-message').style.display = 'none';
+	        });
+	    });
+
+	    // Validación del formulario antes de enviar
+	    document.getElementById('purchase-form').addEventListener('submit', function(e) {
+	        const selectedEvent = document.querySelector('input[name="evento"]:checked');
+	        if (!selectedEvent) {
+	            e.preventDefault();
+	            document.getElementById('error-message').textContent = 'Por favor seleccione un evento.';
+	            document.getElementById('error-message').style.display = 'block';
+	        }
+	    });   	
 
         function showError(message) {
             const errorDiv = document.getElementById('error-message');
