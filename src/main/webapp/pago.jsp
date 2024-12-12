@@ -155,8 +155,8 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#4CAF50'
                     }).then(() => {
-                    	
-                    	window.location.href = '<%= request.getContextPath() %>/indexUsuarios.jsp';
+                    	// Redirige al servlet SvMisEntradas
+                        window.location.href = '<%= request.getContextPath() %>/SvMisEntradas';
                     	
                         // Verifica la sesión antes de redirigir
                         /*
@@ -164,7 +164,7 @@
                             .then(response => {
                                 if (response.status === 200) {
                                     // Sesión válida, redirige al index de usuarios
-                                    window.location.href = '<%= request.getContextPath() %>/indexUsuarios.jsp';
+                                    window.location.href = '<%= request.getContextPath() %>/menu.jsp';
                                 } else {
                                     // Sesión inválida, muestra error y redirige al login
                                     Swal.fire({
@@ -173,7 +173,7 @@
                                         text: 'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
                                         confirmButtonText: 'OK'
                                     }).then(() => {
-                                        window.location.href = '<%= request.getContextPath() %>/index.jsp';
+                                    	window.location.href = '<%= request.getContextPath() %>/index.jsp';
                                     });
                                 }
                             })
