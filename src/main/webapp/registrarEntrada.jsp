@@ -30,8 +30,7 @@
     
     <div>
         <form id="purchase-form" action="pago.jsp" method="post">
-            <input type="hidden" name="tipo_doc" value="<%=loggedInUser.getTipo_doc()%>">
-            <input type="hidden" name="nro_doc" value="<%=loggedInUser.getNro_doc()%>">
+
             <input type="hidden" name="id_user" value="<%=loggedInUser.getIdasistente()%>">
             <!-- Campos ocultos para los detalles del evento -->
 		    <input type="hidden" name="id_fiesta" id="id_fiesta">
@@ -79,55 +78,39 @@
 
     <script>
     	
-	    document.addEventListener('DOMContentLoaded', function() {
-	        const errorDiv = document.getElementById('error-message');
-	        if (!errorDiv) {
-	            console.error('Elemento error-message no encontrado');
-	        } else {
-	            console.log('Elemento error-message existe');
-	        }
-	    });
-	    
-	 // Manejo de selección de evento
-	    document.querySelectorAll('input[name="evento"]').forEach(radio => {
-	        radio.addEventListener('change', function() {
-	            document.getElementById('id_fiesta').value = this.getAttribute('data-idfiesta');
-	            document.getElementById('id_lugar').value = this.getAttribute('data-idlugar');
-	            document.getElementById('fecha_evento').value = this.getAttribute('data-fecha');
-	            document.getElementById('hora_evento').value = this.getAttribute('data-hora');
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('purchase-form');
+        const errorDiv = document.getElementById('error-message');
+        const submitButton = document.getElementById('payment-button');
 
-	            document.getElementById('payment-button').disabled = false;
-	            document.getElementById('error-message').style.display = 'none';
-	        });
-	    });
+        // Habilitar botón al seleccionar evento
+        document.querySelectorAll('input[name="evento"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                const [idFiesta, idLugar, fechaEvento, horaEvento] = radio.value.split('_');
+                document.getElementById('id_fiesta').value = idFiesta;
+                document.getElementById('id_lugar').value = idLugar;
+                document.getElementById('fecha_evento').value = fechaEvento;
+                document.getElementById('hora_evento').value = horaEvento;
 
-	    // Validación del formulario antes de enviar
-	    document.getElementById('purchase-form').addEventListener('submit', function(e) {
-	        const selectedEvent = document.querySelector('input[name="evento"]:checked');
-	        if (!selectedEvent) {
-	            e.preventDefault();
-	            document.getElementById('error-message').textContent = 'Por favor seleccione un evento.';
-	            document.getElementById('error-message').style.display = 'block';
-	        }
-	    });   	
-
-        function showError(message) {
-            const errorDiv = document.getElementById('error-message');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-            setTimeout(() => {
+                submitButton.disabled = false;
                 errorDiv.style.display = 'none';
-            }, 5000);
-        }
+            });
+        });
 
-        function showSuccess(message) {
-            const successDiv = document.getElementById('success-message');
-            successDiv.textContent = message;
-            successDiv.style.display = 'block';
-            setTimeout(() => {
-                successDiv.style.display = 'none';
-            }, 5000);
-        }
+        // Validación del formulario
+        form.addEventListener('submit', (e) => {
+            const selectedEvent = document.querySelector('input[name="evento"]:checked');
+            if (!selectedEvent) {
+                e.preventDefault();
+                showError('Por favor seleccione un evento.');
+            }
+        });
+        
+        
+    });
+
+
+        
     </script>
     <% } %>
 </body>

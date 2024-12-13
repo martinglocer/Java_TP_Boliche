@@ -1,6 +1,7 @@
 
 package data;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -102,47 +103,73 @@ public class DataEntrada {
 	}
 	
 	public void add(Entrada en) {
-		
-		Asistente asis = en.getAsistente();
-		Fiesta_lugar fl = en.getFiesta_lugar();
-		Fiesta f = fl.getFiesta();
-		Lugar l = fl.getLugar();
-		
-		PreparedStatement stmt= null;
-		ResultSet keyResultSet=null;
-		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-							"insert into Entrada(idasistente, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra)\r\n" 
-						+ "values(?,?,?,?,?,?,?)"
-						,PreparedStatement.RETURN_GENERATED_KEYS);
-			
-			stmt.setInt(1, asis.getIdasistente());
-			stmt.setInt(2, f.getIdfiesta());
-			stmt.setInt(3, l.getIdlugar());
-			stmt.setObject(4, fl.getFecha_fiesta());
-			stmt.setObject(5, fl.getHora_fiesta());
-			stmt.setObject(6, en.getFecha_compra());
-			stmt.setObject(7, en.getHora_compra());
-			stmt.executeUpdate();
-			keyResultSet=stmt.getGeneratedKeys();
-			
-			if (keyResultSet!= null && keyResultSet.next()) {
-				en.setIdentrada(keyResultSet.getInt(1));
-			} 
+	    Connection conn = null;
+	    PreparedStatement stmt = null;
+	    ResultSet keyResultSet = null;
 
-			
-		}  catch (SQLException e) {
-            e.printStackTrace();
-		} finally {
-            try {
-                if(keyResultSet!=null)keyResultSet.close();
-                if(stmt!=null)stmt.close();
-                DbConnector.getInstancia().releaseConn();
-            } catch (SQLException e) {
-            	e.printStackTrace();
-            }
-		}
-    }
+	    try {
+	        // Obtener conexión directamente
+	        conn = DbConnector.getInstancia().getConn();
+	        
+	        // Verificar que la conexión no sea nula
+	        if (conn == null) {
+	            System.out.println("ERROR: Conexión a base de datos es nula");
+	            return;
+	        }
+
+	        // Imprimir estado de autocommit
+	        System.out.println("Auto-commit status: " + conn.getAutoCommit());
+
+	        stmt = conn.prepareStatement(
+	            "INSERT INTO Entrada(idasistente, idfiesta, idlugar, fecha_evento, hora_evento, fecha_compra, hora_compra) " +
+	            "VALUES(?,?,?,?,?,?,?)",
+	            PreparedStatement.RETURN_GENERATED_KEYS
+	        );
+
+	        Asistente asis = en.getAsistente();
+	        Fiesta_lugar fl = en.getFiesta_lugar();
+	        Fiesta f = fl.getFiesta();
+	        Lugar l = fl.getLugar();
+
+	        stmt.setInt(1, asis.getIdasistente());
+	        stmt.setInt(2, f.getIdfiesta());
+	        stmt.setInt(3, l.getIdlugar());
+	        stmt.setObject(4, fl.getFecha_fiesta());
+	        stmt.setObject(5, fl.getHora_fiesta());
+	        stmt.setObject(6, en.getFecha_compra());
+	        stmt.setObject(7, en.getHora_compra());
+
+	        // Imprimir la consulta SQL (opcional, para depuración)
+	        System.out.println("Ejecutando consulta SQL: " + stmt.toString());
+
+	        int affectedRows = stmt.executeUpdate();
+	        System.out.println("Filas afectadas: " + affectedRows);
+
+	        keyResultSet = stmt.getGeneratedKeys();
+	        if (keyResultSet != null && keyResultSet.next()) {
+	            int generatedId = keyResultSet.getInt(1);
+	            en.setIdentrada(generatedId);
+	            System.out.println("Entrada generada con ID: " + generatedId);
+	        } else {
+	            System.out.println("No se generaron claves");
+	        }
+
+	    } catch (SQLException e) {
+	        System.out.println("ERROR EN INSERCIÓN:");
+	        System.out.println("Mensaje: " + e.getMessage());
+	        System.out.println("Código de error SQL: " + e.getErrorCode());
+	        System.out.println("Estado SQL: " + e.getSQLState());
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (keyResultSet != null) keyResultSet.close();
+	            if (stmt != null) stmt.close();
+	            DbConnector.getInstancia().releaseConn();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	
 	
 	public Entrada getById(Entrada en) {

@@ -80,6 +80,7 @@
 
     <div class="payment-container">
         <h1>Método de pago</h1>
+        
 
         <div id="payment-element"></div>
 
@@ -91,6 +92,9 @@
         const stripe = Stripe('pk_test_51QNLtpAgf9Xw1p1yUbZNyW1xMSZ1RfuYsBKQnaKLcIL18kP9Yy13fmgQU8oj2kFkQiRJ7kmM8OoNl1kpox1pznS700WYWps3S0');
 
         let elements;
+    
+        var id_user = '<%= loggedInUser.getIdasistente() %>';
+    
         
         initialize();
 
@@ -149,16 +153,19 @@
                 } else if (paymentIntent.status === 'succeeded') {
                     const eventData = {
                         id_user: '<%= loggedInUser.getIdasistente()%>',
-                        // Aquí debes incluir los detalles necesarios de la entrada, como evento o precio
-                        // Por ejemplo: evento_id: 1, fecha: '2024-12-12'
+                        evento: `${id_fiesta}_${id_lugar}_${fecha_evento}_${hora_evento}`
                     };
 
-                    await fetch('<%= request.getContextPath() %>/SvRegistrarEntrada', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(eventData)
-                    });
+                    // Mostrar datos en la consola para ver si son correctos
+                    console.log('Datos del evento:', eventData);
 
+                    await fetch('<%= request.getContextPath() %>/RegistrarEntrada', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/x-www-form-urlencoded' 
+                        },
+                        body: `id_user=${eventData.id_user}&evento=${eventData.evento}`
+                    });
                     Swal.fire({
                         icon: 'success',
                         title: '¡Pago exitoso!',
@@ -166,7 +173,7 @@
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#4CAF50'
                     }).then(() => {
-                        window.location.href = '<%= request.getContextPath() %>/SvMisEntradas';
+                        window.location.href = '<%= request.getContextPath() %>/SvMisEntradas?id_user=' + eventData.id_user;
                     });
                 }
             } catch (err) {
@@ -182,6 +189,7 @@
                 button.disabled = false;
             }
         });
+
 
         function showMessage(message) {
             const messageElement = document.getElementById('payment-message');

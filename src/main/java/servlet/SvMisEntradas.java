@@ -28,28 +28,47 @@ public class SvMisEntradas extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Asistente a = new Asistente();
-		DataAsistente da = new DataAsistente();
-		String id_asi = request.getParameter("id_user");
-		System.out.println(id_asi);
-		int id_asi_editar = Integer.parseInt(id_asi);
-		a = da.getById(id_asi_editar);
-		DataEntrada de = new DataEntrada();
-		
-		LinkedList<Entrada> listaEntradas = de.getByUser(a);
-		System.out.println(listaEntradas.size());
-		
-		HttpSession misesion = request.getSession();
-		misesion.setAttribute("listaEntradas", listaEntradas);
-		
-		response.sendRedirect("misEntradas.jsp");
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id_asi = request.getParameter("id_user");
+        
+        if (id_asi == null || id_asi.isEmpty()) {
+            response.getWriter().write("Error: El parámetro id_user no fue proporcionado o está vacío.");
+            return;
+        }
+
+        try {
+            int id_asi_editar = Integer.parseInt(id_asi);
+
+            DataAsistente da = new DataAsistente();
+            Asistente a = da.getById(id_asi_editar);
+
+            DataEntrada de = new DataEntrada();
+            LinkedList<Entrada> listaEntradas = de.getByUser(a);
+
+            HttpSession misesion = request.getSession();
+            misesion.setAttribute("listaEntradas", listaEntradas);
+
+            response.sendRedirect("misEntradas.jsp");
+        } catch (NumberFormatException e) {
+            response.getWriter().write("Error: El parámetro id_user debe ser un número válido.");
+        }
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String idAsi = request.getParameter("id_user");
+	    
+	    if (idAsi == null || idAsi.isEmpty()) {
+	        // El atributo no fue enviado o está vacío
+	        response.getWriter().write("Error: id_user es null o vacío.");
+	        return;
+	    }
+
+	    // Conversión de String a Integer si es necesario
+	    int idAsistente = Integer.parseInt(idAsi);
+
 		
 		
 	}
