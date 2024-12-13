@@ -69,7 +69,17 @@
             response.sendRedirect(request.getContextPath() + "/index.jsp");
             return;
         }
-
+     	// Capturar los parámetros
+        String idFiesta = request.getParameter("id_fiesta");
+        String idLugar = request.getParameter("id_lugar");
+        String fechaEvento = request.getParameter("fecha_evento");
+        String horaEvento = request.getParameter("hora_evento");
+        
+        // Validar que los parámetros existan
+        if (idFiesta == null || idLugar == null || fechaEvento == null || horaEvento == null) {
+            response.sendRedirect("comprar_entrada.jsp");
+            return;
+        }
         int isAdmin = (loggedInUser.getIdrol() == 1) ? 1 : 2;
         if (isAdmin == 1) { %>
             <%@ include file="menu_cabecera_admin.jsp" %>
@@ -80,9 +90,12 @@
 
     <div class="payment-container">
         <h1>Método de pago</h1>
-        
-
-        <div id="payment-element"></div>
+        <input type="hidden" id="id_fiesta" value="<%= idFiesta %>">
+	    <input type="hidden" id="id_lugar" value="<%= idLugar %>">
+	    <input type="hidden" id="fecha_evento" value="<%= fechaEvento %>">
+	    <input type="hidden" id="hora_evento" value="<%= horaEvento %>">
+	    
+	    <div id="payment-element"></div>
 
         <button id="submit">Pagar</button>
         <div id="payment-message" class="payment-message"></div>
@@ -151,6 +164,11 @@
                     button.disabled = false;
                     return;
                 } else if (paymentIntent.status === 'succeeded') {
+                	const id_fiesta = document.getElementById('id_fiesta').value;
+                    const id_lugar = document.getElementById('id_lugar').value;
+                    const fecha_evento = document.getElementById('fecha_evento').value;
+                    const hora_evento = document.getElementById('hora_evento').value;
+
                     const eventData = {
                         id_user: '<%= loggedInUser.getIdasistente()%>',
                         evento: `${id_fiesta}_${id_lugar}_${fecha_evento}_${hora_evento}`
@@ -159,13 +177,18 @@
                     // Mostrar datos en la consola para ver si son correctos
                     console.log('Datos del evento:', eventData);
 
-                    await fetch('<%= request.getContextPath() %>/RegistrarEntrada', {
+                    const response = await fetch('<%= request.getContextPath() %>/RegistrarEntrada', {
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/x-www-form-urlencoded' 
                         },
                         body: `id_user=${eventData.id_user}&evento=${eventData.evento}`
                     });
+                    
+                    if (!response.ok) {
+                        throw new Error('Error al registrar la entrada');
+                    }
+                    
                     Swal.fire({
                         icon: 'success',
                         title: '¡Pago exitoso!',
