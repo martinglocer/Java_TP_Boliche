@@ -34,76 +34,69 @@ public class RegistrarEntrada extends HttpServlet {
 	    try {
 	        // Verificar los parámetros de entrada
 	        String id_asi = request.getParameter("id_user");
-	        String fiestaSeleccionada = request.getParameter("evento");
+	        String idFiestaStr = request.getParameter("idfiesta");
+	        String idLugarStr = request.getParameter("idlugar");
+	        String fechaStr = request.getParameter("fecha");
+	        String horaStr = request.getParameter("hora");
+
+            // Depuración de parámetros
+            System.out.println("DEBUG: ID Usuario recibido: " + id_asi);
+            System.out.println("DEBUG: ID Fiesta recibido: " + idFiestaStr);
+            System.out.println("DEBUG: ID Lugar recibido: " + idLugarStr);
+            System.out.println("DEBUG: Fecha recibida: " + fechaStr);
+            System.out.println("DEBUG: Hora recibida: " + horaStr);
 	        
-	        // Depuración de parámetros
-	        System.out.println("DEBUG: ID Usuario recibido: " + id_asi);
-	        System.out.println("DEBUG: Evento seleccionado: " + fiestaSeleccionada);
-	        
-	        if (id_asi == null || fiestaSeleccionada == null) {
+            if (id_asi == null || idFiestaStr == null || idLugarStr == null || fechaStr == null || horaStr == null) {
 	            System.out.println("ERROR: Parámetros nulos");
 	            response.getWriter().write("Error: Parámetros incompletos");
 	            return;
 	        }
 
-	        int id_asi_editar = Integer.parseInt(id_asi);
-	        System.out.println("DEBUG: ID Usuario entero recibido: " + id_asi_editar);
+            int idAsistente = Integer.parseInt(id_asi);
+            int idFiesta = Integer.parseInt(idFiestaStr);
+            int idLugar = Integer.parseInt(idLugarStr);
+            LocalDate fechaFiesta = LocalDate.parse(fechaStr);
+            LocalTime horaFiesta = LocalTime.parse(horaStr);
+	        System.out.println("DEBUG: ID Usuario entero recibido: " + idAsistente);
 	        
 	        // Obtener el asistente
 	        DataAsistente da = new DataAsistente();
-	        Asistente asist = da.getById(id_asi_editar);
+	        Asistente asist = da.getById(idAsistente);
 	        
 	        if (asist == null) {
-	            System.out.println("ERROR: Asistente no encontrado para ID: " + id_asi_editar);
+	            System.out.println("ERROR: Asistente no encontrado para ID: " + idAsistente);
 	            response.getWriter().write("Error: Asistente no encontrado");
 	            return;
 	        }
 
-	        // Parsear los detalles del evento
-	        String[] fiestaDetails = fiestaSeleccionada.split("_");
-	        
-	        if (fiestaDetails.length < 4) {
-	            System.out.println("ERROR: Formato de evento inválido");
-	            response.getWriter().write("Error: Formato de evento inválido");
-	            return;
-	        }
-
-	        // Depuración de detalles del evento
-	        System.out.println("DEBUG: Detalles del evento:");
-	        for (int i = 0; i < fiestaDetails.length; i++) {
-	            System.out.println("  Índice " + i + ": " + fiestaDetails[i]);
-	        }
-
-	        int idfiesta = Integer.parseInt(fiestaDetails[0]);
-	        int idlugar = Integer.parseInt(fiestaDetails[1]);
-	        LocalDate fecha_fiesta = LocalDate.parse(fiestaDetails[2]);
-	        LocalTime hora_fiesta = LocalTime.parse(fiestaDetails[3]);
-
+	        // Configurar las entidades Fiesta, Lugar y Fiesta_lugar
 	        Fiesta f = new Fiesta();
-	        f.setIdfiesta(idfiesta);
-	        
+	        f.setIdfiesta(idFiesta);
+
 	        Lugar l = new Lugar();
-	        l.setIdlugar(idlugar);
+	        l.setIdlugar(idLugar);
 
 	        Fiesta_lugar fl = new Fiesta_lugar();
 	        fl.setFiesta(f);
 	        fl.setLugar(l);
-	        fl.setFecha_fiesta(fecha_fiesta);
-	        fl.setHora_fiesta(hora_fiesta);
+	        fl.setFecha_fiesta(fechaFiesta);
+	        fl.setHora_fiesta(horaFiesta);
 
-	        LocalDate fecha_actual = LocalDate.now();
+	        // Crear y registrar la entrada
+	        LocalDate fechaActual = LocalDate.now();
 	        LocalTime horaActual = LocalTime.now();
-
-	        Entrada ent = new Entrada(0, asist, fl, fecha_actual, horaActual);
+	        
+	       
+	        Entrada ent = new Entrada(0, asist, fl, fechaActual, horaActual);
 	        
 	        // Depuración de la entrada
 	        System.out.println("DEBUG: Entrada a registrar:");
 	        System.out.println("  Asistente ID: " + asist.getIdasistente());
-	        System.out.println("  Fiesta ID: " + idfiesta);
-	        System.out.println("  Lugar ID: " + idlugar);
-	        System.out.println("  Fecha Fiesta: " + fecha_fiesta);
-	        System.out.println("  Hora Fiesta: " + hora_fiesta);
-	        System.out.println("  Fecha Compra: " + fecha_actual);
+	        System.out.println("  Fiesta ID: " + idFiesta);
+	        System.out.println("  Lugar ID: " + idLugar);
+	        System.out.println("  Fecha Fiesta: " + fechaFiesta);
+	        System.out.println("  Hora Fiesta: " + horaFiesta);
+	        System.out.println("  Fecha Compra: " + fechaActual);
 	        System.out.println("  Hora Compra: " + horaActual);
 
 	        DataEntrada dent = new DataEntrada();

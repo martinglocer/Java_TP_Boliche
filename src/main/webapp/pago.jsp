@@ -164,14 +164,12 @@
                     button.disabled = false;
                     return;
                 } else if (paymentIntent.status === 'succeeded') {
+                	const id_user: '<%= loggedInUser.getIdasistente()%>';
                 	const id_fiesta = document.getElementById('id_fiesta').value;
                     const id_lugar = document.getElementById('id_lugar').value;
                     const fecha_evento = document.getElementById('fecha_evento').value;
                     const hora_evento = document.getElementById('hora_evento').value;
 
-                    const eventData = {
-                        id_user: '<%= loggedInUser.getIdasistente()%>',
-                        evento: `${id_fiesta}_${id_lugar}_${fecha_evento}_${hora_evento}`
                     };
 
                     // Mostrar datos en la consola para ver si son correctos
@@ -179,10 +177,16 @@
 
                     const response = await fetch('<%= request.getContextPath() %>/RegistrarEntrada', {
                         method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/x-www-form-urlencoded' 
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
                         },
-                        body: `id_user=${eventData.id_user}&evento=${eventData.evento}`
+                        body: new URLSearchParams({
+                            id_user: eventData.id_user,
+                            idfiesta: id_fiesta,
+                            idlugar: id_lugar,
+                            fecha: fecha_evento,
+                            hora: hora_evento
+                        })
                     });
                     
                     if (!response.ok) {
