@@ -169,11 +169,17 @@
                     const id_lugar = document.getElementById('id_lugar').value;
                     const fecha_evento = document.getElementById('fecha_evento').value;
                     const hora_evento = document.getElementById('hora_evento').value;
-
+                	
+                    const eventData = {
+                            id_user: '<%= loggedInUser.getIdasistente() %>',
+                            id_fiesta: document.getElementById('id_fiesta').value,
+                            id_lugar: document.getElementById('id_lugar').value,
+                            fecha_evento: document.getElementById('fecha_evento').value,
+                            hora_evento: document.getElementById('hora_evento').value                    
                     };
 
                     // Mostrar datos en la consola para ver si son correctos
-                    console.log('Datos del evento:', eventData);
+                    //console.log('Datos del evento:', eventData);
 
                     const response = await fetch('<%= request.getContextPath() %>/RegistrarEntrada', {
                         method: 'POST',
@@ -182,10 +188,10 @@
                         },
                         body: new URLSearchParams({
                             id_user: eventData.id_user,
-                            idfiesta: id_fiesta,
-                            idlugar: id_lugar,
-                            fecha: fecha_evento,
-                            hora: hora_evento
+                            idfiesta: eventData.id_fiesta,
+                            idlugar: eventData.id_lugar,
+                            fecha: eventData.fecha_evento,
+                            hora: eventData.hora_event
                         })
                     });
                     
