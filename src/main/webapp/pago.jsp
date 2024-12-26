@@ -102,7 +102,7 @@
     </div>
 
     <script>
-        const stripe = Stripe('pk_test_51QNLtpAgf9Xw1p1yUbZNyW1xMSZ1RfuYsBKQnaKLcIL18kP9Yy13fmgQU8oj2kFkQiRJ7kmM8OoNl1kpox1pznS700WYWps3S0');
+    	const stripe = Stripe('pk_test_51QNLtpAgf9Xw1p1yUbZNyW1xMSZ1RfuYsBKQnaKLcIL18kP9Yy13fmgQU8oj2kFkQiRJ7kmM8OoNl1kpox1pznS700WYWps3S0');
 
         let elements;
     
@@ -116,34 +116,37 @@
                 const response = await fetch('<%= request.getContextPath() %>/SvCreatePaymentIntent', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount: 1099 })
+                    body: JSON.stringify({ 
+                        amount: 1099,
+                        // Agregar los detalles del evento
+                        id_fiesta: document.getElementById('id_fiesta').value,
+                        id_lugar: document.getElementById('id_lugar').value,
+                        fecha_evento: document.getElementById('fecha_evento').value,
+                        hora_evento: document.getElementById('hora_evento').value
+                    })
                 });
 
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Payment Intent Error:', errorText);
-                    throw new Error(errorText);
+                    throw new Error('Error al crear el PaymentIntent');
                 }
 
                 const data = await response.json();
                 
-                const appearance = {
-                    theme: 'stripe',
-                    variables: {
-                        colorPrimary: '#5469d4',
-                    }
-                };
-                
                 elements = stripe.elements({ 
-                    appearance,
-                    clientSecret: data.clientSecret
+                    clientSecret: data.clientSecret,
+                    appearance: {
+                        theme: 'stripe',
+                        variables: {
+                            colorPrimary: '#5469d4',
+                        }
+                    }
                 });
-
+                
                 const paymentElement = elements.create('payment');
-                paymentElement.mount('#payment-element');
+                await paymentElement.mount('#payment-element');
             } catch (error) {
-                console.error('Full Error:', error);
-                showMessage(`Error al crear el pago: ${error.message}`);
+                console.error('Error:', error);
+                showMessage('Error al inicializar el pago: ' + error.message);
             }
         }
 
@@ -155,64 +158,69 @@
             try {
                 const { error, paymentIntent } = await stripe.confirmPayment({
                     elements,
-                    redirect: 'if_required'
+                    redirect: 'if_required',
+                    confirmParams: {
+                        return_url: window.location.origin + '<%= request.getContextPath() %>/confirmacion-pago.jsp'
+                    }
                 });
 
                 if (error) {
-                    console.error('Payment Error:', error);
+                    console.error('Error de pago:', error);
                     showMessage(error.message);
                     button.disabled = false;
                     return;
-                } else if (paymentIntent.status === 'succeeded') {
-                	const id_user: '<%= loggedInUser.getIdasistente()%>';
-                	const id_fiesta = document.getElementById('id_fiesta').value;
-                    const id_lugar = document.getElementById('id_lugar').value;
-                    const fecha_evento = document.getElementById('fecha_evento').value;
-                    const hora_evento = document.getElementById('hora_evento').value;
-                	
+                } 
+                
+                if (paymentIntent && paymentIntent.status === 'succeeded') {
                     const eventData = {
-                            id_user: '<%= loggedInUser.getIdasistente() %>',
-                            id_fiesta: document.getElementById('id_fiesta').value,
-                            id_lugar: document.getElementById('id_lugar').value,
-                            fecha_evento: document.getElementById('fecha_evento').value,
-                            hora_evento: document.getElementById('hora_evento').value                    
+                        id_user: '<%= loggedInUser.getIdasistente() %>',
+                        id_fiesta: document.getElementById('id_fiesta').value,
+                        id_lugar: document.getElementById('id_lugar').value,
+                        fecha_evento: document.getElementById('fecha_evento').value,
+                        hora_evento: document.getElementById('hora_evento').value                    
                     };
 
-                    // Mostrar datos en la consola para ver si son correctos
-                    //console.log('Datos del evento:', eventData);
+                    // Descomenta esto para debugging
+                    console.log('Datos del evento a enviar:', eventData);
 
-                    const response = await fetch('<%= request.getContextPath() %>/RegistrarEntrada', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: new URLSearchParams({
-                            id_user: eventData.id_user,
-                            idfiesta: eventData.id_fiesta,
-                            idlugar: eventData.id_lugar,
-                            fecha: eventData.fecha_evento,
-                            hora: eventData.hora_event
-                        })
-                    });
-                    
-                    if (!response.ok) {
-                        throw new Error('Error al registrar la entrada');
-                    }
-                    
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Pago exitoso!',
-                        text: 'Tu entrada ha sido registrada correctamente.',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: '#4CAF50'
-                    }).then(() => {
+                    try {
+                        const response = await fetch('<%= request.getContextPath() %>/RegistrarEntrada', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: new URLSearchParams({
+                                id_user: eventData.id_user,
+                                idfiesta: eventData.id_fiesta,
+                                idlugar: eventData.id_lugar,
+                                fecha: eventData.fecha_evento,
+                                hora: eventData.hora_evento
+                            })
+                        });
+                        
+                        if (!response.ok) {
+                            throw new Error('Error al registrar la entrada: ' + response.statusText);
+                        }
+                        
+                        await Swal.fire({
+                            icon: 'success',
+                            title: '¡Pago exitoso!',
+                            text: 'Tu entrada ha sido registrada correctamente.',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#4CAF50'
+                        });
+
                         window.location.href = '<%= request.getContextPath() %>/SvMisEntradas?id_user=' + eventData.id_user;
-                    });
+                        
+                    } catch (registroError) {
+                        console.error('Error al registrar entrada:', registroError);
+                        throw new Error('Error al procesar el registro de la entrada');
+                    }
                 }
             } catch (err) {
-                console.error('Comprehensive Error:', err);
+                console.error('Error completo:', err);
 
-                Swal.fire({
+                await Swal.fire({
                     icon: 'error',
                     title: 'Error de pago',
                     text: 'No se pudo procesar el pago. Por favor, intenta de nuevo.',
@@ -222,7 +230,6 @@
                 button.disabled = false;
             }
         });
-
 
         function showMessage(message) {
             const messageElement = document.getElementById('payment-message');
