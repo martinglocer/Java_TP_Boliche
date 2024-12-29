@@ -32,12 +32,16 @@ public class RegistrarEntrada extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    try {
+	    	
+	    	
+	    	
+	    	
 	        // Verificar los parámetros de entrada
 	        String id_asi = request.getParameter("id_user");
-	        String idFiestaStr = request.getParameter("idfiesta");
-	        String idLugarStr = request.getParameter("idlugar");
-	        String fechaStr = request.getParameter("fecha");
-	        String horaStr = request.getParameter("hora");
+	        String idFiestaStr = request.getParameter("id_fiesta");
+	        String idLugarStr = request.getParameter("id_lugar");
+	        String fechaStr = request.getParameter("fecha_evento");
+	        String horaStr = request.getParameter("hora_evento");
 
             // Depuración de parámetros
             System.out.println("DEBUG: ID Usuario recibido: " + id_asi);

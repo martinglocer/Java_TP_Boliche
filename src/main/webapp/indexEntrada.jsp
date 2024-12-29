@@ -24,7 +24,7 @@
                     <nav>
                         <ul class=opc>
                             <li><a class=button-link href="indexEntrada">Listar todas las entradas</a></li>  <!-- admin -->
-                            <li><a class=button-link href="registrarEntrada.jsp">Registrar una entrada</a></li> <!-- admin -->
+                            <li><a class=button-link href="Sv_fiesta_lugar_disponibles_para_entradas">Registrar una entrada</a></li> <!-- admin -->
                             <li><a class="button-link back-to-main" href="menu.jsp">Volver al menú principal</a></li>
                         </ul>
                     </nav>
