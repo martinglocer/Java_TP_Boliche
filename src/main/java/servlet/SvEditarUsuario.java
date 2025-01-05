@@ -53,35 +53,83 @@ public class SvEditarUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id_asi = request.getParameter("id_user");
-		int id_asi_editar = Integer.parseInt(id_asi);
-		String tipo_doc = request.getParameter("tipo_doc");
-		String nroDocStr = request.getParameter("nro_doc");
-		int nro_doc = Integer.parseInt(nroDocStr);
-		String nombre = request.getParameter("nombre");
-		String apellido = request.getParameter("apellido");
-		String email = request.getParameter("email");
-		String celular = request.getParameter("celular");
-		String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
-		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
-		String saldo_Str = request.getParameter("saldo");
-		System.out.println("Saldo STR es: "+saldo_Str);
-		float saldo = Float.parseFloat(saldo_Str);
-		String password = request.getParameter("password");
-		String idrolStr = request.getParameter("idrol");
-		int idrol = Integer.parseInt(idrolStr);
-		
-		DataAsistente da = new DataAsistente();
-		Asistente a = new Asistente(id_asi_editar, tipo_doc, nro_doc, nombre, apellido, email, celular, fecha_nacimiento, saldo, password, idrol);
-		//DataAsistente da = new DataAsistente();
-		da.actualizarAsist(a);
-		response.sendRedirect("indexUsuarios");
-		
-		System.out.println("Nombre del usuario es: "+a.getNombre());
-		System.out.println("apellido es: "+a.getApellido());
-		System.out.println("celular es: "+a.getCelular());
-		System.out.println("email es: "+a.getEmail());
-		System.out.println("Saldo es: "+a.getSaldo());
+	    String id_asi = request.getParameter("id_user");
+	    String tipo_doc = request.getParameter("tipo_doc");
+	    String nroDocStr = request.getParameter("nro_doc");
+	    String nombre = request.getParameter("nombre");
+	    String apellido = request.getParameter("apellido");
+	    String email = request.getParameter("email");
+	    String celular = request.getParameter("celular");
+	    String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
+	    String password = request.getParameter("password");
+	    String idrolStr = request.getParameter("idrol");
+
+	    // Inicializamos las variables necesarias
+	    int nro_doc = 0;
+	    int idrol = 0;
+	    LocalDate fecha_nacimiento = null;
+	    String errorMessage = null;
+
+	    try {
+	        // Validaciones de formato
+	        if (id_asi == null || id_asi.isEmpty() ||
+	            tipo_doc == null || tipo_doc.isEmpty() ||
+	            nroDocStr == null || nroDocStr.isEmpty() ||
+	            !nroDocStr.matches("\\d+") || // Verificar si nroDocStr contiene solo números
+	            nombre == null || nombre.isEmpty() ||
+	            apellido == null || apellido.isEmpty() ||
+	            email == null || email.isEmpty() ||
+	            celular == null || celular.isEmpty() ||
+	            fechaNacimientoStr == null || fechaNacimientoStr.isEmpty() ||
+	            password == null || password.isEmpty() ||
+	            idrolStr == null || idrolStr.isEmpty() ||
+	            !idrolStr.matches("\\d+")) { // Verificar si idrolStr contiene solo números
+	            
+	            errorMessage = "Todos los campos son obligatorios y deben contener datos válidos.";
+	            throw new IllegalArgumentException(errorMessage);
+	        }
+
+	        nro_doc = Integer.parseInt(nroDocStr);
+	        idrol = Integer.parseInt(idrolStr);
+
+	        // Validación adicional de rol y fecha
+	        if (idrol < 1 || idrol > 2) {
+	            errorMessage = "El rol debe ser 1 o 2.";
+	            throw new IllegalArgumentException(errorMessage);
+	        }
+
+	        fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
+
+	    } catch (IllegalArgumentException e) {
+	        // Si ocurre algún error, mantenemos los datos y redirigimos con mensaje de error
+	        Asistente currentAsistente = new Asistente();
+	        currentAsistente.setIdasistente(id_asi != null ? Integer.parseInt(id_asi) : 0);
+	        currentAsistente.setTipo_doc(tipo_doc);
+	        currentAsistente.setNro_doc(nro_doc);
+	        currentAsistente.setNombre(nombre);
+	        currentAsistente.setApellido(apellido);
+	        currentAsistente.setEmail(email);
+	        currentAsistente.setCelular(celular);
+	        currentAsistente.setFecha_nacimiento(fechaNacimientoStr != null ? LocalDate.parse(fechaNacimientoStr) : null);
+	        currentAsistente.setPassword(password);
+	        currentAsistente.setIdrol(idrol);
+
+	        HttpSession session = request.getSession();
+	        session.setAttribute("usuEditar", currentAsistente);
+	        session.setAttribute("error", errorMessage != null ? errorMessage : e.getMessage());
+	        response.sendRedirect("editarUsuario.jsp");
+	        return;
+	    }
+
+	    // Si las validaciones son exitosas, procesamos la actualización
+	    DataAsistente da = new DataAsistente();
+	    float saldo = 0; // Se asigna un saldo por defecto
+	    Asistente asistenteActualizado = new Asistente(
+	        Integer.parseInt(id_asi), tipo_doc, nro_doc, nombre, apellido, email, celular, fecha_nacimiento, saldo, password, idrol
+	    );
+
+	    da.actualizarAsist(asistenteActualizado);
+	    response.sendRedirect("indexUsuarios");
 	}
 
 }
