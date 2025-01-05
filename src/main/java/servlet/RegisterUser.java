@@ -42,29 +42,36 @@ public class RegisterUser extends HttpServlet {
 	    String email = request.getParameter("email");
 	    String celular = request.getParameter("celular");
 	    String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
-	    String saldoStr = request.getParameter("saldo");
+	    //String saldoStr = request.getParameter("saldo");
 	    String password = request.getParameter("password");
 	    String idrolStr = request.getParameter("idrol");
 
 	    // Verificación de los campos
-	    if (tipo_doc.isEmpty() || nroDocStr.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() ||
-	            celular.isEmpty() || fechaNacimientoStr.isEmpty() || saldoStr.isEmpty() || password.isEmpty() ||
-	            idrolStr.isEmpty()) {
-	        HttpSession session = request.getSession();
-	        session.setAttribute("error", "Por favor complete todos los campos.");
-	        response.sendRedirect("RegisterUser.jsp"); 
-	        return; 
-	    }
+	    if (tipo_doc == null || tipo_doc.isEmpty() || 
+	    	    nroDocStr == null || nroDocStr.isEmpty() || 
+	    	    nombre == null || nombre.isEmpty() || 
+	    	    apellido == null || apellido.isEmpty() || 
+	    	    email == null || email.isEmpty() || 
+	    	    celular == null || celular.isEmpty() || 
+	    	    fechaNacimientoStr == null || fechaNacimientoStr.isEmpty() || 
+	    	    password == null || password.isEmpty() || 
+	    	    idrolStr == null || idrolStr.isEmpty()) {
+
+	    	    HttpSession session = request.getSession();
+	    	    session.setAttribute("error", "Por favor complete todos los campos.");
+	    	    response.sendRedirect("RegisterUser.jsp"); 
+	    	    return; 
+	    	}
 
 	    // Validación del número de documento y el saldo
 	    int nro_doc;
-	    float saldo;
+	    float saldo = 0;
 	    try {
 	        nro_doc = Integer.parseInt(nroDocStr);
-	        saldo = Float.parseFloat(saldoStr);
+	       // saldo = Float.parseFloat(saldoStr);
 	    } catch (NumberFormatException e) {
 	        HttpSession session = request.getSession();
-	        session.setAttribute("error", "Por favor ingrese números válidos para el número de documento y el saldo.");
+	        session.setAttribute("error", "Por favor ingrese números válidos para el número de documento .");
 	        response.sendRedirect("RegisterUser.jsp"); // Reemplaza "tuPagina.jsp" con la página donde está tu formulario
 	        return; 
 	    }

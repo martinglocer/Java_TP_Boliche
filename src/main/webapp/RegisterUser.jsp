@@ -47,8 +47,8 @@
             <p><label>Celular</label><p>
             <p><input type="text" name="celular" required></p>
             <p>Fecha de nacimiento</p><p><input type="date" name="fecha_nacimiento" required></p>
-            <p><label>Saldo</label><p>
-            <p><input type="text" name="saldo" required></p>
+           <!--  <p><label>Saldo</label><p>
+            <p><input type="text" name="saldo" required></p> -->
             <p><label>Contraseña</label><p>
             <p><input type="password" name="password" required></p>
             <%

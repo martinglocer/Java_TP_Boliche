@@ -173,10 +173,10 @@
                            },
                            body: new URLSearchParams({
                                id_user: eventData.id_user,
-                               idfiesta: eventData.id_fiesta,
-                               idlugar: eventData.id_lugar,
-                               fecha: eventData.fecha_evento,
-                               hora: eventData.hora_evento
+                               id_fiesta: eventData.id_fiesta,
+                               id_lugar: eventData.id_lugar,
+                               fecha_evento: eventData.fecha_evento,
+                               hora_evento: eventData.hora_evento
                            })
                        });
                       
@@ -191,7 +191,7 @@
                            confirmButtonText: 'OK',
                            confirmButtonColor: '#4CAF50'
                        });
-                       window.location.href = '<%= request.getContextPath() %>/RegistrarEntrada?id_user=' + eventData.id_user;
+                       window.location.href = '<%= request.getContextPath() %>/SvMisEntradas?id_user=' + eventData.id_user;
                       
                    } catch (registroError) {
                        console.error('Error al registrar entrada:', registroError);

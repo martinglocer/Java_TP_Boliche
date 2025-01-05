@@ -55,8 +55,8 @@
                         	<th>Fecha de nacimiento</th>
                         	<th>Rol</th>
                         	<th>Saldo</th>
-                        	<th>---</th>
-                        	<th>---</th>
+                        	<th>Editar</th>
+                        	<th>Eliminar</th>
                    		 </tr>
                    	</thead>
                 <tbody>
