@@ -45,9 +45,9 @@ public class SvEditar_MiPerfil extends HttpServlet {
 		String celular = request.getParameter("celular");
 		String fechaNacimientoStr = request.getParameter("fecha_nacimiento");
 		LocalDate fecha_nacimiento = LocalDate.parse(fechaNacimientoStr);
-		String saldo_Str = request.getParameter("saldo");
-		System.out.println("Saldo STR es: "+saldo_Str);
-		float saldo = Float.parseFloat(saldo_Str);
+		//String saldo_Str = request.getParameter("saldo");
+		//System.out.println("Saldo STR es: "+saldo_Str);
+		float saldo = 0;
 		String password = request.getParameter("password");
 		String idrolStr = request.getParameter("idrol");
 		int idrol = Integer.parseInt(idrolStr);
