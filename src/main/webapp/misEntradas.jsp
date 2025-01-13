@@ -83,7 +83,7 @@
 							%>
 							<tr>
 								<td><%=ent.getIdentrada()%></td>
-								<td><%=asist.getIdasistente() %></td>
+								<td><%=asist.getTipo_doc() %></td>
 								<td><%=asist.getNro_doc()%></td>
 								<td><%=asist.getNombre()%></td>
 								<td><%=asist.getApellido()%></td>
