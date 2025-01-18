@@ -47,8 +47,10 @@ public class RegistrarFiesta_lugar extends HttpServlet {
 		LocalDate fecha_fiesta = LocalDate.parse(fecha_fiestaStr);
 		String hora_fiestaStr = request.getParameter("hora_fiesta");
 		LocalTime hora_fiesta = LocalTime.parse(hora_fiestaStr);
+		String precioStr = request.getParameter("precio_evento");
+		double precio = Double.parseDouble(precioStr);
 		
-		Fiesta_lugar fl = new Fiesta_lugar(f, l, fecha_fiesta, hora_fiesta );
+		Fiesta_lugar fl = new Fiesta_lugar(f, l, fecha_fiesta, hora_fiesta, precio );
 		dfl.add(fl);
 		
 		System.out.println("Id de la fiesta es: "+ idfiesta);

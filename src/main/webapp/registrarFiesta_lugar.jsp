@@ -51,6 +51,8 @@
                         <p><input type="date" name="fecha_fiesta" required></p>
                         <p><label>Hora de realización:</label></p>
                         <p><input type="time" name="hora_fiesta" required></p>
+                        <p><label>Precio de las entradas:</label></p>
+                        <p><input type="number" name="precio_evento" required></p>
                         <button type="submit">Registrar</button>
                     </form>
                 </div>
