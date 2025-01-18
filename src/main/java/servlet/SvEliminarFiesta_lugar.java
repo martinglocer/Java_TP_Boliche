@@ -30,7 +30,8 @@ public class SvEliminarFiesta_lugar extends HttpServlet {
     
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+    	String message = null;
+    	
 		int id_fiesta = Integer.parseInt(request.getParameter("idfiesta_elim"));
 		int id_lugar = Integer.parseInt(request.getParameter("idlugar_elim"));
 		String fecha_fiestaStr = request.getParameter("fecha_fiesta_elim");
@@ -48,7 +49,8 @@ public class SvEliminarFiesta_lugar extends HttpServlet {
 		Fiesta_lugar fl = new Fiesta_lugar();
 		fl = dfl.getByData(id_fiesta, id_lugar, fecha_fiesta, hora_fiesta);
 		System.out.println(" fiesta:" + fl.getFiesta() + " lugar: " + fl.getLugar() + " fecha: " + fl.getFecha_fiesta() + " hora: " + fl.getHora_fiesta() );
-		dfl.deleteByIDs(fl);
+		message = dfl.deleteByIDs(fl);
+		System.out.println(message);
 		response.sendRedirect("indexFiesta_lugar");
 		
 	}

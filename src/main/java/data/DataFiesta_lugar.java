@@ -308,9 +308,10 @@ public class DataFiesta_lugar {
         }
     }
 
-    public void deleteByIDs(Fiesta_lugar delfl) {
+    public String deleteByIDs(Fiesta_lugar delfl) {
         PreparedStatement stmt = null;
-
+        String message = null;
+        
         try {
             stmt = DbConnector.getInstancia().getConn().prepareStatement(
                 "delete from fiesta_lugar where idfiesta=? and idlugar=? and fecha_evento=? and hora_evento=?"
@@ -327,8 +328,11 @@ public class DataFiesta_lugar {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
+        	
+        	message = "No se puede eliminar un evento que tiene entradas vendidas.";
             e.printStackTrace();
-            System.out.println("Fiesta_lugar inexistente");
+            System.out.println(message);
+            return message;
         } finally {
             try {
                 if(stmt!=null) {stmt.close();}
@@ -337,5 +341,7 @@ public class DataFiesta_lugar {
                 e.printStackTrace();
             }
         }
+        message = "Evento eliminado exitosamente.";
+        return message;
     }
 }
