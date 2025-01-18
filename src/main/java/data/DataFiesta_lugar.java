@@ -326,13 +326,14 @@ public class DataFiesta_lugar {
             stmt.setObject(4, delfl.getHora_fiesta());
             
             stmt.executeUpdate();
-
+            message = "Evento eliminado exitosamente.";
         } catch (SQLException e) {
         	
         	message = "No se puede eliminar un evento que tiene entradas vendidas.";
             e.printStackTrace();
+            
             System.out.println(message);
-            return message;
+            //throw e;
         } finally {
             try {
                 if(stmt!=null) {stmt.close();}
@@ -341,7 +342,6 @@ public class DataFiesta_lugar {
                 e.printStackTrace();
             }
         }
-        message = "Evento eliminado exitosamente.";
         return message;
     }
 }
