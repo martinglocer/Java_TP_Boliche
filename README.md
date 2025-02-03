@@ -22,4 +22,5 @@ Esta aplicación Java facilita la gestión integral de un boliche, permitiendo a
 El proyecto tiene como objetivo mejorar la experiencia de los usuarios, agilizar la compra de entradas, y fomentar la interacción entre el boliche y su comunidad a través de funcionalidades como la compra de entradas, la gestión de eventos y la interacción mediante comentarios.
 
 # Modelo de Datos (D-E-R)
-https://raw.githubusercontent.com/Spini03/Java_TP_Boliche/main/img/
+
+<span>![</span><span>Aquí la descripción de la imagen por si no carga</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/Spini03/Java_TP_Boliche/main/img/img_DER.png</span><span>)</span>
