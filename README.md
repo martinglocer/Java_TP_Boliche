@@ -23,4 +23,22 @@ El proyecto tiene como objetivo mejorar la experiencia de los usuarios, agilizar
 
 # Modelo de Datos (D-E-R)
 
-<span>![</span><span>Aquí la descripción de la imagen por si no carga</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/Spini03/Java_TP_Boliche/main/img/img_DER.png</span><span>)</span>
+<span>![</span><span>img_DER.png</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/Spini03/Java_TP_Boliche/main/img/img_DER.png</span><span>)</span>
+
+# Modelo de Datos 
+
+<span>![</span><span>img_Modelo_de_Datos.png</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/Spini03/Java_TP_Boliche/main/img/img_Modelo_de_Datos.png</span><span>)</span>
+
+# Alcance
+
+| Requerimiento | Detalle |
+|----------|----------|
+| ABMC Simple | 1. ABMC Asistente 2. ABMC Fiesta 3. ABMC Lugar |
+| ABMC Dependiente   | 1. ABMC Fiesta_lugar { depende de } ABMC Fiesta, ABMC Lugar  | 
+| Listado + detalle  | 1. Asistentes de la fiesta: listado de asistentes filtrado por fiesta. Muestra datos de asistentes ⇒ detalle ABMC Asistente 2. Fiestas asistidas: listado de las fiestas asistidas filtrado por asistente. Muestra datos de las fiestas ⇒ detalle ABMC Fiesta  |
+| CUU/Epic | 1. Asistente compra entrada para una fiesta. 2. Asistente hace un comentario sobre un evento |
+
+# Credenciales
+
+Para login siendo asistente usar mail juliarob@gmail.com y contraseña julia123
+Para login siendo administrador usar mail johndoe@gmail.com y contraseña P@ssword 
