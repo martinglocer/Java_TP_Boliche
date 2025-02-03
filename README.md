@@ -42,4 +42,5 @@ El proyecto tiene como objetivo mejorar la experiencia de los usuarios, agilizar
 # Credenciales
 
 Para login siendo asistente usar mail juliarob@gmail.com y contraseña julia123
+
 Para login siendo administrador usar mail johndoe@gmail.com y contraseña P@ssword 
