@@ -19,6 +19,7 @@ Descripción: (2 a 6 líneas describiendo el negocio)
 *Sistema de gestión de un boliche*
 
 Esta aplicación Java facilita la gestión integral de un boliche, permitiendo a los usuarios comprar entradas para eventos de manera sencilla a través de una integración con Spark. Los usuarios también pueden interactuar con la comunidad a través de comentarios y acceder a información actualizada sobre los eventos. La plataforma está diseñada para optimizar la experiencia del boliche y sus asistentes, mejorando la gestión de eventos y brindando una forma ágil de adquirir entradas online.
+
 El proyecto tiene como objetivo mejorar la experiencia de los usuarios, agilizar la compra de entradas, y fomentar la interacción entre el boliche y su comunidad a través de funcionalidades como la compra de entradas, la gestión de eventos y la interacción mediante comentarios.
 
 # Modelo de Datos (D-E-R)
